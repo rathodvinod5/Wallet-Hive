@@ -5,7 +5,9 @@ import { useThemeColor } from '@/hooks/useThemeColor';
 export type ThemedTextProps = TextProps & {
   lightColor?: string;
   darkColor?: string;
-  type?: 'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link';
+  type?: 'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link' | 'textSM' 
+    | 'textSMSemibold' | 'textMD' | 'textMDSemibold' | 'textLG' | 'textLGSemibold' 
+    | 'textEL' | 'textELSemibold';
 };
 
 export function ThemedText({
@@ -22,6 +24,14 @@ export function ThemedText({
       style={[
         { color },
         type === 'default' ? styles.default : undefined,
+        type === 'textSM' ? styles.textSM : undefined,
+        type === 'textSMSemibold' ? styles.textSMSemibold : undefined,
+        type === 'textMD' ? styles.textMD : undefined,
+        type === 'textMDSemibold' ? styles.textMDSemibold : undefined,
+        type === 'textLG' ? styles.textLG : undefined,
+        type === 'textLGSemibold' ? styles.textLGSemibold : undefined,
+        type === 'textEL' ? styles.textEL : undefined,
+        type === 'textELSemibold' ? styles.textELSemibold : undefined,
         type === 'title' ? styles.title : undefined,
         type === 'defaultSemiBold' ? styles.defaultSemiBold : undefined,
         type === 'subtitle' ? styles.subtitle : undefined,
@@ -41,6 +51,42 @@ const styles = StyleSheet.create({
   defaultSemiBold: {
     fontSize: 16,
     lineHeight: 24,
+    fontWeight: '600',
+  },
+  textSM: {
+    fontSize: 18,
+    lineHeight: 24,
+  },
+  textSMSemibold: {
+    fontSize: 18,
+    lineHeight: 24,
+    fontWeight: '600',
+  },
+  textMD: {
+    fontSize: 20,
+    lineHeight: 24,
+  },
+  textMDSemibold: {
+    fontSize: 20,
+    lineHeight: 24,
+    fontWeight: '600',
+  },
+  textLG: {
+    fontSize: 22,
+    lineHeight: 26,
+  },
+  textLGSemibold: {
+    fontSize: 22,
+    lineHeight: 26,
+    fontWeight: '600',
+  },
+  textEL: {
+    fontSize: 24,
+    lineHeight: 28,
+  },
+  textELSemibold: {
+    fontSize: 24,
+    lineHeight: 28,
     fontWeight: '600',
   },
   title: {
