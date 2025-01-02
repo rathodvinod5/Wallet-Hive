@@ -4,6 +4,8 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import SearchInput from '@/components/ui/search-input/SearchInput';
 import { ThemedText } from '@/components/ThemedText';
+import BalanceParentContainer from './explore-tab/BalanceParentContainer';
+import FeatureContainer from './explore-tab/FeatureContainer';
 
 
 export default function HomeScreen() {
@@ -19,6 +21,8 @@ export default function HomeScreen() {
 
         <View style={styles.contentContainer}>
           <SearchInput />
+          <BalanceParentContainer />
+          <FeatureContainer />
         </View>
       </View>
     </Screen>

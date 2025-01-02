@@ -36,6 +36,9 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingRight: 20,
     paddingLeft: 24,
+    fontSize: 16,
+    fontWeight: '600',
+    color: 'gray'
   },
   iconContainer: {
     display: 'flex',
