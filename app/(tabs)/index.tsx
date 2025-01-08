@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Platform, Text, View } from 'react-native';
+import { Image, StyleSheet, Platform, Text, Modal, View, TouchableOpacity } from 'react-native';
 import Screen from '@/components/Screen';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import AntDesign from '@expo/vector-icons/AntDesign';
@@ -7,17 +7,40 @@ import { ThemedText } from '@/components/ThemedText';
 import BalanceParentContainer from '../modules/explore-tab/BalanceParentContainer';
 import FeatureContainer from '../modules/explore-tab/FeatureContainer';
 import CryptoNFTTabContainer from '../modules/explore-tab/CryptoNFTTabContainer';
+import useParentController from '../modules/explore-tab/ParentController';
+import ModalHandler from '../modules/explore-tab/ModalHandler';
+import WalletModalContents from '../modules/explore-tab/WalletModalContents';
 
 
 export default function HomeScreen() {
+  const { showWalletModal, toggleWalletModal } = useParentController();
+
   return(
     <Screen>
       <View style={styles.parentContainer}>
+        <ModalHandler 
+          isVisible={showWalletModal}
+          onClose={toggleWalletModal}
+        >
+          <WalletModalContents />
+        </ModalHandler>
+
         <View style={styles.topContainer}>
-          <MaterialIcons name="settings" size={28} color="gray" />
-          {/* <Text style={styles.screenTitle}>Home</Text> */}
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={() => {}}
+            style={{ padding: 8 }}
+          >
+            <MaterialIcons name="settings" size={26} color="black" />
+          </TouchableOpacity>
           <ThemedText type="textMDSemibold">Home</ThemedText>
-          <AntDesign name="pluscircle" size={26} color="gray" />
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={toggleWalletModal}
+            style={{ padding: 8 }}
+          >
+            <AntDesign name="pluscircle" size={26} color="gray" />
+          </TouchableOpacity>
         </View>
 
         <View style={styles.contentContainer}>
