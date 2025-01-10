@@ -52,6 +52,6 @@ const styels = StyleSheet.create({
   titleStyles: {
     fontSize: 20,
     fontWeight: '600',
-    color: 'gray',
+    color: 'black',
   }
 });
