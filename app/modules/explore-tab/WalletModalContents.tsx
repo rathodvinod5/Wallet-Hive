@@ -1,11 +1,15 @@
 import HeaderComponent from '@/components/ui/header/HeaderComponent';
 import { View, StyleSheet, Text } from 'react-native';
+import Entypo from '@expo/vector-icons/Entypo';
+
 
 const WalletModalContents = () => {
   return(
     <View style={styles.container}>
       <HeaderComponent
-        title='Wallet' 
+        title='Wallets' 
+        leftItem={<Entypo name="cross" size={28} color="gray" />}
+        rightItem={<Entypo name="plus" size={24} color="gray" />}
       />
     </View>
   );

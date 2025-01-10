@@ -42,9 +42,10 @@ const styles = StyleSheet.create({
         // margin: 80,
         flex: 1,
         width: '100%',
-        backgroundColor: 'teal',
+        backgroundColor: 'snow',
         borderRadius: 20,
-        padding: 35,
+        paddingVertical: 35,
+        paddingHorizontal: 20,
         alignItems: 'center',
         shadowColor: '#000',
         shadowOffset: {

@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, StyleProp, TextStyle } from 'react-native';
 
 export type HeaderContainerProps = {
   leftItem?: React.ReactNode;
@@ -6,6 +6,7 @@ export type HeaderContainerProps = {
   title: string;
   rightItem?: React.ReactNode;
   onPressRightItem?: () => void;
+  titleCustomStyle?: StyleProp<TextStyle>;
 };
 
 const HeaderComponent = ({
@@ -14,6 +15,7 @@ const HeaderComponent = ({
   title,
   rightItem,
   onPressRightItem,
+  titleCustomStyle,
 }: HeaderContainerProps) => {
   return(
     <View style={styels.container}>
@@ -25,7 +27,7 @@ const HeaderComponent = ({
           {leftItem}
         </TouchableOpacity>
       ) : <View />}
-      <Text>{title}</Text>
+      <Text style={[styels.titleStyles, titleCustomStyle]}>{title}</Text>
       {rightItem ? (
         <TouchableOpacity
           activeOpacity={0.9}
@@ -46,5 +48,10 @@ const styels = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'
+  },
+  titleStyles: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: 'gray',
   }
 });
