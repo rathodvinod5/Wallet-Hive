@@ -1,10 +1,48 @@
-import { View, StyleSheet, Modal, ViewStyle, Text} from "react-native";
+import { View, StyleSheet, ViewStyle, Text, Dimensions, Platform} from "react-native";
+import Modal from "react-native-modal";
+
+const { width, height } = Dimensions.get("window");
+
 
 export type ModalHandlerProps = {
   isVisible: boolean;
   onClose: () => void;
   children: React.ReactNode;
   customStyles?: ViewStyle;
+}
+
+// const ModalHandler = ({
+//   isVisible,
+//   onClose,
+//   children,
+//   customStyles,
+// }: ModalHandlerProps) => {
+//   return (
+//     <Modal
+//       animationType="slide"
+//       transparent={true}
+//       visible={isVisible}
+//       onRequestClose={onClose}
+//     >
+//       <View style={styles.centeredView}>
+//         <View style={styles.modalView}>
+//             {children}
+//         </View>
+//       </View>
+//     </Modal>
+//   );
+// }
+
+function WrapperComponent() {
+  return (
+    <View>
+      <Modal>
+        <View style={{ flex: 1 }}>
+          <Text>I am the modal content!</Text>
+        </View>
+      </Modal>
+    </View>
+  );
 }
 
 const ModalHandler = ({
@@ -15,15 +53,20 @@ const ModalHandler = ({
 }: ModalHandlerProps) => {
   return (
     <Modal
-      animationType="slide"
-      transparent={true}
-      visible={isVisible}
-      onRequestClose={onClose}
+      // animationType="slide"
+      // onRequestClose={onClose}
+      isVisible={isVisible}
+      animationIn={"bounceInUp"}
+      style={{ flex: 1, backgroundColor: 'white', paddingHorizontal: 0 }}
+      coverScreen={false}
+      deviceWidth={width}
+      deviceHeight={height}
+      onBackdropPress={onClose}
     >
-      <View style={styles.centeredView}>
-        <View style={styles.modalView}>
-            {children}
-        </View>
+      <View style={{ flex: 1, }}>
+        <Text>I am the modal content!</Text>
+        <Text>I am the modal content!</Text>
+        <Text>I am the modal content!</Text>
       </View>
     </Modal>
   );
