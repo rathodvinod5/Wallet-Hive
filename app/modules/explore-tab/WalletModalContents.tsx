@@ -3,15 +3,30 @@ import { View, StyleSheet, Text } from 'react-native';
 import Entypo from '@expo/vector-icons/Entypo';
 import { ThemedView } from '@/components/ThemedView';
 import { ThemedText } from '@/components/ThemedText';
+import IconButton from '@/components/ui/button/IconButton';
 
 
-const WalletModalContents = () => {
+const WalletModalContents = ({
+  onPressClose,
+  onPressAdd,
+}: {
+  onPressClose: () => void,
+  onPressAdd: () => void,
+}) => {
   return(
     <View style={styles.container}>
       <HeaderComponent
         title='Wallets' 
-        leftItem={<Entypo name="cross" size={28} color="gray" />}
-        rightItem={<Entypo name="plus" size={24} color="gray" />}
+        leftItem={(
+          <IconButton onPress={onPressClose}>
+            <Entypo name="cross" size={28} color="gray" />
+          </IconButton>
+        )}
+        rightItem={(
+          <IconButton onPress={onPressAdd}>
+            <Entypo name="plus" size={24} color="gray" />
+          </IconButton>
+        )}
       />
 
       <ThemedView style={styles.contentContainer}>
@@ -34,6 +49,7 @@ export default WalletModalContents;
 const styles = StyleSheet.create({
   container: {   
     flex: 1,
+    paddingHorizontal: 20,
   },
   headerContainer: {
     flexDirection: 'row',

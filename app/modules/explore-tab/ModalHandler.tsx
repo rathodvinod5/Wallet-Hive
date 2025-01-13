@@ -57,17 +57,13 @@ const ModalHandler = ({
       // onRequestClose={onClose}
       isVisible={isVisible}
       animationIn={"bounceInUp"}
-      style={{ flex: 1, backgroundColor: 'white', paddingHorizontal: 0 }}
-      coverScreen={false}
-      deviceWidth={width}
-      deviceHeight={height}
+      style={styles.modalStyles}
+      coverScreen={true}
+      // deviceWidth={width}
+      // deviceHeight={height}
       onBackdropPress={onClose}
     >
-      <View style={{ flex: 1, }}>
-        <Text>I am the modal content!</Text>
-        <Text>I am the modal content!</Text>
-        <Text>I am the modal content!</Text>
-      </View>
+      {children}
     </Modal>
   );
 }
@@ -75,29 +71,37 @@ const ModalHandler = ({
 export default ModalHandler;
 
 const styles = StyleSheet.create({
-    centeredView: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingTop: 40,
-      },
-      modalView: {
-        // margin: 80,
-        flex: 1,
-        width: '100%',
-        backgroundColor: 'snow',
-        borderRadius: 20,
-        paddingVertical: 35,
-        paddingHorizontal: 20,
-        alignItems: 'center',
-        shadowColor: '#000',
-        shadowOffset: {
-          width: 0,
-          height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5,
-      },
-     
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 40,
+  },
+  modalView: {
+    // margin: 80,
+    flex: 1,
+    width: '100%',
+    backgroundColor: 'snow',
+    borderRadius: 20,
+    paddingVertical: 35,
+    // paddingHorizontal: 20,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalStyles: { 
+    margin: 0, 
+    backgroundColor: 'white', 
+    paddingHorizontal: 0, 
+    marginTop: 150,
+    paddingTop: 20,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+  }
 });

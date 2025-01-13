@@ -1,4 +1,5 @@
 import { Image, StyleSheet, Platform, Text, Modal, View, TouchableOpacity } from 'react-native';
+// import { Link } from "expo-router";
 import Screen from '@/components/Screen';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import AntDesign from '@expo/vector-icons/AntDesign';
@@ -22,7 +23,10 @@ export default function HomeScreen() {
           isVisible={showWalletModal}
           onClose={toggleWalletModal}
         >
-          <WalletModalContents />
+          <WalletModalContents 
+            onPressClose={toggleWalletModal} 
+            onPressAdd={() => {}} 
+          />
         </ModalHandler>
 
         <View style={styles.topContainer}>
@@ -41,6 +45,7 @@ export default function HomeScreen() {
           >
             <AntDesign name="pluscircle" size={26} color="gray" />
           </TouchableOpacity>
+          {/* <Link href={'/modal'}></Link> */}
         </View>
 
         <View style={styles.contentContainer}>
@@ -59,7 +64,7 @@ const styles = StyleSheet.create({
     flex: 1,
     display: 'flex',
     flexDirection: 'column',
-    paddingHorizontal: 24,
+    // paddingHorizontal: 24,
   },
   titleContainer: {
     flexDirection: 'row',
