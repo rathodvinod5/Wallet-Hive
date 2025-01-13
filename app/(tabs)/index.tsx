@@ -11,6 +11,7 @@ import CryptoNFTTabContainer from '../modules/explore-tab/CryptoNFTTabContainer'
 import useParentController from '../modules/explore-tab/ParentController';
 import ModalHandler from '../modules/explore-tab/ModalHandler';
 import WalletModalContents from '../modules/explore-tab/WalletModalContents';
+import ParallaxScrollView from '@/components/ParallaxScrollView';
 
 
 export default function HomeScreen() {
@@ -48,12 +49,19 @@ export default function HomeScreen() {
           {/* <Link href={'/modal'}></Link> */}
         </View>
 
-        <View style={styles.contentContainer}>
-          <SearchInput />
-          <BalanceParentContainer />
-          <FeatureContainer />
-          <CryptoNFTTabContainer />
-        </View>
+        <ParallaxScrollView
+          headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
+          headerImage={<View />}
+        >
+          <View style={styles.contentContainer}>
+            <SearchInput />
+            <BalanceParentContainer 
+              onPressOpenWalletModal={toggleWalletModal} 
+            />
+            <FeatureContainer />
+            <CryptoNFTTabContainer />
+          </View>
+        </ParallaxScrollView>
       </View>
     </Screen>
   );
@@ -87,6 +95,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    paddingHorizontal: 10
   },
   screenTitle: {
     fontSize: 22,
@@ -94,6 +103,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
-    paddingTop: 20
+    paddingTop: 20,
+    // paddingHorizontal: 20
   }
 });

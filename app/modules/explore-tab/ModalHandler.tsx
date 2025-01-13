@@ -59,9 +59,11 @@ const ModalHandler = ({
       animationIn={"bounceInUp"}
       style={styles.modalStyles}
       coverScreen={true}
+      animationInTiming={800}
       // deviceWidth={width}
       // deviceHeight={height}
       onBackdropPress={onClose}
+      hideModalContentWhileAnimating={true}
     >
       {children}
     </Modal>

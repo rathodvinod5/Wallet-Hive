@@ -1,5 +1,5 @@
 import { ThemedText } from "@/components/ThemedText";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Entypo from '@expo/vector-icons/Entypo';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
@@ -9,21 +9,31 @@ import IconButton from "@/components/ui/button/IconButton";
 import { ThemedView } from "@/components/ThemedView";
 
 
-const BalanceParentContainer = () => {
+const BalanceParentContainer = ({
+  onPressOpenWalletModal
+}: {
+  onPressOpenWalletModal: () => void
+}) => {
   const { showBalance } = useExploreTabController();
 
   return(
     <View style={styles.container}>
       <View>
-        <View style={styles.innLeftContainer}>
+        <TouchableOpacity 
+          style={styles.innLeftContainer} 
+          activeOpacity={0.8} 
+          onPress={onPressOpenWalletModal}
+        >
           {showBalance ? (
             <Ionicons name="eye" size={24} color="gray" />
           ) : (
             <Ionicons name="eye-off" size={24} color="gray" />
           )}
-          <ThemedText type="textSMSemibold" style={styles.walletChainName}>Etherum Wallet</ThemedText>
+          <ThemedText type="textSMSemibold" style={styles.walletChainName}>
+            Etherum Wallet
+          </ThemedText>
           <Entypo name="select-arrows" size={16} color="gray" />
-        </View>
+        </TouchableOpacity>
         <ThemedText type="textELSemibold">$0.00</ThemedText>
       </View>
       <View style={styles.rightContainer}>
