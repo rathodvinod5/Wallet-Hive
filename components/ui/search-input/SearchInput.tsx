@@ -1,8 +1,15 @@
 import { useState } from "react";
-import { NativeSyntheticEvent, StyleSheet, TextInput, TextInputChangeEventData, View } from "react-native";
+import { NativeSyntheticEvent, StyleProp, StyleSheet, TextInput, TextInputChangeEventData, 
+  TextStyle, View, ViewStyle } from "react-native";
 import Feather from '@expo/vector-icons/Feather';
 
-const SearchInput = () => {
+const SearchInput = ({
+  customContainerCss,
+  customTextInputCss,
+}: {
+  customContainerCss?: StyleProp<ViewStyle>,
+  customTextInputCss?: StyleProp<TextStyle>
+}) => {
   const [inputValue, setInputValue] = useState("");
   
   const handleOnChange = (e: NativeSyntheticEvent<TextInputChangeEventData>) => {
@@ -10,12 +17,12 @@ const SearchInput = () => {
   }
 
   return(
-    <View style={styles.container}>
+    <View style={[styles.container, customContainerCss]}>
       <TextInput
         placeholder="Search"
         value={inputValue}
         onChange={handleOnChange}
-        style={styles.textInput}
+        style={[styles.textInput, customTextInputCss]}
       />
       <View style={styles.iconContainer}>
         <Feather name="search" size={24} color="gray" />

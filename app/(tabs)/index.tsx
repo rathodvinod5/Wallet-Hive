@@ -1,4 +1,5 @@
-import { Image, StyleSheet, Platform, Text, Modal, View, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Platform, Text, Modal, View, 
+  TouchableOpacity, VirtualizedList } from 'react-native';
 // import { Link } from "expo-router";
 import Screen from '@/components/Screen';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
@@ -12,22 +13,31 @@ import useParentController from '../modules/explore-tab/ParentController';
 import ModalHandler from '../modules/explore-tab/ModalHandler';
 import WalletModalContents from '../modules/explore-tab/WalletModalContents';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
+import ManageCrypto from '../ManageCrypto';
 
 
 export default function HomeScreen() {
-  const { showWalletModal, toggleWalletModal } = useParentController();
+  const { showWalletModal, toggleWalletModal, showManageCryptoModal, 
+    toggleManageCryptoModal } = useParentController();
 
   return(
     <Screen>
       <View style={styles.parentContainer}>
         <ModalHandler 
-          isVisible={showWalletModal}
-          onClose={toggleWalletModal}
+          isVisible={showWalletModal || showManageCryptoModal}
+          onClose={showWalletModal ? toggleWalletModal : toggleManageCryptoModal}
         >
-          <WalletModalContents 
-            onPressClose={toggleWalletModal} 
-            onPressAdd={() => {}} 
-          />
+          {showWalletModal ? (
+            <WalletModalContents 
+              onPressClose={toggleWalletModal} 
+              onPressAdd={() => {}} 
+            />
+          ) : (
+            <ManageCrypto
+              onPressClose={toggleManageCryptoModal} 
+              onPressAdd={() => {}} 
+            />
+          )}
         </ModalHandler>
 
         <View style={styles.topContainer}>
@@ -41,7 +51,7 @@ export default function HomeScreen() {
           <ThemedText type="textMDSemibold">Home</ThemedText>
           <TouchableOpacity
             activeOpacity={0.8}
-            onPress={toggleWalletModal}
+            onPress={toggleManageCryptoModal}
             style={{ padding: 8 }}
           >
             <AntDesign name="pluscircle" size={26} color="gray" />
