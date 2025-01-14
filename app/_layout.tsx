@@ -1,3 +1,4 @@
+import { View, Text } from 'react-native';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
 import { Stack, useRouter, Link } from 'expo-router';
@@ -6,8 +7,6 @@ import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
 import { useColorScheme } from '@/hooks/useColorScheme';
-import { View, Text } from 'react-native';
-import { ManageCryptoHeader } from './ManageCrypto';
 import IconButton from '@/components/ui/button/IconButton';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
@@ -16,6 +15,7 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+  const { back } = useRouter();
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
@@ -31,8 +31,6 @@ export default function RootLayout() {
     return null;
   }
 
-  const { back } = useRouter();
-
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
@@ -43,6 +41,7 @@ export default function RootLayout() {
         <Stack.Screen 
           name="managecrypto" 
           options={{ 
+            animation: "ios_from_right",
             headerShown: true, 
             title: 'ManageCrypto',
             headerLeft: () => (
@@ -51,13 +50,15 @@ export default function RootLayout() {
               </IconButton>
             ),
             headerRight: () => (
-              <Link href={"/modal"}>
+              <Link href={"/walletmodal"}>
                 <Ionicons name="add" size={28} color="black" />
               </Link>
             ),
             headerTitle(props) {
              return (
-                <Text style={{ fontSize: 18, color: 'black', fontWeight: 'bold' }}>Manage Crypto</Text>
+                <Text style={{ fontSize: 18, color: 'black', fontWeight: 'bold' }}>
+                  Manage Crypto
+                </Text>
               );
             },
             headerStyle: {
@@ -67,7 +68,7 @@ export default function RootLayout() {
         />
         <Stack.Screen name="+not-found" />
         <Stack.Screen
-          name="modal"
+          name="walletmodal"
           options={{
             presentation: "formSheet",
             animation: "slide_from_bottom",

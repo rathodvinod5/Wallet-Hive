@@ -28,9 +28,9 @@ export default function HomeScreen() {
           onClose={showWalletModal ? toggleWalletModal : toggleManageCryptoModal}
         >
           <WalletModalContents 
-              onPressClose={toggleWalletModal} 
-              onPressAdd={() => {}} 
-            />
+            onPressClose={toggleWalletModal} 
+            onPressAdd={() => {}} 
+          />
           {/* {showWalletModal ? (
             <WalletModalContents 
               onPressClose={toggleWalletModal} 

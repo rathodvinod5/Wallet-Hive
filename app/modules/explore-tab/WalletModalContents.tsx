@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
   container: {   
     flex: 1,
     paddingHorizontal: 20,
+    backgroundColor: 'white'
   },
   headerContainer: {
     flexDirection: 'row',
@@ -57,17 +58,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   titleSmall: {
-    fontSize: 12,
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: 'gray'
   },
   contentContainer: {
     flex: 1,
-    marginTop: 30,
+    marginTop: 40,
     flexDirection: 'column',
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
   },
   itemLayout: {
     flexDirection: 'row',
     alignItems: 'center',
+    paddingTop: 10
   },
   itemLeftContainer: {
     padding: 4,

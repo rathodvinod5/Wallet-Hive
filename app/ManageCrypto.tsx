@@ -1,34 +1,10 @@
 import HeaderComponent from "@/components/ui/header/HeaderComponent";
-import { View, StyleSheet, FlatList } from "react-native";
-import Ionicons from '@expo/vector-icons/Ionicons';
-import IconButton from "@/components/ui/button/IconButton";
+import { View, StyleSheet, FlatList, Switch } from "react-native";
+// import Ionicons from '@expo/vector-icons/Ionicons';
+// import IconButton from "@/components/ui/button/IconButton";
 import SearchInput from "@/components/ui/search-input/SearchInput";
 import { transactionListData, TransactionObjType } from "./DATA";
 import { ThemedText } from "@/components/ThemedText";
-
-export const ManageCryptoHeader = ({
-  onPressClose,
-  onPressAdd,
-}: {
-  onPressClose: () => void,
-  onPressAdd: () => void,
-}) => {
-  return (
-    <HeaderComponent
-      title='Manage Crypto' 
-      leftItem={(
-        <IconButton onPress={onPressClose}>
-          <Ionicons name="arrow-back" size={28} color="gray" />
-        </IconButton>
-      )}
-      rightItem={(
-        <IconButton onPress={onPressAdd}>
-          <Ionicons name="add" size={28} color="black" />
-        </IconButton>
-      )}
-    />
-  );
-}
 
 const ManageCrypto = ({
     onPressClose,
@@ -39,9 +15,20 @@ const ManageCrypto = ({
   }) => {
   return(
     <View style={styles.container}>
-      
+      {/* <HeaderComponent
+        title='Manage Crypto' 
+        leftItem={(
+          <IconButton onPress={onPressClose}>
+            <Ionicons name="arrow-back" size={28} color="gray" />
+          </IconButton>
+        )}
+        rightItem={(
+          <IconButton onPress={onPressAdd}>
+            <Ionicons name="add" size={28} color="black" />
+          </IconButton>
+        )}
+      /> */}
       <SearchInput customContainerCss={{ marginTop: 20 }} />
-
       <FlatList
         data={transactionListData}
         keyExtractor={(item, index) => 'list-item-'+index} 
@@ -62,18 +49,21 @@ type RenderItemProps<T> = {
 export function RenderItem<T>({ item }: RenderItemProps<T & TransactionObjType>){
   return(
     <View style={styles.listItemObject}>
-      <View style={styles.itemLeftContainer}>
-      </View>
+      <View style={styles.itemLeftContainer} />
       <View style={styles.itemRightContainer}>
         <View style={styles.recordContainer}>
           <ThemedText type="textSMSemibold">{item.chain.title}</ThemedText>
           <ThemedText type="textSMSemibold">{item.transactionAmount}</ThemedText>
         </View>
-        <View style={styles.recordContainer}>
-          <ThemedText type="textSMSemibold">{item.cryptoNativeValue}</ThemedText>
-          <ThemedText type="textSMSemibold">{`$0.00`}</ThemedText>
-        </View>
+        <ThemedText type="textSMSemibold">{item.chain.title}</ThemedText>
       </View>
+      <Switch
+        trackColor={{false: '#767577', true: '#81b0ff'}}
+        thumbColor={item.isEnabled ? '#f5dd4b' : '#f4f3f4'}
+        ios_backgroundColor="#3e3e3e"
+        // onValueChange={toggleSwitch}
+        value={item.isEnabled}
+      />
     </View>
   );
 }
@@ -108,7 +98,7 @@ const styles = StyleSheet.create({
   },
   recordContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     alignItems: 'center',
   }
 });

@@ -12,6 +12,7 @@ export type TransactionObjType = {
   transactionTime: string,
   transactionStatus: string,
   chainIncDecStatus: IncDecStatusType,
+  isEnabled?: boolean,
 };
 
 export const transactionListData: TransactionObjType[] = [

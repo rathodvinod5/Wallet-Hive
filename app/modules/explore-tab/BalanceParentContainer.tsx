@@ -7,6 +7,7 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import useExploreTabController from "@/hooks/useExploreTabController";
 import IconButton from "@/components/ui/button/IconButton";
 import { ThemedView } from "@/components/ThemedView";
+import { Link } from "expo-router";
 
 
 const BalanceParentContainer = ({
@@ -19,10 +20,11 @@ const BalanceParentContainer = ({
   return(
     <View style={styles.container}>
       <View>
-        <TouchableOpacity 
+        <Link
+          href={"/walletmodal"} 
           style={styles.innLeftContainer} 
-          activeOpacity={0.8} 
-          onPress={onPressOpenWalletModal}
+          // activeOpacity={0.8} 
+          // onPress={onPressOpenWalletModal}
         >
           {showBalance ? (
             <Ionicons name="eye" size={24} color="gray" />
@@ -33,7 +35,7 @@ const BalanceParentContainer = ({
             Etherum Wallet
           </ThemedText>
           <Entypo name="select-arrows" size={16} color="gray" />
-        </TouchableOpacity>
+        </Link>
         <ThemedText type="textELSemibold">$0.00</ThemedText>
       </View>
       <View style={styles.rightContainer}>
