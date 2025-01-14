@@ -22,19 +22,20 @@ const BalanceParentContainer = ({
       <View>
         <Link
           href={"/walletmodal"} 
-          style={styles.innLeftContainer} 
           // activeOpacity={0.8} 
           // onPress={onPressOpenWalletModal}
         >
-          {showBalance ? (
-            <Ionicons name="eye" size={24} color="gray" />
-          ) : (
-            <Ionicons name="eye-off" size={24} color="gray" />
-          )}
-          <ThemedText type="textSMSemibold" style={styles.walletChainName}>
-            Etherum Wallet
-          </ThemedText>
-          <Entypo name="select-arrows" size={16} color="gray" />
+          <View style={styles.innLeftContainer}>
+            {showBalance ? (
+              <Ionicons name="eye" size={24} color="gray" />
+            ) : (
+              <Ionicons name="eye-off" size={24} color="gray" />
+            )}
+            <ThemedText type="textSMSemibold" style={styles.walletChainName}>
+              Etherum Wallet
+            </ThemedText>
+            <Entypo name="select-arrows" size={16} color="gray" />
+          </View>
         </Link>
         <ThemedText type="textELSemibold">$0.00</ThemedText>
       </View>

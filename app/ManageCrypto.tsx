@@ -1,18 +1,33 @@
+import { useState } from "react";
 import HeaderComponent from "@/components/ui/header/HeaderComponent";
 import { View, StyleSheet, FlatList, Switch } from "react-native";
-// import Ionicons from '@expo/vector-icons/Ionicons';
-// import IconButton from "@/components/ui/button/IconButton";
 import SearchInput from "@/components/ui/search-input/SearchInput";
 import { transactionListData, TransactionObjType } from "./DATA";
 import { ThemedText } from "@/components/ThemedText";
 
-const ManageCrypto = ({
-    onPressClose,
-    onPressAdd,
-  }: {
-    onPressClose: () => void,
-    onPressAdd: () => void,
-  }) => {
+const ManageCrypto = () => {
+  const [itemsList, setItemsList] = useState<TransactionObjType[]>(
+    JSON.parse(JSON.stringify(transactionListData))
+  );
+
+  const handleIsSelected = (index: number) => {
+    // console.log('in handleIsSelected: ', item);
+    // if(isSelectedSet.has(item)) {
+    //   isSelectedSet.delete(item);
+    //   return;
+    // }
+    // isSelectedSet.add(item);
+
+    try {
+      if(itemsList[index]) {
+        const status = !itemsList[index].isEnabled;
+        itemsList[index].isEnabled = status;
+      }
+    } catch(error) {
+      console.log('error: ', error);
+    }
+  }
+
   return(
     <View style={styles.container}>
       {/* <HeaderComponent
@@ -30,9 +45,14 @@ const ManageCrypto = ({
       /> */}
       <SearchInput customContainerCss={{ marginTop: 20 }} />
       <FlatList
-        data={transactionListData}
-        keyExtractor={(item, index) => 'list-item-'+index} 
-        renderItem={(item) => <RenderItem<TransactionObjType> item={item.item} />}
+        data={itemsList}
+        keyExtractor={(item, index) => 'manage-crypto-list-item-'+index} 
+        renderItem={({ item, index }) => (
+          <RenderItem<TransactionObjType> 
+            item={item} 
+            // handleIsSelected={() => handleIsSelected(index)}
+          />
+        )}
         contentContainerStyle={styles.flatlistContainer}
       />
       
@@ -44,9 +64,19 @@ export default ManageCrypto;
 
 type RenderItemProps<T> = {
   item: T;
+  // handleIsSelected: () => void,
 };
 
-export function RenderItem<T>({ item }: RenderItemProps<T & TransactionObjType>){
+export function RenderItem<T>({ 
+  item, 
+  // handleIsSelected, 
+}: RenderItemProps<T & TransactionObjType>){
+  const [isEnabled, setIsEnabled] = useState(false);
+
+  const toggleIsEnabled = () => {
+    setIsEnabled(!isEnabled);
+  }
+
   return(
     <View style={styles.listItemObject}>
       <View style={styles.itemLeftContainer} />
@@ -58,11 +88,11 @@ export function RenderItem<T>({ item }: RenderItemProps<T & TransactionObjType>)
         <ThemedText type="textSMSemibold">{item.chain.title}</ThemedText>
       </View>
       <Switch
-        trackColor={{false: '#767577', true: '#81b0ff'}}
-        thumbColor={item.isEnabled ? '#f5dd4b' : '#f4f3f4'}
-        ios_backgroundColor="#3e3e3e"
-        // onValueChange={toggleSwitch}
-        value={item.isEnabled}
+        trackColor={{false: 'lightgray', true: 'blue'}}
+        thumbColor={'#f4f3f4'}
+        ios_backgroundColor="gray"
+        onChange={toggleIsEnabled}
+        value={isEnabled}
       />
     </View>
   );
@@ -72,18 +102,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 20,
-    // paddingTop: 60
   },
   listItemObject: {
     flexDirection: 'row',
-    // justifyContent: 'space-between',
     alignItems: 'center',
     marginVertical: 8,
     gap: 4
   },
   flatlistContainer: { 
     width: '100%', 
-    // borderWidth: 1, 
     marginTop: 20 
   },
   itemLeftContainer: {
