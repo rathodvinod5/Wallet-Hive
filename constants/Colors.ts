@@ -5,6 +5,7 @@
 
 const tintColorLight = '#0a7ea4';
 const tintColorDark = '#fff';
+const greyExtraLight = "#F0F0F0"; //https://baskent.edu.tr/~tkaracay/etudio/agora/nnn/html_colors.htm
 
 export const Colors = {
   light: {
@@ -14,6 +15,7 @@ export const Colors = {
     icon: '#687076',
     tabIconDefault: '#687076',
     tabIconSelected: tintColorLight,
+    greyExtraLight: greyExtraLight,
   },
   dark: {
     text: '#ECEDEE',
@@ -22,5 +24,6 @@ export const Colors = {
     icon: '#9BA1A6',
     tabIconDefault: '#9BA1A6',
     tabIconSelected: tintColorDark,
+    greyExtraLight: greyExtraLight,
   },
 };

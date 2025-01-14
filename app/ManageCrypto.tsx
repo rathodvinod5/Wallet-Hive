@@ -107,7 +107,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 8,
-    gap: 4
+    gap: 4,
+    backgroundColor: 'lightgray',
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 6
   },
   flatlistContainer: { 
     width: '100%', 
@@ -118,7 +122,7 @@ const styles = StyleSheet.create({
     width: 48,
     height: 48,
     borderRadius: 48 / 2,
-    backgroundColor: 'lightgrey'
+    backgroundColor: 'gray'
   },
   itemRightContainer: {
     flex: 1,

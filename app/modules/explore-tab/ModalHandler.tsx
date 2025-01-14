@@ -74,10 +74,10 @@ export default ModalHandler;
 
 const styles = StyleSheet.create({
   centeredView: {
-    flex: 1,
+    // flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: 40,
+    // marginTop: 240,
   },
   modalView: {
     // margin: 80,
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     margin: 0, 
     backgroundColor: 'white', 
     paddingHorizontal: 0, 
-    marginTop: 150,
+    marginTop: height * 0.4,
     paddingTop: 20,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
