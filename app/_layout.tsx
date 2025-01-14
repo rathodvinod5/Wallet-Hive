@@ -1,12 +1,16 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
+import { Stack, useRouter, Link } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
-
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { View, Text } from 'react-native';
+import { ManageCryptoHeader } from './ManageCrypto';
+import IconButton from '@/components/ui/button/IconButton';
+import Ionicons from '@expo/vector-icons/Ionicons';
+
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -27,16 +31,47 @@ export default function RootLayout() {
     return null;
   }
 
+  const { back } = useRouter();
+
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+        <Stack.Screen 
+          name="(tabs)" 
+          options={{ headerShown: false }} 
+        />
+        <Stack.Screen 
+          name="managecrypto" 
+          options={{ 
+            headerShown: true, 
+            title: 'ManageCrypto',
+            headerLeft: () => (
+              <IconButton onPress={() => back()}>
+                <Ionicons name="arrow-back" size={28} color="gray" />
+              </IconButton>
+            ),
+            headerRight: () => (
+              <Link href={"/modal"}>
+                <Ionicons name="add" size={28} color="black" />
+              </Link>
+            ),
+            headerTitle(props) {
+             return (
+                <Text style={{ fontSize: 18, color: 'black', fontWeight: 'bold' }}>Manage Crypto</Text>
+              );
+            },
+            headerStyle: {
+              backgroundColor: 'lightgrey',
+            },
+          }} 
+        />
         <Stack.Screen name="+not-found" />
         <Stack.Screen
           name="modal"
           options={{
-            presentation: 'fullScreenModal',
-            animation: 'fade',
+            presentation: "formSheet",
+            animation: "slide_from_bottom",
+            headerShown: false,
           }}
         />
       </Stack>

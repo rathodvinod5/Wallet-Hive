@@ -1,6 +1,6 @@
 import { Image, StyleSheet, Platform, Text, Modal, View, 
   TouchableOpacity, VirtualizedList } from 'react-native';
-// import { Link } from "expo-router";
+import { Link } from "expo-router";
 import Screen from '@/components/Screen';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import AntDesign from '@expo/vector-icons/AntDesign';
@@ -13,7 +13,7 @@ import useParentController from '../modules/explore-tab/ParentController';
 import ModalHandler from '../modules/explore-tab/ModalHandler';
 import WalletModalContents from '../modules/explore-tab/WalletModalContents';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
-import ManageCrypto from '../ManageCrypto';
+// import ManageCrypto from '../managecrypto';
 
 
 export default function HomeScreen() {
@@ -27,7 +27,11 @@ export default function HomeScreen() {
           isVisible={showWalletModal || showManageCryptoModal}
           onClose={showWalletModal ? toggleWalletModal : toggleManageCryptoModal}
         >
-          {showWalletModal ? (
+          <WalletModalContents 
+              onPressClose={toggleWalletModal} 
+              onPressAdd={() => {}} 
+            />
+          {/* {showWalletModal ? (
             <WalletModalContents 
               onPressClose={toggleWalletModal} 
               onPressAdd={() => {}} 
@@ -37,7 +41,7 @@ export default function HomeScreen() {
               onPressClose={toggleManageCryptoModal} 
               onPressAdd={() => {}} 
             />
-          )}
+          )} */}
         </ModalHandler>
 
         <View style={styles.topContainer}>
@@ -49,29 +53,32 @@ export default function HomeScreen() {
             <MaterialIcons name="settings" size={26} color="black" />
           </TouchableOpacity>
           <ThemedText type="textMDSemibold">Home</ThemedText>
-          <TouchableOpacity
-            activeOpacity={0.8}
-            onPress={toggleManageCryptoModal}
-            style={{ padding: 8 }}
-          >
+          {/* <TouchableOpacity
+              activeOpacity={0.8}
+              // onPress={toggleManageCryptoModal}
+              style={{ padding: 8 }}
+            >
+              <AntDesign name="pluscircle" size={26} color="gray" />
+            </TouchableOpacity> */}
+
+          <Link href={'/managecrypto'} style={{ padding: 8 }}>
             <AntDesign name="pluscircle" size={26} color="gray" />
-          </TouchableOpacity>
-          {/* <Link href={'/modal'}></Link> */}
+          </Link>
         </View>
 
-        <ParallaxScrollView
+        {/* <ParallaxScrollView
           headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
           headerImage={<View />}
         >
-          <View style={styles.contentContainer}>
-            <SearchInput />
-            <BalanceParentContainer 
-              onPressOpenWalletModal={toggleWalletModal} 
-            />
-            <FeatureContainer />
-            <CryptoNFTTabContainer />
-          </View>
-        </ParallaxScrollView>
+        </ParallaxScrollView> */}
+        <View style={styles.contentContainer}>
+          <SearchInput />
+          <BalanceParentContainer 
+            onPressOpenWalletModal={toggleWalletModal} 
+          />
+          <FeatureContainer />
+          <CryptoNFTTabContainer />
+        </View>
       </View>
     </Screen>
   );
@@ -114,6 +121,6 @@ const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     paddingTop: 20,
-    // paddingHorizontal: 20
+    paddingHorizontal: 20
   }
 });
