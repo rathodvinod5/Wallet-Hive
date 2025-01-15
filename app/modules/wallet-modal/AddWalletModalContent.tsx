@@ -16,32 +16,38 @@ const AddWalletModalContent = () => {
         height={60} 
       />
       {/* <Crypto style={{ width: 100, height: 60 }} /> */}
-      <View style={styles.listItemObject}>
-        <View style={styles.itemLeftContainer} />
-        <View style={styles.itemRightContainer}>
-          <ThemedText style={styles.itemTitleStyles}>
-            Create New Wallet
-          </ThemedText>
-          <ThemedText style={styles.subtitleStyles}>
-            Secrete phase
-          </ThemedText>
-        </View>
-        <Feather name="chevron-right" size={28} color="gray" />
-      </View>
-      <Link href={'/addwalletscreen'}>
-        <View style={styles.listItemObject}>
-          <View style={styles.itemLeftContainer} />
-          <View style={styles.itemRightContainer}>
-            <ThemedText style={styles.itemTitleStyles}>
-              Add Existing Wallet
-            </ThemedText>
-            <ThemedText style={styles.subtitleStyles}>
-              Secrete phase
-            </ThemedText>
+      <View style={{ marginVertical: 16 }}>
+        <Link href={'/createnewwalletscreen'}>
+          <View style={styles.listItemObject}>
+            <View style={styles.itemLeftContainer} />
+            <View style={styles.itemRightContainer}>
+              <ThemedText style={styles.itemTitleStyles}>
+                Create New Wallet
+              </ThemedText>
+              <ThemedText style={styles.subtitleStyles}>
+                Secrete phase
+              </ThemedText>
+            </View>
+            <Feather name="chevron-right" size={28} color="gray" />
           </View>
-          <Feather name="chevron-right" size={28} color="gray" />
-        </View> 
-      </Link>
+        </Link>
+      </View>
+      <View>
+        <Link href={'/addwalletscreen'}>
+          <View style={styles.listItemObject}>
+            <View style={styles.itemLeftContainer} />
+            <View style={styles.itemRightContainer}>
+              <ThemedText style={styles.itemTitleStyles}>
+                Add Existing Wallet
+              </ThemedText>
+              <ThemedText style={styles.subtitleStyles}>
+                Secrete phase
+              </ThemedText>
+            </View>
+            <Feather name="chevron-right" size={28} color="gray" />
+          </View> 
+        </Link>
+      </View>
     </View>
   );
 }

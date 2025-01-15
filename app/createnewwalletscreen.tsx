@@ -4,78 +4,45 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import HeaderComponent from '@/components/ui/header/HeaderComponent';
 import { useRouter } from 'expo-router';
-import useAddWalletControllet from './modules/add-wallet-screen/useAddWalletController';
 import { ThemedText } from '@/components/ThemedText';
 import { Colors } from '@/constants/Colors';
 import { SwitchType } from './modules/add-wallet-screen/types/Types';
+import useCreateNewWalletController from './modules/create-wallet-screen/useCreateNewWallet';
 
 const AddWalletScreen = () => {
   const { back } = useRouter();
-  const { walletName, phrase, activeItem, secretKey, onChangeWalletName, onChangePhrase,
-    onChangeActiveItem, validateString, onChangeSecretKey } = useAddWalletControllet();
+  const { } = useCreateNewWalletController();
 
   const onPressClose = () => back();
 
   return(
     <View style={styles.container}>
       <HeaderComponent
-        title='Add Wallet' 
+        title='Create Wallet' 
         leftItem={(
           <IconButton onPress={onPressClose}>
             <Ionicons name="arrow-back-outline" size={28} color="gray" />
           </IconButton>
         )}
-        rightItem={(
-          <IconButton onPress={() => {}}>
-            <MaterialCommunityIcons name="line-scan" size={28} color="gray" />
-          </IconButton>
-        )}
+        // rightItem={(
+        //   <IconButton onPress={() => {}}>
+        //     <MaterialCommunityIcons name="line-scan" size={28} color="gray" />
+        //   </IconButton>
+        // )}
       />
 
       <View style={styles.innContainer}>
         <View style={{ flex: 1 }}>
-          <ThemedText 
-            type="textSMSemibold" 
-            style={styles.labelStyles}
-          >
-            Wallet Name
-          </ThemedText>
-          <TextInput 
-            value={walletName} 
-            onChangeText={onChangeWalletName}
-            style={styles.textInpuStyles}
-          />
-
-          <View style={{ height: 20 }} />
-          <CustomSwitchButtons
-            activeItem={activeItem}
-            onChangeActiveItem={onChangeActiveItem}
-          />
-          <ThemedText 
-            type="textSMSemibold" 
-            style={[styles.labelStyles, { marginTop: 20, }]}
-          >
-            {activeItem === 'phrase' ? 'Enter Phrase' : 'Enter Secret Key'}
-          </ThemedText>
-          <TextInput
-            value={phrase}
-            onChangeText={onChangePhrase}
-            style={[styles.textInpuStyles, styles.phraseTextArea]}
-            multiline={true}
-          />
+          
         </View>
         <TouchableOpacity 
-          style={[styles.restoreWalletButton, {
-            // backgroundColor: phrase ? 'royalblue' : 'lightgray',
-            opacity: phrase ? 1.0 : 0.4,
-          }]}
+          style={[styles.restoreWalletButton]}
           activeOpacity={0.9}
-          disabled={!phrase}
-          onPress={validateString}
+        //   onPress={validateString}
         >
           {/* <Text style={styles.buttonTitle}>Restore Wallet</Text> */}
           <ThemedText type="textSMSemibold" style={{ color: 'white' }}>
-            Restore Wallet
+            Create Wallet
           </ThemedText>
         </TouchableOpacity>
       </View>
