@@ -26,7 +26,7 @@ const HeaderComponent = ({
         >
           {leftItem}
         </TouchableOpacity>
-      ) : <View />}
+      ) : <View style={styels.emptyView} />}
       <Text style={[styels.titleStyles, titleCustomStyle]}>{title}</Text>
       {rightItem ? (
         <TouchableOpacity
@@ -35,7 +35,7 @@ const HeaderComponent = ({
         >
           {rightItem}
         </TouchableOpacity>
-      ) : <View />}
+      ) : <View style={styels.emptyView} />}
     </View>
   );
 }
@@ -53,5 +53,8 @@ const styels = StyleSheet.create({
     fontSize: 20,
     fontWeight: '600',
     color: 'black',
+  },
+  emptyView: {
+    width: 28
   }
 });
