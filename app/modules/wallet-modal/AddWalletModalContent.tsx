@@ -2,6 +2,8 @@ import { ThemedText } from "@/components/ThemedText";
 import { View, Text, StyleSheet, Switch, Image } from "react-native";
 import Feather from '@expo/vector-icons/Feather';
 import { Colors } from "@/constants/Colors";
+import { useThemeColor } from "@/hooks/useThemeColor";
+import { Link } from "expo-router";
 const Crypto = require('../../../assets/images/CryptoWallet.svg');
 
 const AddWalletModalContent = () => {
@@ -17,23 +19,29 @@ const AddWalletModalContent = () => {
       <View style={styles.listItemObject}>
         <View style={styles.itemLeftContainer} />
         <View style={styles.itemRightContainer}>
-          <ThemedText type="textSMSemibold">Create New Wallet</ThemedText>
-          <ThemedText type="textSM" style={{ color: 'grey' }}>
+          <ThemedText style={styles.itemTitleStyles}>
+            Create New Wallet
+          </ThemedText>
+          <ThemedText style={styles.subtitleStyles}>
             Secrete phase
           </ThemedText>
         </View>
         <Feather name="chevron-right" size={28} color="gray" />
       </View>
-      <View style={styles.listItemObject}>
-        <View style={styles.itemLeftContainer} />
-        <View style={styles.itemRightContainer}>
-          <ThemedText type="textSMSemibold">Add Existing Wallet</ThemedText>
-          <ThemedText type="textSM" style={{ color: 'grey' }}>
-            Secrete phase
-          </ThemedText>
-        </View>
-        <Feather name="chevron-right" size={28} color="gray" />
-      </View> 
+      <Link href={'/addwalletscreen'}>
+        <View style={styles.listItemObject}>
+          <View style={styles.itemLeftContainer} />
+          <View style={styles.itemRightContainer}>
+            <ThemedText style={styles.itemTitleStyles}>
+              Add Existing Wallet
+            </ThemedText>
+            <ThemedText style={styles.subtitleStyles}>
+              Secrete phase
+            </ThemedText>
+          </View>
+          <Feather name="chevron-right" size={28} color="gray" />
+        </View> 
+      </Link>
     </View>
   );
 }
@@ -52,6 +60,7 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     gap: 4,
     backgroundColor: Colors['light']['greyExtraLight'], // '#F0F0F0',
+    // backgroundColor: useThemeColor({}, 'greyExtraLight'),
     paddingHorizontal: 12,
     paddingVertical: 8,
     borderRadius: 6
@@ -74,5 +83,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-  }
+  },
+  itemTitleStyles: { fontSize: 15, fontWeight: '600' },
+  subtitleStyles: { fontSize: 14, color: 'grey' },
 });

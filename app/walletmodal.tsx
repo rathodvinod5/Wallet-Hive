@@ -11,7 +11,6 @@ const WalletModalScreen = () => {
 
   return(
     <View style={styles.container}>
-      {/* <View style={styles.sliderTipStyles} /> */}
       <ModalHandler
         isVisible={showAddWalletModal}
         onClose={toggleWalletModal}

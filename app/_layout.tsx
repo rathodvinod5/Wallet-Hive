@@ -75,6 +75,14 @@ export default function RootLayout() {
             headerShown: false,
           }}
         />
+        <Stack.Screen
+          name="addwalletscreen" 
+          options={{
+            presentation: "formSheet",
+            animation: "slide_from_right",
+            headerShown: false,
+          }}
+        />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>
