@@ -3,6 +3,7 @@ import TabButton from "@/components/ui/button/TabButton";
 import useExploreTabController from "@/hooks/useExploreTabController";
 import { View, StyleSheet, TouchableOpacity, FlatList } from "react-native";
 import { transactionListData, TransactionObjType } from "@/app/data/DATA";
+import { Link } from "expo-router";
 
 const CryptoNFTTabContainer = () => {
   const { activeTab, onChangeTab } = useExploreTabController();
@@ -37,19 +38,23 @@ export default CryptoNFTTabContainer;
 
 export const RenderItem = ({ item } : { item: TransactionObjType }) => {
   return(
-    <View style={styles.listItemObject}>
-      <View style={styles.itemLeftContainer}>
-      </View>
-      <View style={styles.itemRightContainer}>
-        <View style={styles.recordContainer}>
-          <ThemedText type="textSMSemibold">{item.chain.title}</ThemedText>
-          <ThemedText type="textSMSemibold">{item.transactionAmount}</ThemedText>
+    <View style={{ marginVertical: 8 }}>
+      <Link href={"/coindetailsscreen"}>
+        <View style={styles.listItemObject}>
+          <View style={styles.itemLeftContainer}>
+          </View>
+          <View style={styles.itemRightContainer}>
+            <View style={styles.recordContainer}>
+              <ThemedText type="textSMSemibold">{item.chain.title}</ThemedText>
+              <ThemedText type="textSMSemibold">{item.transactionAmount}</ThemedText>
+            </View>
+            <View style={styles.recordContainer}>
+              <ThemedText type="textSMSemibold">{item.cryptoNativeValue}</ThemedText>
+              <ThemedText type="textSMSemibold">{`$0.00`}</ThemedText>
+            </View>
+          </View>
         </View>
-        <View style={styles.recordContainer}>
-          <ThemedText type="textSMSemibold">{item.cryptoNativeValue}</ThemedText>
-          <ThemedText type="textSMSemibold">{`$0.00`}</ThemedText>
-        </View>
-      </View>
+      </Link>
     </View>
   );
 }

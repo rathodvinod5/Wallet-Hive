@@ -3,10 +3,11 @@ import { View, Text, StyleSheet, TouchableOpacity, StyleProp, TextStyle } from '
 export type HeaderContainerProps = {
   leftItem?: React.ReactNode;
   onPressLeftItem?: () => void;
-  title: string;
+  title?: string;
   rightItem?: React.ReactNode;
   onPressRightItem?: () => void;
   titleCustomStyle?: StyleProp<TextStyle>;
+  customTitleComponent?: React.ReactNode | null;
 };
 
 const HeaderComponent = ({
@@ -16,6 +17,7 @@ const HeaderComponent = ({
   rightItem,
   onPressRightItem,
   titleCustomStyle,
+  customTitleComponent,
 }: HeaderContainerProps) => {
   return(
     <View style={styels.container}>
@@ -27,7 +29,9 @@ const HeaderComponent = ({
           {leftItem}
         </TouchableOpacity>
       ) : <View style={styels.emptyView} />}
-      <Text style={[styels.titleStyles, titleCustomStyle]}>{title}</Text>
+      {!customTitleComponent ? (
+        <Text style={[styels.titleStyles, titleCustomStyle]}>{title}</Text>
+      ): customTitleComponent }
       {rightItem ? (
         <TouchableOpacity
           activeOpacity={0.9}

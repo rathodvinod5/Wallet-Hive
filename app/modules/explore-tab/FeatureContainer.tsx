@@ -13,7 +13,7 @@ const FeatureContainer = () => {
       <View style={styles.buttonContainer}>
         <IconButton onPress={() => {}}>
           <ThemedView style={styles.buttonStyles}>
-            <AntDesign name="arrowup" size={26} color="gray" />
+            <AntDesign name="arrowup" size={26} color="black" />
           </ThemedView>
         </IconButton>
         <ThemedText type="textSMSemibold">Send</ThemedText>
@@ -21,7 +21,7 @@ const FeatureContainer = () => {
       <View style={styles.buttonContainer}>
         <IconButton onPress={() => {}}>
           <ThemedView style={styles.buttonStyles}>
-            <AntDesign name="arrowdown" size={26} color="gray" />
+            <AntDesign name="arrowdown" size={26} color="black" />
           </ThemedView>
         </IconButton>
         <ThemedText type="textSMSemibold">Receive</ThemedText>
@@ -29,7 +29,7 @@ const FeatureContainer = () => {
       <View style={styles.buttonContainer}>
         <IconButton onPress={() => {}}>
           <ThemedView style={styles.buttonStyles}>
-            <Foundation name="credit-card" size={26} color="gray" />
+            <Foundation name="credit-card" size={26} color="black" />
           </ThemedView>
         </IconButton>
         <ThemedText type="textSMSemibold">Buy</ThemedText>
@@ -37,7 +37,7 @@ const FeatureContainer = () => {
       <View style={styles.buttonContainer}>
         <IconButton onPress={() => {}}>
           <ThemedView style={styles.buttonStyles}>
-            <MaterialIcons name="history" size={26} color="gray" />
+            <MaterialIcons name="history" size={26} color="black" />
           </ThemedView>
         </IconButton>
         <ThemedText type="textSMSemibold">History</ThemedText>

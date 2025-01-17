@@ -41,21 +41,21 @@ const BalanceParentContainer = ({
         <ThemedText type="textELSemibold">$0.00</ThemedText>
       </View>
       <View style={styles.rightContainer}>
-        <IconButton onPress={() => {}}>
+        <Link href="/copyaddressscreen">
           <ThemedView style={styles.buttonStyles}>
             <MaterialIcons name="content-copy" size={20} color="gray" />
           </ThemedView>
-        </IconButton>
+        </Link>
         <IconButton onPress={() => {}}>
           <ThemedView style={styles.buttonStyles}>
             <MaterialCommunityIcons name="line-scan" size={20} color="gray" />
           </ThemedView>
         </IconButton>
-        <IconButton onPress={() => {}}>
+        {/* <IconButton onPress={() => {}}>
           <ThemedView style={styles.buttonStyles}>
             <MaterialIcons name="notifications" size={20} color="gray" />
           </ThemedView>
-        </IconButton>
+        </IconButton> */}
       </View>
     </View>
   );
