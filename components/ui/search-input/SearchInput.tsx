@@ -1,20 +1,33 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NativeSyntheticEvent, StyleProp, StyleSheet, TextInput, TextInputChangeEventData, 
   TextStyle, View, ViewStyle } from "react-native";
 import Feather from '@expo/vector-icons/Feather';
+import { Colors } from "@/constants/Colors";
 
 const SearchInput = ({
   customContainerCss,
   customTextInputCss,
+  onUpdateTextInput,
 }: {
   customContainerCss?: StyleProp<ViewStyle>,
-  customTextInputCss?: StyleProp<TextStyle>
+  customTextInputCss?: StyleProp<TextStyle>,
+  onUpdateTextInput?: (text: string) => void,
 }) => {
   const [inputValue, setInputValue] = useState("");
   
   const handleOnChange = (e: NativeSyntheticEvent<TextInputChangeEventData>) => {
     setInputValue(e.nativeEvent.text);
   }
+
+  useEffect(() => {
+    const debounceTimer = setTimeout(() => {
+      if(onUpdateTextInput) onUpdateTextInput(inputValue);
+    }, 300);
+
+    return () => {
+      clearTimeout(debounceTimer); // Cleanup the timer on unmount or inputValue change
+    };
+  }, [inputValue]);
 
   return(
     <View style={[styles.container, customContainerCss]}>
@@ -33,7 +46,7 @@ const SearchInput = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#D3D3D3',
+    backgroundColor: Colors['light']['greyExtraLight1'], // '#D3D3D3',
     height: 44,
     paddingLeft: 20,
     paddingRight: 10,

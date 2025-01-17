@@ -9,6 +9,7 @@ import 'react-native-reanimated';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import IconButton from '@/components/ui/button/IconButton';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { AppProvider } from './context/ParentContext';
 
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -32,67 +33,69 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen 
-          name="(tabs)" 
-          options={{ headerShown: false }} 
-        />
-        <Stack.Screen 
-          name="managecrypto" 
-          options={{ 
-            animation: "ios_from_right",
-            headerShown: true, 
-            title: 'ManageCrypto',
-            headerLeft: () => (
-              <IconButton onPress={() => back()}>
-                <Ionicons name="arrow-back" size={28} color="gray" />
-              </IconButton>
-            ),
-            headerRight: () => (
-              <Link href={"/walletmodal"}>
-                <Ionicons name="add" size={28} color="black" />
-              </Link>
-            ),
-            headerTitle(props) {
-             return (
-                <Text style={{ fontSize: 18, color: 'black', fontWeight: 'bold' }}>
-                  Manage Crypto
-                </Text>
-              );
-            },
-            headerStyle: {
-              backgroundColor: 'lightgrey',
-            },
-          }} 
-        />
-        <Stack.Screen name="+not-found" />
-        <Stack.Screen
-          name="walletmodal"
-          options={{
-            presentation: "formSheet",
-            animation: "slide_from_bottom",
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="addwalletscreen" 
-          options={{
-            presentation: "formSheet",
-            animation: "slide_from_right",
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="createnewwalletscreen" 
-          options={{
-            presentation: "formSheet",
-            animation: "slide_from_right",
-            headerShown: false,
-          }}
-        />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <AppProvider>
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <Stack>
+          <Stack.Screen 
+            name="(tabs)" 
+            options={{ headerShown: false }} 
+          />
+          <Stack.Screen 
+            name="managecrypto" 
+            options={{ 
+              animation: "ios_from_right",
+              headerShown: true, 
+              title: 'ManageCrypto',
+              headerLeft: () => (
+                <IconButton onPress={() => back()}>
+                  <Ionicons name="arrow-back" size={28} color="gray" />
+                </IconButton>
+              ),
+              headerRight: () => (
+                <Link href={"/walletmodal"}>
+                  <Ionicons name="add" size={28} color="black" />
+                </Link>
+              ),
+              headerTitle(props) {
+              return (
+                  <Text style={{ fontSize: 18, color: 'black', fontWeight: 'bold' }}>
+                    Manage Crypto
+                  </Text>
+                );
+              },
+              headerStyle: {
+                backgroundColor: 'lightgrey',
+              },
+            }} 
+          />
+          <Stack.Screen name="+not-found" />
+          <Stack.Screen
+            name="walletmodal"
+            options={{
+              presentation: "formSheet",
+              animation: "slide_from_bottom",
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="addwalletscreen" 
+            options={{
+              presentation: "formSheet",
+              animation: "slide_from_right",
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="createnewwalletscreen" 
+            options={{
+              presentation: "formSheet",
+              animation: "slide_from_right",
+              headerShown: false,
+            }}
+          />
+        </Stack>
+        <StatusBar style="auto" />
+      </ThemeProvider>
+    </AppProvider>
   );
 }

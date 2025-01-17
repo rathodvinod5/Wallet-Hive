@@ -9,7 +9,7 @@ import { ThemedText } from '@/components/ThemedText';
 import BalanceParentContainer from '../modules/explore-tab/BalanceParentContainer';
 import FeatureContainer from '../modules/explore-tab/FeatureContainer';
 import CryptoNFTTabContainer from '../modules/explore-tab/CryptoNFTTabContainer';
-import useParentController from '../modules/explore-tab/ParentController';
+import useParentController from '../modules/explore-tab/useExploreTabController';
 import ModalHandler from '../modules/explore-tab/ModalHandler';
 import WalletModalContents from '../modules/explore-tab/WalletModalContents';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
@@ -31,17 +31,6 @@ export default function HomeScreen() {
             onPressClose={toggleWalletModal} 
             onPressAdd={() => {}} 
           />
-          {/* {showWalletModal ? (
-            <WalletModalContents 
-              onPressClose={toggleWalletModal} 
-              onPressAdd={() => {}} 
-            />
-          ) : (
-            <ManageCrypto
-              onPressClose={toggleManageCryptoModal} 
-              onPressAdd={() => {}} 
-            />
-          )} */}
         </ModalHandler>
 
         <View style={styles.topContainer}>
@@ -53,14 +42,6 @@ export default function HomeScreen() {
             <MaterialIcons name="settings" size={26} color="black" />
           </TouchableOpacity>
           <ThemedText type="textMDSemibold">Home</ThemedText>
-          {/* <TouchableOpacity
-              activeOpacity={0.8}
-              // onPress={toggleManageCryptoModal}
-              style={{ padding: 8 }}
-            >
-              <AntDesign name="pluscircle" size={26} color="gray" />
-            </TouchableOpacity> */}
-
           <Link href={'/managecrypto'} style={{ padding: 8 }}>
             <AntDesign name="pluscircle" size={26} color="gray" />
           </Link>
@@ -89,7 +70,6 @@ const styles = StyleSheet.create({
     flex: 1,
     display: 'flex',
     flexDirection: 'column',
-    // paddingHorizontal: 24,
   },
   titleContainer: {
     flexDirection: 'row',

@@ -2,7 +2,7 @@ import { Text, View, StyleSheet } from "react-native";
 import WalletModalContents from "./modules/explore-tab/WalletModalContents";
 import { useRouter } from "expo-router";
 import ModalHandler from "./modules/explore-tab/ModalHandler";
-import useWalletParentController from "./modules/wallet-modal/ParentController";
+import useWalletParentController from "./modules/wallet-modal/useWalletModalController";
 import AddWalletModalContent from "./modules/wallet-modal/AddWalletModalContent";
 
 const WalletModalScreen = () => {

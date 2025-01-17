@@ -1,13 +1,11 @@
 import { Text, StyleSheet, View, TextInput, TouchableOpacity, Button } from 'react-native';
 import IconButton from '@/components/ui/button/IconButton';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import HeaderComponent from '@/components/ui/header/HeaderComponent';
 import { useRouter } from 'expo-router';
 import { ThemedText } from '@/components/ThemedText';
-import { Colors } from '@/constants/Colors';
-import { SwitchType } from './modules/add-wallet-screen/types/Types';
-import useCreateNewWalletController from './modules/create-wallet-screen/useCreateNewWallet';
+// import { SwitchType } from './modules/add-wallet-screen/types/Types';
+import useCreateNewWalletController from './modules/create-wallet-screen/useCreateNewWalletController';
 
 
 const AddWalletScreen = () => {

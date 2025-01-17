@@ -8,6 +8,7 @@ import useExploreTabController from "@/hooks/useExploreTabController";
 import IconButton from "@/components/ui/button/IconButton";
 import { ThemedView } from "@/components/ThemedView";
 import { Link } from "expo-router";
+import { Colors } from "@/constants/Colors";
 
 
 const BalanceParentContainer = ({
@@ -90,7 +91,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'lightgrey',
+    // backgroundColor: 'lightgrey',
+    backgroundColor: Colors.light.greyExtraLight1,
     padding: 6,
     borderRadius: 6,
   }

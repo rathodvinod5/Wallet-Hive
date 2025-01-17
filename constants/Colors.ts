@@ -6,6 +6,7 @@
 const tintColorLight = '#0a7ea4';
 const tintColorDark = '#fff';
 const greyExtraLight = "#F0F0F0"; //https://baskent.edu.tr/~tkaracay/etudio/agora/nnn/html_colors.htm
+const greyExtraLight1 = "#E0E0E0";
 const blackNew = "#212121";
 
 export const Colors = {
@@ -17,6 +18,7 @@ export const Colors = {
     tabIconDefault: '#687076',
     tabIconSelected: tintColorLight,
     greyExtraLight: greyExtraLight,
+    greyExtraLight1: greyExtraLight1,
     blackNew: blackNew,
   },
   dark: {
@@ -27,6 +29,7 @@ export const Colors = {
     tabIconDefault: '#9BA1A6',
     tabIconSelected: tintColorDark,
     greyExtraLight: greyExtraLight,
+    greyExtraLight1: greyExtraLight1,
     blackNew: blackNew,
   },
 };

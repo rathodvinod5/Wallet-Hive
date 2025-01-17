@@ -5,6 +5,7 @@ import { ThemedView } from "@/components/ThemedView";
 import IconButton from "@/components/ui/button/IconButton";
 import Foundation from '@expo/vector-icons/Foundation';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { Colors } from "@/constants/Colors";
 
 const FeatureContainer = () => {
   return(
@@ -65,7 +66,8 @@ const styles = StyleSheet.create({
     width: 52,
     height: 52,
     borderRadius: 52 / 2,
-    backgroundColor: 'lightgrey',
+    // backgroundColor: 'lightgrey',
+    backgroundColor: Colors.light.greyExtraLight1,
     justifyContent: 'center',
     alignItems: "center"
   }

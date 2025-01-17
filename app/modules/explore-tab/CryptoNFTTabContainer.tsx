@@ -2,7 +2,7 @@ import { ThemedText } from "@/components/ThemedText";
 import TabButton from "@/components/ui/button/TabButton";
 import useExploreTabController from "@/hooks/useExploreTabController";
 import { View, StyleSheet, TouchableOpacity, FlatList } from "react-native";
-import { transactionListData, TransactionObjType } from "@/app/DATA";
+import { transactionListData, TransactionObjType } from "@/app/data/DATA";
 
 const CryptoNFTTabContainer = () => {
   const { activeTab, onChangeTab } = useExploreTabController();

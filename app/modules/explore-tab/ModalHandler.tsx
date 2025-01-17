@@ -33,18 +33,6 @@ export type ModalHandlerProps = {
 //   );
 // }
 
-function WrapperComponent() {
-  return (
-    <View>
-      <Modal>
-        <View style={{ flex: 1 }}>
-          <Text>I am the modal content!</Text>
-        </View>
-      </Modal>
-    </View>
-  );
-}
-
 const ModalHandler = ({
   isVisible,
   onClose,
@@ -57,7 +45,7 @@ const ModalHandler = ({
       // onRequestClose={onClose}
       isVisible={isVisible}
       animationIn={"bounceInUp"}
-      style={styles.modalStyles}
+      style={[styles.modalStyles, customStyles]}
       coverScreen={true}
       animationInTiming={800}
       // deviceWidth={width}
