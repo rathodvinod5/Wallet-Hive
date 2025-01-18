@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.light.greyExtraLight1,
     paddingHorizontal: 12,
     paddingVertical: 8,
-    borderRadius: 6
+    borderRadius: 8
   },
   itemLeftContainer: {
     padding: 4,

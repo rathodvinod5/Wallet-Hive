@@ -85,7 +85,11 @@ const styles = StyleSheet.create({
   headingStyles: {
     color: 'grey'
   },
-  innContainer: { flex: 1, alignItems: 'center', paddingTop: 30},
+  innContainer: { 
+    flex: 1, 
+    alignItems: 'center', 
+    paddingTop: 30
+  },
   imageContainer: {
     padding: 4,
     width: 48,

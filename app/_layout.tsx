@@ -101,11 +101,19 @@ export default function RootLayout() {
               headerShown: false,
             }}
           />
-           <Stack.Screen
+          <Stack.Screen
             name="coindetailsscreen" 
             options={{
               // presentation: "formSheet",
               animation: "slide_from_right",
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="sendscreen"
+            options={{
+              presentation: "formSheet",
+              animation: "slide_from_bottom",
               headerShown: false,
             }}
           />

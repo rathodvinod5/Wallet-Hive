@@ -6,16 +6,17 @@ import IconButton from "@/components/ui/button/IconButton";
 import Foundation from '@expo/vector-icons/Foundation';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Colors } from "@/constants/Colors";
+import { Link } from "expo-router";
 
 const FeatureContainer = () => {
   return(
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
-        <IconButton onPress={() => {}}>
+        <Link href="/sendscreen">
           <ThemedView style={styles.buttonStyles}>
             <AntDesign name="arrowup" size={26} color="black" />
           </ThemedView>
-        </IconButton>
+        </Link>
         <ThemedText type="textSMSemibold">Send</ThemedText>
       </View>
       <View style={styles.buttonContainer}>

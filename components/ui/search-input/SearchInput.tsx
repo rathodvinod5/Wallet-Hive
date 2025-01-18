@@ -8,10 +8,14 @@ const SearchInput = ({
   customContainerCss,
   customTextInputCss,
   onUpdateTextInput,
+  placeHolderText="Search",
+  showSearchIcon=true,
 }: {
   customContainerCss?: StyleProp<ViewStyle>,
   customTextInputCss?: StyleProp<TextStyle>,
   onUpdateTextInput?: (text: string) => void,
+  placeHolderText?: string,
+  showSearchIcon?: boolean,
 }) => {
   const [inputValue, setInputValue] = useState("");
   
@@ -30,16 +34,21 @@ const SearchInput = ({
   }, [inputValue]);
 
   return(
-    <View style={[styles.container, customContainerCss]}>
+    <View style={[styles.container, { 
+      paddingLeft: showSearchIcon ? 20 : 0,
+      }, customContainerCss]}
+    >
       <TextInput
-        placeholder="Search"
+        placeholder={placeHolderText}
         value={inputValue}
         onChange={handleOnChange}
         style={[styles.textInput, customTextInputCss]}
       />
-      <View style={styles.iconContainer}>
-        <Feather name="search" size={24} color="gray" />
-      </View>
+      {showSearchIcon ? (
+        <View style={styles.iconContainer}>
+          <Feather name="search" size={24} color="gray" />
+        </View>
+      ) : null}
     </View>
   );
 }
@@ -48,7 +57,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors['light']['greyExtraLight1'], // '#D3D3D3',
     height: 44,
-    paddingLeft: 20,
+    // paddingLeft: 20,
     paddingRight: 10,
     borderRadius: 22,
   },
