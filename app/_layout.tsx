@@ -117,6 +117,14 @@ export default function RootLayout() {
               headerShown: false,
             }}
           />
+          <Stack.Screen
+            name="receivescreen"
+            options={{
+              presentation: "formSheet",
+              animation: "slide_from_bottom",
+              headerShown: false,
+            }}
+          />
         </Stack>
         <StatusBar style="auto" />
       </ThemeProvider>

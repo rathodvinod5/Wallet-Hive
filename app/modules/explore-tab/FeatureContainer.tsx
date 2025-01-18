@@ -20,11 +20,11 @@ const FeatureContainer = () => {
         <ThemedText type="textSMSemibold">Send</ThemedText>
       </View>
       <View style={styles.buttonContainer}>
-        <IconButton onPress={() => {}}>
+        <Link href="/receivescreen">
           <ThemedView style={styles.buttonStyles}>
             <AntDesign name="arrowdown" size={26} color="black" />
           </ThemedView>
-        </IconButton>
+        </Link>
         <ThemedText type="textSMSemibold">Receive</ThemedText>
       </View>
       <View style={styles.buttonContainer}>
