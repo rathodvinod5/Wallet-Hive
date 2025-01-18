@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NativeSyntheticEvent, StyleProp, StyleSheet, TextInput, TextInputChangeEventData, 
+import { KeyboardTypeOptions, NativeSyntheticEvent, StyleProp, StyleSheet, TextInput, TextInputChangeEventData, 
   TextStyle, View, ViewStyle } from "react-native";
 import Feather from '@expo/vector-icons/Feather';
 import { Colors } from "@/constants/Colors";
@@ -10,12 +10,14 @@ const SearchInput = ({
   onUpdateTextInput,
   placeHolderText="Search",
   showSearchIcon=true,
+  keyboardType="default"
 }: {
   customContainerCss?: StyleProp<ViewStyle>,
   customTextInputCss?: StyleProp<TextStyle>,
   onUpdateTextInput?: (text: string) => void,
   placeHolderText?: string,
   showSearchIcon?: boolean,
+  keyboardType?: KeyboardTypeOptions | undefined,
 }) => {
   const [inputValue, setInputValue] = useState("");
   
@@ -42,6 +44,7 @@ const SearchInput = ({
         placeholder={placeHolderText}
         value={inputValue}
         onChange={handleOnChange}
+        keyboardType={keyboardType}
         style={[styles.textInput, customTextInputCss]}
       />
       {showSearchIcon ? (

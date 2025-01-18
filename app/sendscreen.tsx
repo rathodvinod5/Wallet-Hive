@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import IconButton from "@/components/ui/button/IconButton";
@@ -12,7 +12,7 @@ import { Colors } from "@/constants/Colors";
 
 
 const SendScreen = () => {
-  const { toAddress, onChangeToAddress } = useSendScreenController();
+  const { toAddress, amount, onChangeToAddress, onChangeAmount } = useSendScreenController();
   const { back } = useRouter();
   const onPressClose = () => back();
 
@@ -31,6 +31,7 @@ const SendScreen = () => {
         <CustomTextInputWithLabel 
           label="Wallet Address"
           placeHolderText="Enter Address"
+          onChangeText={onChangeToAddress}
           renderItemDirection="right"
           renderItem={(
             <View style={styles.rightContainer}>
@@ -50,6 +51,8 @@ const SendScreen = () => {
         <CustomTextInputWithLabel 
           label="Wallet Address"
           placeHolderText="Enter Address"
+          onChangeText={onChangeAmount}
+          keyboardType={"numeric"}
           renderItemDirection="right"
           renderItem={(
             <View style={styles.rightContainer}>
@@ -63,6 +66,19 @@ const SendScreen = () => {
             </View>
           )}
         />
+
+       <View style={styles.buttonContainer}>
+        <TouchableOpacity 
+            activeOpacity={0.9} 
+            // disabled={!isReceivable}
+            style={[styles.buttonStyle, {
+              // backgroundColor: isReceivable ? "teal" : "lightgray",
+              backgroundColor: toAddress && amount ? "teal" : "lightgray",
+            }]}
+          >
+            <Text style={styles.buttonLabel}>Send</Text>
+          </TouchableOpacity>
+       </View>
       </View>
     </View>
   );
@@ -77,6 +93,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   contentStyles: {
+    flex: 1,
     flexDirection: 'column',
     gap: 28,
     marginTop: 40,
@@ -97,5 +114,18 @@ const styles = StyleSheet.create({
     // backgroundColor: 'lightgrey',
     backgroundColor: "transparent",
     flex: 1,
+  },
+  buttonContainer: { flex: 1, marginTop: 100 },
+  buttonStyle: {
+    paddingVertical: 10,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 30
+  },
+  buttonLabel: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: Colors.light.blackNew,
   },
 });

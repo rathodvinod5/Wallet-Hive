@@ -1,13 +1,15 @@
 import SearchInput from "@/components/ui/search-input/SearchInput";
 import { Colors } from "@/constants/Colors";
-import { View, Text, StyleSheet, StyleProp, ViewStyle } from "react-native";
+import { View, Text, StyleSheet, StyleProp, ViewStyle, KeyboardTypeOptions } from "react-native";
 
 type CustomTextInputWithLabelProps = {
   label: string;
-  placeHolderText?: string,
-  renderItemDirection?: 'left' | 'right',
+  placeHolderText?: string;
+  renderItemDirection?: 'left' | 'right';
   renderItem?: React.ReactNode;
-  containerCustomStyles?: StyleProp<ViewStyle>
+  containerCustomStyles?: StyleProp<ViewStyle>;
+  onChangeText?: (text: string) => void;
+  keyboardType?: KeyboardTypeOptions | undefined
 }
 
 const CustomTextInputWithLabel = ({
@@ -15,7 +17,9 @@ const CustomTextInputWithLabel = ({
   placeHolderText="Send",
   renderItemDirection='left',
   renderItem,
-  containerCustomStyles
+  containerCustomStyles,
+  onChangeText,
+  keyboardType,
 }: CustomTextInputWithLabelProps) => {
   return(
     <View style={[styles.container]}>
@@ -23,11 +27,12 @@ const CustomTextInputWithLabel = ({
       <View style={[styles.inputContainer, containerCustomStyles]}>
         {renderItem && renderItemDirection === 'left' ? renderItem : null}
         <SearchInput
-          customContainerCss={{ borderRadius: 4, flex: 1,  backgroundColor: 'transparent'}}
+          customContainerCss={styles.customContainerStyles}
           customTextInputCss={{ paddingLeft: 10, }}
-          onUpdateTextInput={() => {}}
+          onUpdateTextInput={onChangeText}
           showSearchIcon={false}
           placeHolderText={placeHolderText}
+          keyboardType={keyboardType}
         />
         {renderItem && renderItemDirection === 'right' ? renderItem : null}
       </View>
@@ -55,5 +60,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     color: 'grey'
-  }
+  },
+  customContainerStyles: { borderRadius: 4, flex: 1,  backgroundColor: 'transparent'}
 });
