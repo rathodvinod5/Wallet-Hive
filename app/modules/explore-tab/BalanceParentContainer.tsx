@@ -9,6 +9,7 @@ import IconButton from "@/components/ui/button/IconButton";
 import { ThemedView } from "@/components/ThemedView";
 import { Link } from "expo-router";
 import { Colors } from "@/constants/Colors";
+import { useAppContext } from "@/app/context/ParentContext";
 
 
 const BalanceParentContainer = ({
@@ -17,6 +18,7 @@ const BalanceParentContainer = ({
   onPressOpenWalletModal: () => void
 }) => {
   const { showBalance } = useExploreTabController();
+  const { selectedWallet } = useAppContext();
 
   return(
     <View style={styles.container}>
@@ -33,7 +35,7 @@ const BalanceParentContainer = ({
               <Ionicons name="eye-off" size={24} color="gray" />
             )}
             <ThemedText type="textSMSemibold" style={styles.walletChainName}>
-              Etherum Wallet
+              {selectedWallet ? selectedWallet.walletName : ""} Wallet
             </ThemedText>
             <Entypo name="select-arrows" size={16} color="gray" />
           </View>

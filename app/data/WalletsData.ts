@@ -9,5 +9,5 @@ export type WalletType = {
 
 export const walletsAdded: WalletType[] = [
   { walletName: 'Ethereum', walletId: '0x1234567890',  chain: 'eth', amount: 20.0, nfts: [] },
-  { walletName: 'Solana', walletId: '0x1234567890',  chain: 'sol', amount: 10.0, nfts: [] },
+  { walletName: 'Solana', walletId: '0x1234567891',  chain: 'sol', amount: 10.0, nfts: [] },
 ];

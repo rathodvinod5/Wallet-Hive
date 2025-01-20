@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Button } from "react-native";
 import { Link, useRouter } from "expo-router";
 import QRCode from 'react-native-qrcode-svg';
 import Ionicons from '@expo/vector-icons/Ionicons';
@@ -8,12 +8,13 @@ import HeaderComponent from "@/components/ui/header/HeaderComponent";
 import { ThemedView } from "@/components/ThemedView";
 import { ThemedText } from "@/components/ThemedText";
 import { Colors } from "@/constants/Colors";
+import { useAppContext } from "./context/ParentContext";
 
 const ReceiveScreen = () => {
   const { back } = useRouter();
   const onPressClose = () => back();
 
-  const address = "0x85d9D9436065cA8b6EF505DB98654BAa72e1A255";
+  const { selectedWallet } = useAppContext();
 
   return(
     <View style={styles.container}>
@@ -26,28 +27,37 @@ const ReceiveScreen = () => {
         )}
       />
 
-      <View style={styles.innContainer}>
-        <View style={styles.qrCodeContainer}>
-          <QRCode
-            value={address} // The wallet ID to encode in the QR code
-            size={200}       // Size of the QR code
-            color="black"    // QR code color
-            backgroundColor="white" // Background color
-          />
-          <Text style={styles.addres}>
-            0x85d9D9436065cA8b6EF505DB98654BAa72e1A255
-          </Text>
-        </View>
+      {selectedWallet ? (
+        <View style={styles.innContainer}>
+          <View style={styles.qrCodeContainer}>
+            <QRCode
+              value={selectedWallet.walletId} // The wallet ID to encode in the QR code
+              size={200}       // Size of the QR code
+              color="black"    // QR code color
+              backgroundColor="white" // Background color
+            />
+            <Text style={styles.addres}>
+              0x85d9D9436065cA8b6EF505DB98654BAa72e1A255
+            </Text>
+          </View>
 
-        <View style={styles.buttonContainer}>
           <View style={styles.buttonContainer}>
-            <ThemedView style={styles.buttonStyles}>
-                <AntDesign name="copy1" size={26} color="black" />
-            </ThemedView>
-            <ThemedText type="textSMSemibold">Copy</ThemedText>
+            <View style={styles.buttonContainer}>
+              <ThemedView style={styles.buttonStyles}>
+                  <AntDesign name="copy1" size={26} color="black" />
+              </ThemedView>
+              <ThemedText type="textSMSemibold">Copy</ThemedText>
+            </View>
           </View>
         </View>
-      </View>
+      ) : (
+        <View style={styles.innContainer}>
+          <Text>No Wallet added, Please add a wallet</Text>
+          <Link href="/addwalletscreen">
+            <Text style={styles.addWalletTextStyles}>Add Wallet</Text>
+          </Link>
+        </View>
+      )}
     </View>
   );
 }
@@ -61,9 +71,11 @@ const styles = StyleSheet.create({
   },
   innContainer: {
     flex: 1,
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: 40
+    paddingTop: 40,
+    gap: 20,
   },
   qrCodeContainer: {
     paddingHorizontal: 20,
@@ -106,5 +118,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: "center",
     marginBottom: 4
+  },
+  addWalletStyle: {
+    padding: 16,
+    marginTop: 50
+  },
+  addWalletTextStyles: {
+    fontSize: 20,
+    // lineHeight: 22,
+    fontWeight: '600',
+    color: 'teal',
   }
 });

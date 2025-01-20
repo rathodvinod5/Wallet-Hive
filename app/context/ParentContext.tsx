@@ -9,8 +9,10 @@ type AppContextState = {
   login: (username: string) => void;
   logout: () => void;
   walletsAdded: WalletType[] | null;
+  selectedWallet: WalletType | null;
   onAddNewWalletToList: (wallet: WalletType) => void,
   onRemoveWalletFromList: (walletName: string) => void,
+  onChangeWallet: (walletId: string) => void,
 }
 
 // Default state for the context
@@ -20,8 +22,10 @@ const defaultState: AppContextState = {
   login: () => {},
   logout: () => {},
   walletsAdded: null,
+  selectedWallet: null,
   onAddNewWalletToList: (wallet: WalletType) => {},
   onRemoveWalletFromList: (walletName: string) => {},
+  onChangeWallet: (walletId: string) => {},
 };
 
 // Create the context
@@ -35,6 +39,7 @@ type AppProviderProps = {
 export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const [user, setUser] = useState<string | null>(null);
   const [wallets, setWallets] = useState<WalletType[] | null>(walletsAdded);
+  const [selectedWallet, setSelectedWallet] = useState<WalletType | null>(null);
 
   const login = (username: string) => {
     setUser(username);
@@ -53,14 +58,24 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
         setWallets(wallets?.filter(wallet => wallet.walletName !== walletName));
   }
 
+  const onChangeWallet = (walletId: string) => {
+    if(!wallets) return;
+    const index = wallets?.findIndex((item) => item.walletId === walletId);
+    if(index >= 0) {
+      setSelectedWallet(wallets[index]);
+    }
+  }
+
   const value: AppContextState = {
     user,
     isAuthenticated: !!user,
     login,
     logout,
     walletsAdded: wallets,
+    selectedWallet: selectedWallet,
     onAddNewWalletToList: onAddNewWalletToList,
     onRemoveWalletFromList: onRemoveWalletFromList,
+    onChangeWallet: onChangeWallet,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
