@@ -9,15 +9,30 @@ import { ThemedView } from "@/components/ThemedView";
 import { ThemedText } from "@/components/ThemedText";
 import { Colors } from "@/constants/Colors";
 import { useAppContext } from "./context/ParentContext";
+import ModalHandler from "./modules/explore-tab/ModalHandler";
+import AddWalletModalContent from "./modules/wallet-modal/AddWalletModalContent";
+import { useState } from "react";
 
 const ReceiveScreen = () => {
+  const [showAddWalletModal, setShowAddWalletModal] = useState(false);
   const { back } = useRouter();
   const onPressClose = () => back();
 
-  const { selectedWallet } = useAppContext();
+  const { walletsAdded, selectedWallet } = useAppContext();
+
+  const toggleWalletModal = () => {
+    setShowAddWalletModal(!showAddWalletModal);
+  }
 
   return(
     <View style={styles.container}>
+      <ModalHandler
+        isVisible={showAddWalletModal}
+        onClose={toggleWalletModal}
+      >
+        <AddWalletModalContent />
+      </ModalHandler>
+
       <HeaderComponent
         title="Receive" 
         leftItem={(
@@ -53,9 +68,13 @@ const ReceiveScreen = () => {
       ) : (
         <View style={styles.innContainer}>
           <Text>No Wallet added, Please add a wallet</Text>
-          <Link href="/addwalletscreen">
-            <Text style={styles.addWalletTextStyles}>Add Wallet</Text>
-          </Link>
+          {walletsAdded?.length ? (
+            <Link href="/walletmodal">
+              <Text style={styles.addWalletTextStyles}>Add Wallet</Text>
+            </Link>
+          ) : (
+            <Button title="Add Wallet" color="teal" onPress={toggleWalletModal} />
+          )}
         </View>
       )}
     </View>
