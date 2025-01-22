@@ -2,6 +2,7 @@ import { StyleSheet, Text, TextInput, View } from "react-native";
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import Entypo from '@expo/vector-icons/Entypo';
 import { Colors } from "@/constants/Colors";
+import { Link } from "expo-router";
 
 const SingleSwapContainer = ({
   token,
@@ -17,23 +18,26 @@ const SingleSwapContainer = ({
   return(
     <View style={styles.container}>
       <View style={styles.topContainer}>
-        <View style={styles.topLeftContainer}>
-          <Text style={styles.smallTextStyles}>From</Text>
-          <FontAwesome6 name="ethereum" size={14} color={Colors.light.blackNew} />
-          <Text style={styles.smallTextStyles}>Ethereum</Text>
-          <FontAwesome6 name="angle-down" size={14} color={'gray'} />
-        </View>
+        
+          <View style={styles.topLeftContainer}>
+            <Text style={styles.smallTextStyles}>From</Text>
+            <FontAwesome6 name="ethereum" size={14} color={Colors.light.blackNew} />
+            <Text style={styles.smallTextStyles}>Ethereum</Text>
+            <FontAwesome6 name="angle-down" size={14} color={'gray'} />
+          </View>
         <View style={styles.topRightContainer}>
           <FontAwesome6 name="gas-pump" size={14} color={'gray'} />
           <Text style={styles.smallTextStyles}>0</Text>
         </View>
       </View>
       <View style={styles.topContainer}>
+      <Link href={"/selectcoinscreen"}>
         <View style={styles.topLeftContainer}>
           <View style={styles.imageContainer} />
           <Text style={styles.currStyles}>SOL</Text>
           <Entypo name="chevron-right" size={22} color="gray" />
         </View>
+        </Link>
         <View style={styles.topRightContainer}>
           <TextInput
             placeholder=""
