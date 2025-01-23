@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { WalletType } from '../data/WalletsData';
 import { walletsAdded } from '../data/WalletsData';
+import { TransactionObjType } from '../data/DATA';
 
 // Define the shape of the context state
 type AppContextState = {
@@ -13,6 +14,9 @@ type AppContextState = {
   onAddNewWalletToList: (wallet: WalletType) => void,
   onRemoveWalletFromList: (walletName: string) => void,
   onChangeWallet: (walletId: string) => void,
+
+  fromCoin?: TransactionObjType | null,
+  toCoin?: TransactionObjType | null,
 }
 
 // Default state for the context
@@ -26,6 +30,9 @@ const defaultState: AppContextState = {
   onAddNewWalletToList: (wallet: WalletType) => {},
   onRemoveWalletFromList: (walletName: string) => {},
   onChangeWallet: (walletId: string) => {},
+
+  fromCoin: null,
+  toCoin: null,
 };
 
 // Create the context
@@ -40,6 +47,8 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const [user, setUser] = useState<string | null>(null);
   const [wallets, setWallets] = useState<WalletType[] | null>(walletsAdded);
   const [selectedWallet, setSelectedWallet] = useState<WalletType | null>(null);
+  const [fromCoin, setFromCoin] = useState<TransactionObjType | null>(null);
+  const [toCoin, setToCoin] = useState<TransactionObjType | null>(null);
 
   const login = (username: string) => {
     setUser(username);
@@ -66,6 +75,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     }
   }
 
+
   const value: AppContextState = {
     user,
     isAuthenticated: !!user,
@@ -73,6 +83,8 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     logout,
     walletsAdded: wallets,
     selectedWallet: selectedWallet,
+    fromCoin: fromCoin,
+    toCoin: toCoin,
     onAddNewWalletToList: onAddNewWalletToList,
     onRemoveWalletFromList: onRemoveWalletFromList,
     onChangeWallet: onChangeWallet,

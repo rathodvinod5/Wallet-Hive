@@ -5,11 +5,13 @@ import HeaderComponent from "@/components/ui/header/HeaderComponent";
 import SearchInput from "@/components/ui/search-input/SearchInput";
 import { useRouter } from "expo-router";
 import { RenderFlatlistForCoinAndNFT } from "./modules/explore-tab/CryptoNFTTabContainer";
+import { useAppContext } from "./context/ParentContext";
 
 
 const SelectCoinScreen = () => {
   const { back } = useRouter();
   const onPressClose = () => back();
+  const { } = useAppContext();
 
   return(
     <View style={styles.container}>
