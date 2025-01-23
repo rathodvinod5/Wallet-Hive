@@ -11,7 +11,7 @@ import { useAppContext } from "./context/ParentContext";
 const SelectCoinScreen = () => {
   const { back } = useRouter();
   const onPressClose = () => back();
-  const { } = useAppContext();
+  const { fromCoin, toCoin, onChangeFromCoin, onChangeToCoin } = useAppContext();
 
   return(
     <View style={styles.container}>

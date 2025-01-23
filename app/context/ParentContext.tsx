@@ -17,6 +17,8 @@ type AppContextState = {
 
   fromCoin?: TransactionObjType | null,
   toCoin?: TransactionObjType | null,
+  onChangeFromCoin: (from: TransactionObjType) => void,
+  onChangeToCoin: (from: TransactionObjType) => void,
 }
 
 // Default state for the context
@@ -33,6 +35,8 @@ const defaultState: AppContextState = {
 
   fromCoin: null,
   toCoin: null,
+  onChangeFromCoin: (from: TransactionObjType) => {},
+  onChangeToCoin: (from: TransactionObjType) => {},
 };
 
 // Create the context
@@ -75,6 +79,13 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     }
   }
 
+  const onChangeFromCoin = (from: TransactionObjType) => {
+    setFromCoin(from);
+  }
+
+  const onChangeToCoin = (from: TransactionObjType) => {
+    setToCoin(from);
+  }
 
   const value: AppContextState = {
     user,
@@ -88,6 +99,8 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     onAddNewWalletToList: onAddNewWalletToList,
     onRemoveWalletFromList: onRemoveWalletFromList,
     onChangeWallet: onChangeWallet,
+    onChangeFromCoin: onChangeFromCoin,
+    onChangeToCoin: onChangeToCoin,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
