@@ -5,12 +5,15 @@ import useSwapContoller from "../modules/swap-module/useSwapController";
 import SingleSwapContainer from "../modules/swap-module/SingleSwapContainer";
 import { Colors } from "@/constants/Colors";
 import { ThemedText } from "@/components/ThemedText";
+import { useAppContext } from "../context/ParentContext";
 
 const SwapScreen = () => {
-  const { currentTabIndex, onChangeToken, onChangeTabIndex, fromToken, toToken, toTokenValue,
+  const { currentTabIndex, onChangeTabIndex, toTokenValue,
     fromTokenValue, onChangeFromTokenValue, onChangeToTokenValue } = useSwapContoller();
 
-  const isActive = false;
+  const { fromCoin, toCoin } = useAppContext();
+
+  const isActive = fromCoin && toCoin;
 
   return(
     <View style={styles.container}>
@@ -24,16 +27,18 @@ const SwapScreen = () => {
             <View style={{ width: '100%', height: '100%' }}>
               <View style={styles.swapTopContainer}>
                 <SingleSwapContainer
-                  token={fromToken}
+                  coinOrToken={fromCoin}
                   tokenValue={fromTokenValue}
                   enableTextInput={true}
                   onChangeTextInput={onChangeFromTokenValue}
+                  source="from"
                 />
                 <SingleSwapContainer
-                  token={toToken}
+                  coinOrToken={toCoin}
                   tokenValue={toTokenValue}
                   enableTextInput={false}
                   onChangeTextInput={onChangeToTokenValue}
+                  source="to"
                 />
                 <View style={styles.swapIconFixedContainer}>
                   <MaterialCommunityIcons 
@@ -47,7 +52,7 @@ const SwapScreen = () => {
               <TouchableOpacity
                 activeOpacity={0.9}
                 style={[styles.buttonStyles, {
-                  backgroundColor: Colors.light.greyExtraLight1
+                  backgroundColor: isActive ? "teal" : Colors.light.greyExtraLight1
                 }]}
                 disabled={!isActive}
               >

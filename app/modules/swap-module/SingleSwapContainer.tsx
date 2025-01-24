@@ -3,17 +3,20 @@ import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import Entypo from '@expo/vector-icons/Entypo';
 import { Colors } from "@/constants/Colors";
 import { Link } from "expo-router";
+import { TransactionObjType } from "@/app/data/DATA";
 
 const SingleSwapContainer = ({
-  token,
+  coinOrToken,
   tokenValue,
   enableTextInput = false,
   onChangeTextInput,
+  source = "from",
 }: {
-  token: string,
+  coinOrToken: TransactionObjType | null | undefined,
   tokenValue: string,
   enableTextInput?: boolean,
-  onChangeTextInput: (text: string) => void
+  onChangeTextInput: (text: string) => void,
+  source?: string,
 }) => {
   return(
     <View style={styles.container}>
@@ -22,7 +25,7 @@ const SingleSwapContainer = ({
           <View style={styles.topLeftContainer}>
             <Text style={styles.smallTextStyles}>From</Text>
             <FontAwesome6 name="ethereum" size={14} color={Colors.light.blackNew} />
-            <Text style={styles.smallTextStyles}>Ethereum</Text>
+            <Text style={styles.smallTextStyles}>{coinOrToken?.chain.title}</Text>
             <FontAwesome6 name="angle-down" size={14} color={'gray'} />
           </View>
         <View style={styles.topRightContainer}>
@@ -31,10 +34,10 @@ const SingleSwapContainer = ({
         </View>
       </View>
       <View style={styles.topContainer}>
-      <Link href={"/selectcoinscreen"}>
+      <Link href={`/selectcoinscreen?source=${source}`}>
         <View style={styles.topLeftContainer}>
           <View style={styles.imageContainer} />
-          <Text style={styles.currStyles}>SOL</Text>
+          <Text style={styles.currStyles}>{coinOrToken?.chain.title}</Text>
           <Entypo name="chevron-right" size={22} color="gray" />
         </View>
         </Link>

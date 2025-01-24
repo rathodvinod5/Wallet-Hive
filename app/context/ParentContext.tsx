@@ -83,8 +83,8 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     setFromCoin(from);
   }
 
-  const onChangeToCoin = (from: TransactionObjType) => {
-    setToCoin(from);
+  const onChangeToCoin = (to: TransactionObjType) => {
+    setToCoin(to);
   }
 
   const value: AppContextState = {

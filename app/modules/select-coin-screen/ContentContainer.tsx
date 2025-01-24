@@ -1,0 +1,115 @@
+import { useAppContext } from "@/app/context/ParentContext";
+import { transactionListData, TransactionObjType } from "@/app/data/DATA";
+import { ThemedText } from "@/components/ThemedText";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { FlatList, StyleSheet, TouchableOpacity, View } from "react-native";
+
+export const ContentContainer = () => {
+  const { fromCoin, toCoin, onChangeFromCoin, onChangeToCoin } = useAppContext();
+
+  const { back } = useRouter();
+  const onPressClose = () => back();
+  const { source } = useLocalSearchParams();
+  
+
+  const onPressItem = (item: TransactionObjType) => {
+    if(source === 'from') {
+      onChangeFromCoin(item);
+    } else {
+      onChangeToCoin(item);
+    }
+    back();
+  }
+
+  return(
+    <FlatList
+      data={transactionListData}
+      keyExtractor={(item, index) => 'list-item-'+index} 
+      renderItem={(item) => (
+        <TouchableOpacity 
+          activeOpacity={0.9} 
+          onPress={() => onPressItem(item.item)}
+        >
+         <RenderItem item={item.item} />
+       </TouchableOpacity>
+      )}
+      contentContainerStyle={styles.flatlistContainer}
+    />
+  );
+}
+
+export const RenderItem = ({ 
+    item, 
+    // onPressItem 
+  } : {
+    item: TransactionObjType, 
+    // onPressItem: (item: TransactionObjType) => void,
+}) => {
+  return(
+    <View style={{ marginVertical: 8 }}>
+      <View style={styles.listItemObject}>
+        <View style={styles.itemLeftContainer}>
+        </View>
+        <View style={styles.itemRightContainer}>
+        <View style={styles.recordContainer}>
+            <ThemedText type="textSMSemibold">{item.chain.title}</ThemedText>
+            <ThemedText type="textSMSemibold">{item.transactionAmount}</ThemedText>
+        </View>
+        <View style={styles.recordContainer}>
+            <ThemedText type="textSMSemibold">{item.cryptoNativeValue}</ThemedText>
+            <ThemedText type="textSMSemibold">{`$0.00`}</ThemedText>
+        </View>
+        </View>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 30,
+  },
+  tabContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center'
+  },
+  buttonContainer: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 6
+  },
+  activeBottomLine: {
+    width: 30,
+    height: 4,
+    backgroundColor: 'slateblue'
+  },
+  listItemObject: {
+    flexDirection: 'row',
+    // justifyContent: 'space-between',
+    alignItems: 'center',
+    marginVertical: 8,
+    gap: 4
+  },
+  flatlistContainer: { 
+    width: '100%', 
+    // borderWidth: 1, 
+    marginTop: 20 
+  },
+  itemLeftContainer: {
+    padding: 4,
+    width: 48,
+    height: 48,
+    borderRadius: 48 / 2,
+    backgroundColor: 'lightgrey'
+  },
+  itemRightContainer: {
+    flex: 1,
+  },
+  recordContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  }
+});
