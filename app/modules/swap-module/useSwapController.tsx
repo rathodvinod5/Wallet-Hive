@@ -27,7 +27,6 @@ const useSwapContoller = () => {
     const textToNumber = String(Number(text));
     const regex = /^\d+$/;
     if(regex.test(textToNumber)) {
-        console.log(textToNumber);
         setFromTokenValue(textToNumber);
     }
   }
@@ -36,7 +35,6 @@ const useSwapContoller = () => {
     const textToNumber = String(Number(text));
     const regex = /^\d+$/;
     if(regex.test(textToNumber)) {
-        console.log(textToNumber);
         setToTokenValue(textToNumber);
     }
   }

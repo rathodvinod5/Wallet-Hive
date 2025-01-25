@@ -7,7 +7,6 @@ import ListItemWithSwitch from "./modules/manage-crypto/ListItemWithSwitch";
 
 const ManageCrypto = () => {
   const { itemsList, filteredList, getFilterItems, handleIsSelected } = useManageCryptoController();
-  console.log('itemsList: ', filteredList);
   return(
     <View style={styles.container}>
       <SearchInput 

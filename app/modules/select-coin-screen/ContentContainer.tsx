@@ -1,9 +1,8 @@
-import { useAppContext } from "@/app/context/ParentContext";
+import { FlatList, StyleSheet, TouchableOpacity, View } from "react-native";
 import { AllChainsType } from "@/app/data/DATA";
 import { ThemedText } from "@/components/ThemedText";
 import { Colors } from "@/constants/Colors";
-import { useLocalSearchParams, useRouter } from "expo-router";
-import { FlatList, StyleSheet, TouchableOpacity, View } from "react-native";
+
 
 export const ContentContainer = ({
   items,
@@ -12,20 +11,6 @@ export const ContentContainer = ({
   items: AllChainsType[] | null,
   handleIsSelected: (item: AllChainsType) => void
 }) => {
-  // const { fromCoin, toCoin, onChangeFromCoin, onChangeToCoin } = useAppContext();
-
-  // const { back } = useRouter();
-  // const onPressClose = () => back();
-  // const { source } = useLocalSearchParams();
-
-  // const onPressItem = (item: AllChainsType) => {
-  //   if(source === 'from') {
-  //     onChangeFromCoin(item);
-  //   } else {
-  //     onChangeToCoin(item);
-  //   }
-  //   back();
-  // }
 
   return(
     <FlatList
@@ -46,10 +31,8 @@ export const ContentContainer = ({
 
 export const RenderItem = ({ 
     item, 
-    // onPressItem 
   } : {
     item: AllChainsType, 
-    // onPressItem: (item: TransactionObjType) => void,
 }) => {
   return(
     <View style={{ marginVertical: 3 }}>

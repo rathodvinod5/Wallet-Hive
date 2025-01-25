@@ -10,7 +10,6 @@ const useSelectCoinController = () => {
   const { fromCoin, toCoin, onChangeFromCoin, onChangeToCoin } = useAppContext();
 
   const { back } = useRouter();
-  const onPressClose = () => back();
   const { source } = useLocalSearchParams();
 
   const handleIsSelected = (item: AllChainsType) => {
@@ -23,7 +22,6 @@ const useSelectCoinController = () => {
   }
 
   const getFilterItems = (filterString: string) => {
-    // console.log("string: ", filterString);
     if(!filterString) {
       setFilteredList(null);
       return;
@@ -33,7 +31,6 @@ const useSelectCoinController = () => {
       items.chain.title.toLocaleLowerCase() == filterString.toLocaleLowerCase() ||
       items.chain.symbol.toLocaleLowerCase() == filterString.toLocaleLowerCase()
     );
-    // console.log("items: ", items);
     if(!items || !items.length) {
       setFilteredList(null);
       return; 

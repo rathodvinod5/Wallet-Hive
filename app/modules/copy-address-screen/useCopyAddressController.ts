@@ -8,7 +8,6 @@ const useCopyAddressController = () => {
   const { walletsAdded } = useAppContext();
 
   const filterWallets = (filterString: string) => {
-    console.log("string: ", filterString);
     if(!filterString) {
       setFilteredWallets(null);
       return;

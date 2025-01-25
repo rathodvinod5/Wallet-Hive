@@ -14,7 +14,6 @@ const useManageCryptoController = () => {
           return res && JSON.parse(res);
         })
         .then((chain) => {
-          // console.log('chain: ', chain);
           setItemsList(chain ? chain as AllowedChainsType[] : chainsAllowed);
         }).catch((error) => {
         console.log('error: ', error);
@@ -25,13 +24,6 @@ const useManageCryptoController = () => {
 
   const handleIsSelected = async (symbol: string) => {
     try {
-      // if(itemsList && itemsList[index]) {
-      //   const newItemsList = [...itemsList];
-      //   const status = !itemsList[index].isEnabled;
-      //   newItemsList[index].isEnabled = status;
-      //   setItemsList(newItemsList);
-      //   await setItemAsync('chainsAllowed', JSON.stringify(itemsList));
-      // }
       if(itemsList) {
         const newItemsList = [...itemsList];
         const indexOfItem = newItemsList.findIndex((item) => item.symbol === symbol);
@@ -46,7 +38,6 @@ const useManageCryptoController = () => {
   }
 
   const getFilterItems = (filterString: string) => {
-    // console.log("string: ", filterString);
     if(!filterString) {
       setNoItemsError(false);
       setFilteredList(null);
@@ -57,7 +48,6 @@ const useManageCryptoController = () => {
       items.title.toLocaleLowerCase() == filterString.toLocaleLowerCase() ||
       items.symbol.toLocaleLowerCase() == filterString.toLocaleLowerCase()
     );
-    // console.log("items: ", items);
     if(!items || !items.length) {
       setFilteredList(null);
       setNoItemsError(true);

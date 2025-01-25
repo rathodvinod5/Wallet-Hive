@@ -13,9 +13,7 @@ import { AllChainsType } from "./data/DATA";
 
 const SelectCoinScreen = () => {
   const { back } = useRouter();
-  // const { source } = useLocalSearchParams();
   const onPressClose = () => back();
-  // const { fromCoin, toCoin, onChangeFromCoin, onChangeToCoin } = useAppContext();
   const { allChains, filteredList, getFilterItems, handleIsSelected } = useSelectCoinController();
 
   return(
