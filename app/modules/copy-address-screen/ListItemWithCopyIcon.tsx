@@ -5,7 +5,7 @@ import { Colors } from "@/constants/Colors";
 import { WalletType } from "@/app/data/WalletsData";
 import { ThemedView } from "@/components/ThemedView";
 import IconButton from "@/components/ui/button/IconButton";
-// import * as Clipboard from "expo-clipboard";
+import * as Clipboard from "expo-clipboard";
 
 type RenderItemProps<T> = {
   item: T;
@@ -15,13 +15,19 @@ export default function ListItemWithCopyIcon<T>({
   item, 
 }: RenderItemProps<T & WalletType>){
 
-  const copyToClipboard = () => {
-    // try {
-    //   Clipboard.setStringAsync(item.walletId);
-    // } catch (err) {
-    //   cornsole.error('Failed to copy: ', err);
-    // }
+  const copyToClipboard = async () => {
+    try {
+      Clipboard.setStringAsync(item.walletId);
+      // fetchCopiedText();
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
   }
+
+  const fetchCopiedText = async () => {
+    const text = await Clipboard.getStringAsync();
+    console.log(text);
+  };
 
   return(
     <View style={styles.listItemObject}>
