@@ -1,22 +1,23 @@
 import { useState } from "react";
 import { Switch, View, StyleSheet } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
-import { TransactionObjType } from "@/app/data/DATA";
+import { AllowedChainsType, TransactionObjType } from "@/app/data/DATA";
 import { Colors } from "@/constants/Colors";
 
 type RenderItemProps<T> = {
   item: T;
-  // handleIsSelected: () => void,
+  handleIsSelected: () => void,
 };
 
 export default function ListItemWithSwitch<T>({ 
   item, 
-  // handleIsSelected, 
-}: RenderItemProps<T & TransactionObjType>){
-  const [isEnabled, setIsEnabled] = useState(false);
+  handleIsSelected, 
+}: RenderItemProps<T & AllowedChainsType>){
+  const [isEnabled, setIsEnabled] = useState(item.isEnabled);
 
   const toggleIsEnabled = () => {
     setIsEnabled(!isEnabled);
+    handleIsSelected();
   }
 
   return(
@@ -24,15 +25,14 @@ export default function ListItemWithSwitch<T>({
       <View style={styles.itemLeftContainer} />
       <View style={styles.itemRightContainer}>
         <View style={styles.recordContainer}>
-          <ThemedText type="textSMSemibold">{item.chain.title}</ThemedText>
-          <ThemedText type="textSMSemibold">{item.transactionAmount}</ThemedText>
+          <ThemedText type="textSMSemibold">{item.title}</ThemedText>
         </View>
-        <ThemedText type="textSMSemibold">{item.chain.title}</ThemedText>
+        <ThemedText type="textSMSemibold">{item.symbol}</ThemedText>
       </View>
       <Switch
-        trackColor={{false: 'lightgray', true: 'blue'}}
+        trackColor={{false: Colors.light.greyExtraLight1, true: 'blue'}}
         thumbColor={'#f4f3f4'}
-        ios_backgroundColor="gray"
+        ios_backgroundColor={Colors.light.greyExtraLight1}
         onChange={toggleIsEnabled}
         value={isEnabled}
       />
@@ -44,9 +44,9 @@ const styles = StyleSheet.create({
   listItemObject: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 8,
+    // marginVertical: 8,
     gap: 4,
-    backgroundColor: Colors.light.greyExtraLight1,
+    // backgroundColor: Colors.light.greyExtraLight1,
     paddingHorizontal: 12,
     paddingVertical: 8,
     borderRadius: 8

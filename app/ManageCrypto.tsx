@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { View, StyleSheet, FlatList, Switch } from "react-native";
 import SearchInput from "@/components/ui/search-input/SearchInput";
-import { TransactionObjType } from "./data/DATA";
+import { AllowedChainsType, TransactionObjType } from "./data/DATA";
 import useManageCryptoController from "./modules/manage-crypto/useManageCryptoController";
 import ListItemWithSwitch from "./modules/manage-crypto/ListItemWithSwitch";
 
 const ManageCrypto = () => {
-  const { itemsList } = useManageCryptoController();
+  const { itemsList, handleIsSelected } = useManageCryptoController();
 
   return(
     <View style={styles.container}>
@@ -15,9 +15,9 @@ const ManageCrypto = () => {
         data={itemsList}
         keyExtractor={(item, index) => 'manage-crypto-list-item-'+index} 
         renderItem={({ item, index }) => (
-          <ListItemWithSwitch<TransactionObjType> 
+          <ListItemWithSwitch<AllowedChainsType> 
             item={item} 
-            // handleIsSelected={() => handleIsSelected(index)}
+            handleIsSelected={() => handleIsSelected(index)}
           />
         )}
         contentContainerStyle={styles.flatlistContainer}

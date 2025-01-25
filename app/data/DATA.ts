@@ -1,5 +1,11 @@
 export type IncDecStatusType = "INC" | "DEC";
 
+export type AllowedChainsType = {
+  title: string,
+  symbol: string,
+  isEnabled: boolean,
+};
+
 export type TransactionObjType = {
   chain: {
     title: string,
@@ -106,5 +112,18 @@ export const transactionListData: TransactionObjType[] = [
     transactionTime: "10:00 AM",
     transactionStatus: "Success",
     chainIncDecStatus: "DEC",
+  }
+];
+
+export const chainsAllowed: AllowedChainsType[] = [
+  {
+    title: "Etherum",
+    symbol: "ETH",
+    isEnabled: false,
+  },
+  {
+    title: "Solana",
+    symbol: "SOL",
+    isEnabled: false,
   }
 ];

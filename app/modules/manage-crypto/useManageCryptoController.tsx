@@ -1,23 +1,35 @@
-import { useState } from "react";
-import { transactionListData, TransactionObjType } from "@/app/data/DATA";
+import { useEffect, useState } from "react";
+import { AllowedChainsType, chainsAllowed, transactionListData } from "@/app/data/DATA";
+import { getItemAsync, setItemAsync } from "@/app/utilities/SecureStorgeAPI";
 
 const useManageCryptoController = () => {
-  const [itemsList, setItemsList] = useState<TransactionObjType[]>(
-    JSON.parse(JSON.stringify(transactionListData))
-  );
+  const [itemsList, setItemsList] = useState<AllowedChainsType[] | null>(null);
 
-  const handleIsSelected = (index: number) => {
-    // console.log('in handleIsSelected: ', item);
-    // if(isSelectedSet.has(item)) {
-    //   isSelectedSet.delete(item);
-    //   return;
-    // }
-    // isSelectedSet.add(item);
+  useEffect(() => {
+    const getItem = async () => {
+      getItemAsync('chainsAllowed')
+        .then((res) => {
+          return res && JSON.parse(res);
+        })
+        .then((chain) => {
+          setItemsList(chain ? chain as AllowedChainsType[] : chainsAllowed);
+        }).catch((error) => {
+        console.log('error: ', error);
+      });
+    };
+    getItem();
+  }, []);
 
+  
+
+  const handleIsSelected = async (index: number) => {
     try {
-      if(itemsList[index]) {
+      if(itemsList && itemsList[index]) {
+        const newItemsList = [...itemsList];
         const status = !itemsList[index].isEnabled;
-        itemsList[index].isEnabled = status;
+        newItemsList[index].isEnabled = status;
+        setItemsList(newItemsList);
+        await setItemAsync('chainsAllowed', JSON.stringify(itemsList));
       }
     } catch(error) {
       console.log('error: ', error);
