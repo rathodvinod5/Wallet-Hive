@@ -6,6 +6,16 @@ export type AllowedChainsType = {
   isEnabled: boolean,
 };
 
+export type AllChainsType = { 
+  chain: {
+    title: string,
+    symbol: string,
+  },
+  cryptoNativeValue: string,
+  quantity: string,
+  dollarConversionValue: string,
+}
+
 export type TransactionObjType = {
   chain: {
     title: string,
@@ -114,6 +124,54 @@ export const transactionListData: TransactionObjType[] = [
     chainIncDecStatus: "DEC",
   }
 ];
+
+export const allChains: AllChainsType[] = [
+  {
+    chain: {
+      title: "Etherum",
+      symbol: "ETH",
+    },
+    cryptoNativeValue: "3431.10",
+    quantity: "0.0001",
+    dollarConversionValue: "$0.00",
+  },
+  {
+    chain: {
+      title: "Solana",
+      symbol: "SOL",
+    },
+    cryptoNativeValue: "251.10",
+    quantity: "0.0001",
+    dollarConversionValue: "$0.00",
+  },
+  {
+    chain: {
+      title: "Bitcoin",
+      symbol: "BTC",
+    },
+    cryptoNativeValue: "45000.00",
+    quantity: "0.0001",
+    dollarConversionValue: "$4.50",
+  },
+  {
+    chain: {
+      title: "Cardano",
+      symbol: "ADA",
+    },
+    cryptoNativeValue: "2.30",
+    quantity: "100",
+    dollarConversionValue: "$230.00",
+  },
+  {
+    chain: {
+      title: "Polkadot",
+      symbol: "DOT",
+    },
+    cryptoNativeValue: "30.00",
+    quantity: "10",
+    dollarConversionValue: "$300.00",
+  },
+]
 
 export const chainsAllowed: AllowedChainsType[] = [
   {

@@ -3,7 +3,7 @@ import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import Entypo from '@expo/vector-icons/Entypo';
 import { Colors } from "@/constants/Colors";
 import { Link } from "expo-router";
-import { TransactionObjType } from "@/app/data/DATA";
+import { AllChainsType, TransactionObjType } from "@/app/data/DATA";
 
 const SingleSwapContainer = ({
   coinOrToken,
@@ -12,7 +12,7 @@ const SingleSwapContainer = ({
   onChangeTextInput,
   source = "from",
 }: {
-  coinOrToken: TransactionObjType | null | undefined,
+  coinOrToken: AllChainsType | null | undefined,
   tokenValue: string,
   enableTextInput?: boolean,
   onChangeTextInput: (text: string) => void,
@@ -21,13 +21,12 @@ const SingleSwapContainer = ({
   return(
     <View style={styles.container}>
       <View style={styles.topContainer}>
-        
-          <View style={styles.topLeftContainer}>
-            <Text style={styles.smallTextStyles}>From</Text>
-            <FontAwesome6 name="ethereum" size={14} color={Colors.light.blackNew} />
-            <Text style={styles.smallTextStyles}>{coinOrToken?.chain.title}</Text>
-            <FontAwesome6 name="angle-down" size={14} color={'gray'} />
-          </View>
+        <View style={styles.topLeftContainer}>
+          <Text style={styles.smallTextStyles}>From</Text>
+          <FontAwesome6 name="ethereum" size={14} color={Colors.light.blackNew} />
+          <Text style={styles.smallTextStyles}>{coinOrToken?.chain.title}</Text>
+          <FontAwesome6 name="angle-down" size={14} color={'gray'} />
+        </View>
         <View style={styles.topRightContainer}>
           <FontAwesome6 name="gas-pump" size={14} color={'gray'} />
           <Text style={styles.smallTextStyles}>0</Text>
@@ -37,7 +36,7 @@ const SingleSwapContainer = ({
       <Link href={`/selectcoinscreen?source=${source}`}>
         <View style={styles.topLeftContainer}>
           <View style={styles.imageContainer} />
-          <Text style={styles.currStyles}>{coinOrToken?.chain.title}</Text>
+          <Text style={styles.currStyles}>{coinOrToken?.chain.symbol}</Text>
           <Entypo name="chevron-right" size={22} color="gray" />
         </View>
         </Link>

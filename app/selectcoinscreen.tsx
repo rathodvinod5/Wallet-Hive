@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text} from "react-native";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import IconButton from "@/components/ui/button/IconButton";
 import HeaderComponent from "@/components/ui/header/HeaderComponent";
@@ -7,6 +7,8 @@ import { useRouter, SearchParams, useLocalSearchParams } from "expo-router";
 import { RenderFlatlistForCoinAndNFT } from "./modules/explore-tab/CryptoNFTTabContainer";
 import { useAppContext } from "./context/ParentContext";
 import { ContentContainer } from "./modules/select-coin-screen/ContentContainer";
+import useSelectCoinController from "./modules/select-coin-screen/useSelectCoinController";
+import { AllChainsType } from "./data/DATA";
 
 
 const SelectCoinScreen = () => {
@@ -14,6 +16,7 @@ const SelectCoinScreen = () => {
   // const { source } = useLocalSearchParams();
   const onPressClose = () => back();
   // const { fromCoin, toCoin, onChangeFromCoin, onChangeToCoin } = useAppContext();
+  const { allChains, filteredList, getFilterItems, handleIsSelected } = useSelectCoinController();
 
   return(
     <View style={styles.container}>
@@ -26,8 +29,18 @@ const SelectCoinScreen = () => {
         )}
       />
       <View style={{ height: 20 }} />
-      <SearchInput onUpdateTextInput={() => {}} />
-      <ContentContainer />
+      <SearchInput onUpdateTextInput={getFilterItems} />
+      {allChains || filteredList ? (
+        <ContentContainer
+          items={filteredList || allChains}
+          handleIsSelected={handleIsSelected}
+        />
+      ) : (
+        <View>
+          <Text>No items</Text>
+        </View>
+      )}
+      
     </View>
   );
 }

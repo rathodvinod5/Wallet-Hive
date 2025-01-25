@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { WalletType } from '../data/WalletsData';
 import { walletsAdded } from '../data/WalletsData';
-import { TransactionObjType } from '../data/DATA';
+import { AllChainsType, TransactionObjType } from '../data/DATA';
 
 // Define the shape of the context state
 type AppContextState = {
@@ -15,10 +15,10 @@ type AppContextState = {
   onRemoveWalletFromList: (walletName: string) => void,
   onChangeWallet: (walletId: string) => void,
 
-  fromCoin?: TransactionObjType | null,
-  toCoin?: TransactionObjType | null,
-  onChangeFromCoin: (from: TransactionObjType) => void,
-  onChangeToCoin: (from: TransactionObjType) => void,
+  fromCoin?: AllChainsType | null,
+  toCoin?: AllChainsType | null,
+  onChangeFromCoin: (from: AllChainsType) => void,
+  onChangeToCoin: (from: AllChainsType) => void,
 }
 
 // Default state for the context
@@ -35,8 +35,8 @@ const defaultState: AppContextState = {
 
   fromCoin: null,
   toCoin: null,
-  onChangeFromCoin: (from: TransactionObjType) => {},
-  onChangeToCoin: (from: TransactionObjType) => {},
+  onChangeFromCoin: (from: AllChainsType) => {},
+  onChangeToCoin: (from: AllChainsType) => {},
 };
 
 // Create the context
@@ -51,8 +51,8 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const [user, setUser] = useState<string | null>(null);
   const [wallets, setWallets] = useState<WalletType[] | null>(walletsAdded);
   const [selectedWallet, setSelectedWallet] = useState<WalletType | null>(null);
-  const [fromCoin, setFromCoin] = useState<TransactionObjType | null>(null);
-  const [toCoin, setToCoin] = useState<TransactionObjType | null>(null);
+  const [fromCoin, setFromCoin] = useState<AllChainsType | null>(null);
+  const [toCoin, setToCoin] = useState<AllChainsType | null>(null);
 
   const login = (username: string) => {
     setUser(username);
@@ -79,11 +79,11 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     }
   }
 
-  const onChangeFromCoin = (from: TransactionObjType) => {
+  const onChangeFromCoin = (from: AllChainsType) => {
     setFromCoin(from);
   }
 
-  const onChangeToCoin = (to: TransactionObjType) => {
+  const onChangeToCoin = (to: AllChainsType) => {
     setToCoin(to);
   }
 

@@ -6,18 +6,22 @@ import useManageCryptoController from "./modules/manage-crypto/useManageCryptoCo
 import ListItemWithSwitch from "./modules/manage-crypto/ListItemWithSwitch";
 
 const ManageCrypto = () => {
-  const { itemsList, handleIsSelected } = useManageCryptoController();
-
+  const { itemsList, filteredList, getFilterItems, handleIsSelected } = useManageCryptoController();
+  console.log('itemsList: ', filteredList);
   return(
     <View style={styles.container}>
-      <SearchInput customContainerCss={{ marginTop: 20 }} />
+      <SearchInput 
+        customContainerCss={{ marginTop: 20 }} 
+        onUpdateTextInput={getFilterItems}
+      />
       <FlatList
-        data={itemsList}
-        keyExtractor={(item, index) => 'manage-crypto-list-item-'+index} 
+        data={filteredList || itemsList}
+        keyExtractor={(item, index) => 'manage-crypto-list-item-'+index+item.symbol} 
         renderItem={({ item, index }) => (
           <ListItemWithSwitch<AllowedChainsType> 
             item={item} 
-            handleIsSelected={() => handleIsSelected(index)}
+            handleIsSelected={() => handleIsSelected(item.symbol)}
+            key={'manage-crypto-list-item-'+index+item.symbol}
           />
         )}
         contentContainerStyle={styles.flatlistContainer}

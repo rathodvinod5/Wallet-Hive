@@ -1,34 +1,40 @@
 import { useAppContext } from "@/app/context/ParentContext";
-import { transactionListData, TransactionObjType } from "@/app/data/DATA";
+import { AllChainsType } from "@/app/data/DATA";
 import { ThemedText } from "@/components/ThemedText";
+import { Colors } from "@/constants/Colors";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { FlatList, StyleSheet, TouchableOpacity, View } from "react-native";
 
-export const ContentContainer = () => {
-  const { fromCoin, toCoin, onChangeFromCoin, onChangeToCoin } = useAppContext();
+export const ContentContainer = ({
+  items,
+  handleIsSelected,
+}: {
+  items: AllChainsType[] | null,
+  handleIsSelected: (item: AllChainsType) => void
+}) => {
+  // const { fromCoin, toCoin, onChangeFromCoin, onChangeToCoin } = useAppContext();
 
-  const { back } = useRouter();
-  const onPressClose = () => back();
-  const { source } = useLocalSearchParams();
-  
+  // const { back } = useRouter();
+  // const onPressClose = () => back();
+  // const { source } = useLocalSearchParams();
 
-  const onPressItem = (item: TransactionObjType) => {
-    if(source === 'from') {
-      onChangeFromCoin(item);
-    } else {
-      onChangeToCoin(item);
-    }
-    back();
-  }
+  // const onPressItem = (item: AllChainsType) => {
+  //   if(source === 'from') {
+  //     onChangeFromCoin(item);
+  //   } else {
+  //     onChangeToCoin(item);
+  //   }
+  //   back();
+  // }
 
   return(
     <FlatList
-      data={transactionListData}
+      data={items}
       keyExtractor={(item, index) => 'list-item-'+index} 
       renderItem={(item) => (
         <TouchableOpacity 
           activeOpacity={0.9} 
-          onPress={() => onPressItem(item.item)}
+          onPress={() => handleIsSelected(item.item)}
         >
          <RenderItem item={item.item} />
        </TouchableOpacity>
@@ -42,23 +48,23 @@ export const RenderItem = ({
     item, 
     // onPressItem 
   } : {
-    item: TransactionObjType, 
+    item: AllChainsType, 
     // onPressItem: (item: TransactionObjType) => void,
 }) => {
   return(
-    <View style={{ marginVertical: 8 }}>
+    <View style={{ marginVertical: 3 }}>
       <View style={styles.listItemObject}>
         <View style={styles.itemLeftContainer}>
         </View>
         <View style={styles.itemRightContainer}>
-        <View style={styles.recordContainer}>
-            <ThemedText type="textSMSemibold">{item.chain.title}</ThemedText>
-            <ThemedText type="textSMSemibold">{item.transactionAmount}</ThemedText>
-        </View>
-        <View style={styles.recordContainer}>
-            <ThemedText type="textSMSemibold">{item.cryptoNativeValue}</ThemedText>
-            <ThemedText type="textSMSemibold">{`$0.00`}</ThemedText>
-        </View>
+          <View style={styles.recordContainer}>
+            <ThemedText type="textSMSemibold" style={styles.textColor}>{item.chain.symbol}</ThemedText>
+            <ThemedText type="textSMSemibold" style={styles.textColor}>{item.quantity}</ThemedText>
+          </View>
+          <View style={styles.recordContainer}>
+            <ThemedText style={{ fontSize: 16, color: 'gray' }}>{item.chain.title}</ThemedText>
+            <ThemedText type="textSMSemibold" style={styles.textColor}>{`$0.00`}</ThemedText>
+          </View>
         </View>
       </View>
     </View>
@@ -111,5 +117,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  textColor: {
+    color: Colors.light.blackNew
   }
 });
