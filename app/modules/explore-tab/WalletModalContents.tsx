@@ -63,7 +63,7 @@ const WalletModalContents = ({
             key={'removed-wallet-item-'+index+wallet.walletId} 
             style={styles.itemLayout}
             activeOpacity={0.9}
-            onPress={() => onSelectWalletModal(wallet.walletId)}
+            onPress={() => onSelectRemovedItem(wallet)}
           >
             <View style={styles.itemLeftContainer} />
             <View style={styles.middleContainer}>

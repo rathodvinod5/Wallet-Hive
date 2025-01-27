@@ -97,6 +97,8 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
 
     if(walletsRemoved)
       setWalletsRemoved(walletsRemoved?.filter(item => item.walletName !== wallet.walletName));
+
+    // update wallets added and removed wallets in secure storage
   }
 
   const value: AppContextState = {
