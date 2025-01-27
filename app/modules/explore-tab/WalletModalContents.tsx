@@ -16,7 +16,7 @@ const WalletModalContents = ({
   onPressAdd: () => void,
 }) => {
   const { back } = useRouter();
-  const { walletsAdded, onChangeWallet } = useAppContext();
+  const { walletsAdded, walletsRemoved, onChangeWallet, onSelectRemovedItem } = useAppContext();
 
   const onSelectWalletModal = (walletId: string) => {
     onChangeWallet(walletId);
@@ -56,6 +56,23 @@ const WalletModalContents = ({
             <Entypo name="dots-three-vertical" size={22} color="gray" />
           </TouchableOpacity>
         ))}
+
+        <ThemedText style={styles.titleSmall}>Removed Earlier</ThemedText>
+        {walletsRemoved?.map((wallet, index) => (
+          <TouchableOpacity 
+            key={'removed-wallet-item-'+index+wallet.walletId} 
+            style={styles.itemLayout}
+            activeOpacity={0.9}
+            onPress={() => onSelectWalletModal(wallet.walletId)}
+          >
+            <View style={styles.itemLeftContainer} />
+            <View style={styles.middleContainer}>
+              <ThemedText type="textSMSemibold">{wallet.walletName}</ThemedText>
+              <Text>{wallet.walletId}</Text>
+            </View>
+            <Entypo name="dots-three-vertical" size={22} color="gray" />
+          </TouchableOpacity>
+        ))}
       </ThemedView>
     </View>
   );
@@ -77,7 +94,8 @@ const styles = StyleSheet.create({
   titleSmall: {
     fontSize: 14,
     fontWeight: 'bold',
-    color: 'gray'
+    color: 'gray',
+    marginTop: 30,
   },
   contentContainer: {
     flex: 1,

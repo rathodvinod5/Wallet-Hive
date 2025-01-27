@@ -27,14 +27,14 @@ const FeatureContainer = () => {
         </Link>
         <ThemedText type="textSMSemibold">Receive</ThemedText>
       </View>
-      <View style={styles.buttonContainer}>
+      {/* <View style={styles.buttonContainer}>
         <IconButton onPress={() => {}}>
           <ThemedView style={styles.buttonStyles}>
             <Foundation name="credit-card" size={26} color="black" />
           </ThemedView>
         </IconButton>
         <ThemedText type="textSMSemibold">Buy</ThemedText>
-      </View>
+      </View> */}
       <View style={styles.buttonContainer}>
         <IconButton onPress={() => {}}>
           <ThemedView style={styles.buttonStyles}>

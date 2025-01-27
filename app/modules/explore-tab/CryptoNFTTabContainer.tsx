@@ -39,7 +39,9 @@ const CryptoNFTTabContainer = () => {
         </View>
        ) : (
         <View style={{ alignItems: 'center', marginTop: 20 }}>
-          <ThemedText type="textMDSemibold">No data</ThemedText>
+          <ThemedText type="textMDSemibold">
+            {activeTab === 0 ? 'No Crypto found' : 'No NFT found'}
+          </ThemedText>
         </View>
       )}
       

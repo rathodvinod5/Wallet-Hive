@@ -10,11 +10,12 @@ type AppContextState = {
   login: (username: string) => void;
   logout: () => void;
   walletsAdded: WalletType[] | null;
+  walletsRemoved: WalletType[] | null;
   selectedWallet: WalletType | null;
   onAddNewWalletToList: (wallet: WalletType) => void,
   onRemoveWalletFromList: (walletName: string) => void,
   onChangeWallet: (walletId: string) => void,
-
+  onSelectRemovedItem: (wallet: WalletType) => void,
   fromCoin?: AllChainsType | null,
   toCoin?: AllChainsType | null,
   onChangeFromCoin: (from: AllChainsType) => void,
@@ -28,11 +29,12 @@ const defaultState: AppContextState = {
   login: () => {},
   logout: () => {},
   walletsAdded: null,
+  walletsRemoved: null,
   selectedWallet: null,
   onAddNewWalletToList: (wallet: WalletType) => {},
   onRemoveWalletFromList: (walletName: string) => {},
   onChangeWallet: (walletId: string) => {},
-
+  onSelectRemovedItem: (wallet: WalletType) => {},
   fromCoin: null,
   toCoin: null,
   onChangeFromCoin: (from: AllChainsType) => {},
@@ -50,6 +52,7 @@ type AppProviderProps = {
 export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const [user, setUser] = useState<string | null>(null);
   const [wallets, setWallets] = useState<WalletType[] | null>(walletsAdded);
+  const [walletsRemoved, setWalletsRemoved] = useState<WalletType[] | null>(null);
   const [selectedWallet, setSelectedWallet] = useState<WalletType | null>(null);
   const [fromCoin, setFromCoin] = useState<AllChainsType | null>(null);
   const [toCoin, setToCoin] = useState<AllChainsType | null>(null);
@@ -87,18 +90,29 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     setToCoin(to);
   }
 
+  const onSelectRemovedItem = (wallet: WalletType) => {
+
+    if(wallets)
+      setWallets([...wallets, wallet]);
+
+    if(walletsRemoved)
+      setWalletsRemoved(walletsRemoved?.filter(item => item.walletName !== wallet.walletName));
+  }
+
   const value: AppContextState = {
     user,
     isAuthenticated: !!user,
     login,
     logout,
     walletsAdded: wallets,
+    walletsRemoved: walletsRemoved,
     selectedWallet: selectedWallet,
     fromCoin: fromCoin,
     toCoin: toCoin,
     onAddNewWalletToList: onAddNewWalletToList,
     onRemoveWalletFromList: onRemoveWalletFromList,
     onChangeWallet: onChangeWallet,
+    onSelectRemovedItem: onSelectRemovedItem,
     onChangeFromCoin: onChangeFromCoin,
     onChangeToCoin: onChangeToCoin,
   };
