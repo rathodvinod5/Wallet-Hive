@@ -83,7 +83,9 @@ const useAddWalletControllet = () => {
           // }
         }).catch(err => {
           console.log("error occured: ", err);
-        }).finally(() => setIsLoading(false));
+        }).finally(() => {
+          setIsLoading(false);
+        });
       }
     }
     if(error) setError(null);
@@ -91,6 +93,7 @@ const useAddWalletControllet = () => {
 
   const handleAddressTypes = (address: string, chain: string) => {
     if(chain == "ethereum" || chain == "evm") {
+      console.log('in if condition');
       validateEthAddress(address).then((status) => {
         console.log("eth status: ", status);
         if(status == AddressObjectEnum.WALLET) {
@@ -103,7 +106,7 @@ const useAddWalletControllet = () => {
           onAddNewWalletToList(newWallet, () => back());
         }
       }).catch(err => {
-        console.log("err ", err);
+        console.log("error: ", err);
       });
     }
   }

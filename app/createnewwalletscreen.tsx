@@ -66,7 +66,6 @@ const AddWalletScreen = () => {
           activeOpacity={0.9}
           onPress={onClickGeneratePhraseButton}
         >
-          {/* <Text style={styles.buttonTitle}>Restore Wallet</Text> */}
           <ThemedText type="textSMSemibold" style={{ color: 'white' }}>
             {!phrases ? "Create Wallet" : "Save wallet"}
           </ThemedText>

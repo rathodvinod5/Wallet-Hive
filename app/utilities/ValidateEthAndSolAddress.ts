@@ -14,7 +14,6 @@ export const validateEthAddress = (address: string) => {
   }
     
   const provider = new ethers.JsonRpcProvider(`https://sepolia.infura.io/v3/${process.env.REACT_APP_INFURA_ID}`);
-  // const address = "0x32Be343B94f860124dC4fEe278FDCBD38C102D88";
   
   return isEthereumWallet(provider, address).then(isWallet => {
     console.log(isWallet ? "Wallet Address" : "Smart Contract Address");
@@ -36,7 +35,6 @@ export const validateSolAddress = (address: string) => {
     return accountInfo.executable === false; // Non-executable accounts are wallets
   }
   
-  // const address = "5iXsDdVyk9FhbuTw2ftoqRtbYt1J9pVTeZ1gL7v9v3x5";
   isSolanaWallet(address).then(isWallet => {
     console.log(isWallet ? "Wallet Address" : "Program Address");
     return isWallet ? AddressObjectEnum.WALLET : AddressObjectEnum.CONTRACT;

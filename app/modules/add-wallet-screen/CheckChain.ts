@@ -23,21 +23,19 @@ const stringToMnemonic = async (inputString: string) => {
 
 // Function to identify blockchain based on mnemonic
 export const identifyBlockchain = async (mnemonicString: string) => {
-  // const mnemonic = await stringToMnemonic(mnemonicString);
-  // console.log("mnemonicString: ", mnemonicString);
-  // console.log("mnemonic: ", mnemonic);
+  const mnemonic = await stringToMnemonic(mnemonicString);
 
-  // const isValid = bip39.validateMnemonic(mnemonicString);
-  // if (!isValid) {
-  //   throw new Error("Invalid Mnemonic");
-  // }
+  const isValid = bip39.validateMnemonic(mnemonicString);
+  if (!isValid) {
+    throw new Error("Invalid Mnemonic");
+  }
 
   // ETHEREUM (BIP-44 Path: m/44'/60'/0'/0/0)
-  const ethWallet = ethers.Wallet.fromPhrase(mnemonicString);
+  const ethWallet = ethers.Wallet.fromPhrase(mnemonic);
   const ethAddress = ethWallet.address;
 
   // SOLANA (BIP-44 Path: m/44'/501'/0'/0')
-  const seed = bip39.mnemonicToSeedSync(mnemonicString)
+  const seed = bip39.mnemonicToSeedSync(mnemonic)
   const solanaSeed = new Uint8Array(seed.slice(0, 32)); // Ensure seed is 32 bytes for Solana
   const solKeypair = Keypair.fromSeed(solanaSeed);
   const solAddress = solKeypair.publicKey.toBase58();

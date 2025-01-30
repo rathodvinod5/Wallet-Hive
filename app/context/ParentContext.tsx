@@ -70,6 +70,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
 
   useEffect(() => {
     getItem('walletsAdded', (wallets: WalletType[]) => {
+      console.log('wallets: ', wallets);
       setWallets(wallets ? wallets : null);
     });
     getItem('walletsRemoved', (wallets: WalletType[]) => {
@@ -86,15 +87,15 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   };
 
   const onAddNewWalletToList = async (wallet: WalletType, callback?: () => void) => {
-    if(!wallets) {
-      setSelectedWallet(wallet);
-    } 
-    // wallets?.push(wallet);
-
     const newWallets = wallets ? [...wallets, wallet] : [wallet]
-    setWallets(newWallets);
     // update wallets added and removed wallets in secure storage
     await setItemAsync('walletsAdded', JSON.stringify(newWallets));
+    if(!wallets) {
+      setWallets(newWallets);
+      setSelectedWallet(wallet);
+    } else {
+      setWallets(newWallets);
+    }
     callback && callback();
   }
 

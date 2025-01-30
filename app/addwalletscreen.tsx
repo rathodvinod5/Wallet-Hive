@@ -73,7 +73,6 @@ const AddWalletScreen = () => {
           disabled={!phrase}
           onPress={validateString}
         >
-          {/* <Text style={styles.buttonTitle}>Restore Wallet</Text> */}
           {isLoading ? (
             <ActivityIndicator size="small" color="white" />
           ) : (
