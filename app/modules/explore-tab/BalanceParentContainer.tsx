@@ -35,7 +35,7 @@ const BalanceParentContainer = ({
               <Ionicons name="eye-off" size={24} color="gray" />
             )}
             <ThemedText type="textSMSemibold" style={styles.walletChainName}>
-              {selectedWallet ? selectedWallet.walletName : ""} Wallet
+              {selectedWallet ? selectedWallet.walletName : "Select or add Wallet"}
             </ThemedText>
             <Entypo name="select-arrows" size={16} color="gray" />
           </View>

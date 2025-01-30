@@ -40,39 +40,56 @@ const WalletModalContents = ({
       />
 
       <ThemedView style={styles.contentContainer}>
-        <ThemedText style={styles.titleSmall}>Wallets</ThemedText>
-        {walletsAdded?.map((wallet, index) => (
-          <TouchableOpacity 
-            key={'added-wallet-item-'+index+wallet.walletId} 
-            style={styles.itemLayout}
-            activeOpacity={0.9}
-            onPress={() => onSelectWalletModal(wallet.walletId)}
-          >
-            <View style={styles.itemLeftContainer} />
-            <View style={styles.middleContainer}>
-              <ThemedText type="textSMSemibold">{wallet.walletName}</ThemedText>
-              <Text>{wallet.walletId}</Text>
-            </View>
-            <Entypo name="dots-three-vertical" size={22} color="gray" />
-          </TouchableOpacity>
-        ))}
+        {walletsAdded ? (
+          <View>
+            <ThemedText style={styles.titleSmall}>Wallets</ThemedText>
+            {walletsAdded?.map((wallet, index) => (
+              <TouchableOpacity 
+                key={'added-wallet-item-'+index+wallet.walletId} 
+                style={styles.itemLayout}
+                activeOpacity={0.9}
+                onPress={() => onSelectWalletModal(wallet.walletId)}
+              >
+                <View style={styles.itemLeftContainer} />
+                <View style={styles.middleContainer}>
+                  <ThemedText type="textSMSemibold">{wallet.walletName}</ThemedText>
+                  <Text>{wallet.walletId}</Text>
+                </View>
+                <Entypo name="dots-three-vertical" size={22} color="gray" />
+              </TouchableOpacity>
+            ))}
+          </View>
+        ) : (
+          <View style={{ width: '100%', alignItems: 'center', justifyContent: 'center' }}>
+            <ThemedText style={[styles.titleSmall, { flex: 1, fontSize: 18 }]}>
+              No Active wallets found
+            </ThemedText>
+            <ThemedText style={[styles.titleSmall, { paddingBottom: 50 }]}>
+              Please add new wallets or {'\n'} restore from removed list
+            </ThemedText>
+          </View>
+        )}
 
-        <ThemedText style={styles.titleSmall}>Removed Earlier</ThemedText>
-        {walletsRemoved?.map((wallet, index) => (
-          <TouchableOpacity 
-            key={'removed-wallet-item-'+index+wallet.walletId} 
-            style={styles.itemLayout}
-            activeOpacity={0.9}
-            onPress={() => onSelectRemovedItem(wallet)}
-          >
-            <View style={styles.itemLeftContainer} />
-            <View style={styles.middleContainer}>
-              <ThemedText type="textSMSemibold">{wallet.walletName}</ThemedText>
-              <Text>{wallet.walletId}</Text>
-            </View>
-            <Entypo name="dots-three-vertical" size={22} color="gray" />
-          </TouchableOpacity>
-        ))}
+        {walletsRemoved ? (
+          <View>
+            <ThemedText style={styles.titleSmall}>Removed Earlier</ThemedText>
+            {walletsRemoved?.map((wallet, index) => (
+              <TouchableOpacity 
+                key={'removed-wallet-item-'+index+wallet.walletId} 
+                style={styles.itemLayout}
+                activeOpacity={0.9}
+                onPress={() => onSelectRemovedItem(wallet)}
+              >
+                <View style={styles.itemLeftContainer} />
+                <View style={styles.middleContainer}>
+                  <ThemedText type="textSMSemibold">{wallet.walletName}</ThemedText>
+                  <Text>{wallet.walletId}</Text>
+                </View>
+                <Entypo name="dots-three-vertical" size={22} color="gray" />
+              </TouchableOpacity>
+            ))}
+          </View>
+        ) : null}
       </ThemedView>
     </View>
   );
@@ -100,7 +117,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     height: '100%',
-    marginTop: 40,
+    marginTop: 20,
     flexDirection: 'column',
     alignItems: 'flex-start',
     backgroundColor: 'white'

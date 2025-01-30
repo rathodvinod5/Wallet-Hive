@@ -5,7 +5,7 @@ export function isValidAddress(address: string, chain: string): boolean | string
   try {
     if (chain.toLowerCase() === "ethereum" || chain.toLowerCase() === "evm") {
       return isAddress(address); // ✅ Ethereum, Polygon, BSC, Avalanche
-    } else if (chain.toLowerCase() === "solana") {
+    } else if (chain.toLowerCase() === "solana" || chain.toLowerCase() === "sol") {
       new PublicKey(address); // Will throw an error if invalid
       return true; // ✅ Solana
     }

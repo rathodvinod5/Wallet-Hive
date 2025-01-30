@@ -1,3 +1,8 @@
+import "react-native-get-random-values"; // Required for `crypto`, For random number generation
+global.Buffer = global.Buffer || require("buffer").Buffer; // Polyfill Buffer
+global.process = require("process"); // Polyfill process
+
+// import "react-native-crypto";
 import { View, Text } from 'react-native';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';

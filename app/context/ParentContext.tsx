@@ -1,7 +1,8 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { WalletType } from '../data/WalletsData';
 import { walletsAdded } from '../data/WalletsData';
 import { AllChainsType, TransactionObjType } from '../data/DATA';
+import { getItemAsync, setItemAsync } from '../utilities/SecureStorgeAPI';
 
 // Define the shape of the context state
 type AppContextState = {
@@ -12,7 +13,7 @@ type AppContextState = {
   walletsAdded: WalletType[] | null;
   walletsRemoved: WalletType[] | null;
   selectedWallet: WalletType | null;
-  onAddNewWalletToList: (wallet: WalletType) => void,
+  onAddNewWalletToList: (wallet: WalletType, callback?: () => void) => void,
   onRemoveWalletFromList: (walletName: string) => void,
   onChangeWallet: (walletId: string) => void,
   onSelectRemovedItem: (wallet: WalletType) => void,
@@ -31,7 +32,7 @@ const defaultState: AppContextState = {
   walletsAdded: null,
   walletsRemoved: null,
   selectedWallet: null,
-  onAddNewWalletToList: (wallet: WalletType) => {},
+  onAddNewWalletToList: (wallet: WalletType, callback?: () => void) => {},
   onRemoveWalletFromList: (walletName: string) => {},
   onChangeWallet: (walletId: string) => {},
   onSelectRemovedItem: (wallet: WalletType) => {},
@@ -51,11 +52,30 @@ type AppProviderProps = {
 
 export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const [user, setUser] = useState<string | null>(null);
-  const [wallets, setWallets] = useState<WalletType[] | null>(walletsAdded);
+  const [wallets, setWallets] = useState<WalletType[] | null>(null);
   const [walletsRemoved, setWalletsRemoved] = useState<WalletType[] | null>(null);
   const [selectedWallet, setSelectedWallet] = useState<WalletType | null>(null);
   const [fromCoin, setFromCoin] = useState<AllChainsType | null>(null);
   const [toCoin, setToCoin] = useState<AllChainsType | null>(null);
+
+  const getItem = async(key: string, callback: (items: WalletType[]) => void) => {
+    getItemAsync(key)
+      .then((res) => {
+        return res && JSON.parse(res);
+      })
+      .then(callback).catch((error) => {
+      console.log('error: ', error);
+    });
+  };
+
+  useEffect(() => {
+    getItem('walletsAdded', (wallets: WalletType[]) => {
+      setWallets(wallets ? wallets : null);
+    });
+    getItem('walletsRemoved', (wallets: WalletType[]) => {
+      setWallets(wallets ? wallets : null);
+    });
+  }, []);
 
   const login = (username: string) => {
     setUser(username);
@@ -65,8 +85,17 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     setUser(null);
   };
 
-  const onAddNewWalletToList = (wallet: WalletType) => {
-    wallets?.push(wallet);
+  const onAddNewWalletToList = async (wallet: WalletType, callback?: () => void) => {
+    if(!wallets) {
+      setSelectedWallet(wallet);
+    } 
+    // wallets?.push(wallet);
+
+    const newWallets = wallets ? [...wallets, wallet] : [wallet]
+    setWallets(newWallets);
+    // update wallets added and removed wallets in secure storage
+    await setItemAsync('walletsAdded', JSON.stringify(newWallets));
+    callback && callback();
   }
 
   const onRemoveWalletFromList = (walletName: string) => {
