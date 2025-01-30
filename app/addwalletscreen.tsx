@@ -1,4 +1,4 @@
-import { Text, StyleSheet, View, TextInput, TouchableOpacity, Button } from 'react-native';
+import { Text, StyleSheet, View, TextInput, TouchableOpacity, Button, ActivityIndicator } from 'react-native';
 import IconButton from '@/components/ui/button/IconButton';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
@@ -12,7 +12,7 @@ import { SwitchType } from './modules/add-wallet-screen/types/Types';
 const AddWalletScreen = () => {
   const { back } = useRouter();
   const { walletName, phrase, activeItem, secretKey, onChangeWalletName, onChangePhrase,
-    onChangeActiveItem, validateString, onChangeSecretKey } = useAddWalletControllet();
+    onChangeActiveItem, validateString, onChangeSecretKey, isLoading } = useAddWalletControllet();
 
   const onPressClose = () => back();
 
@@ -74,9 +74,13 @@ const AddWalletScreen = () => {
           onPress={validateString}
         >
           {/* <Text style={styles.buttonTitle}>Restore Wallet</Text> */}
-          <ThemedText type="textSMSemibold" style={{ color: 'white' }}>
-            Restore Wallet
-          </ThemedText>
+          {isLoading ? (
+            <ActivityIndicator size="small" color="white" />
+          ) : (
+            <ThemedText type="textSMSemibold" style={{ color: 'white' }}>
+              Restore Wallet
+            </ThemedText>
+          )}
         </TouchableOpacity>
       </View>
     </View>
