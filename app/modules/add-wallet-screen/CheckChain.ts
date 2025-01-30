@@ -18,19 +18,17 @@ const identifyBlockchain = async (mnemonic: string) => {
 
   // SOLANA (BIP-44 Path: m/44'/501'/0'/0')
   //   const seed = utils.mnemonicToSeedSync(mnemonic).slice(0, 32); // Convert mnemonic to seed
-  const mnemonicObject = Mnemonic.fromPhrase(mnemonic);
-//   const seed = mnemonicObject.computeSeed(); // ✅ Returns a Uint8Array
-//   const solKeypair = Keypair.fromSeed(seed);
+  const seed = await bip39.mnemonicToSeed(mnemonic); // Convert mnemonic to seed
+  const solanaSeed = new Uint8Array(seed.slice(0, 32)); // Ensure seed is 32 bytes for Solana
+  const solKeypair = Keypair.fromSeed(solanaSeed);
 
-const seed = Mnemonic.fromPhrase(mnemonic).computeSeed();
-
-// Ensure seed is 32 bytes for Solana
-const solanaSeed = seed.slice(0, 32); // ✅ Get the first 32 bytes
-
-// Generate Solana Keypair
-const solanaKeypair = Keypair.fromSeed(solanaSeed);
-
+  // const seed = Mnemonic.fromPhrase(mnemonic).computeSeed();
+  // // Ensure seed is 32 bytes for Solana
+  // const solanaSeed = seed.slice(0, 32); // ✅ Get the first 32 bytes
+  // // Generate Solana Keypair
+  // const solanaKeypair = Keypair.fromSeed(solanaSeed);
   const solAddress = solKeypair.publicKey.toBase58();
+  console.log('sol address: ', solAddress);
 
   return {
     ethereum: ethAddress,
