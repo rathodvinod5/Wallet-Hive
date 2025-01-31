@@ -11,7 +11,7 @@ import { SwitchType } from './modules/add-wallet-screen/types/Types';
 
 const AddWalletScreen = () => {
   const { back } = useRouter();
-  const { walletName, phrase, activeItem, secretKey, onChangeWalletName, onChangePhrase,
+  const { activeItem, walletName, phrase, secretKey, onChangeWalletName, onChangePhrase,
     onChangeActiveItem, validateString, onChangeSecretKey, isLoading } = useAddWalletControllet();
 
   const onPressClose = () => back();
@@ -58,7 +58,7 @@ const AddWalletScreen = () => {
             {activeItem === 'phrase' ? 'Enter Phrase' : 'Enter Secret Key'}
           </ThemedText>
           <TextInput
-            value={phrase}
+            value={activeItem === 'phrase' ? phrase : secretKey}
             onChangeText={onChangePhrase}
             style={[styles.textInpuStyles, styles.phraseTextArea]}
             multiline={true}

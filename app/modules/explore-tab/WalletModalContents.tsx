@@ -23,6 +23,8 @@ const WalletModalContents = ({
     back();
   }
 
+  console.log('walletsAdded: ', walletsAdded);
+
   return(
     <View style={styles.container}>
       <HeaderComponent
@@ -41,7 +43,7 @@ const WalletModalContents = ({
 
       <ThemedView style={styles.contentContainer}>
         {walletsAdded ? (
-          <View>
+          <View style={{ width: '100%' }}>
             <ThemedText style={styles.titleSmall}>Wallets</ThemedText>
             {walletsAdded?.map((wallet, index) => (
               <TouchableOpacity 
@@ -71,7 +73,7 @@ const WalletModalContents = ({
         )}
 
         {walletsRemoved ? (
-          <View>
+          <View style={{ width: '100%' }}>
             <ThemedText style={styles.titleSmall}>Removed Earlier</ThemedText>
             {walletsRemoved?.map((wallet, index) => (
               <TouchableOpacity 

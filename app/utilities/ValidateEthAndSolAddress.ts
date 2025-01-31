@@ -13,7 +13,7 @@ export const validateEthAddress = (address: string) => {
     return code === "0x"; // If no bytecode, it's a wallet
   }
     
-  const provider = new ethers.JsonRpcProvider(`https://sepolia.infura.io/v3/${process.env.REACT_APP_INFURA_ID}`);
+  const provider = new ethers.JsonRpcProvider(`https://sepolia.infura.io/${process.env.REACT_APP_INFURA_KEY}`);
   
   return isEthereumWallet(provider, address).then(isWallet => {
     console.log(isWallet ? "Wallet Address" : "Smart Contract Address");

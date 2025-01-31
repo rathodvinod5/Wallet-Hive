@@ -11,3 +11,11 @@ export async function getItemAsync(key: string) {
   } 
   return null;
 }
+
+export async function deleteItemAsync(key: string) {
+  try {
+    await SecureStore.deleteItemAsync(key);
+  }catch(err) {
+    console.log('Error deleting item: ', err);
+  }
+}

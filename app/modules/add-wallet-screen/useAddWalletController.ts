@@ -24,11 +24,17 @@ const useAddWalletControllet = () => {
   const { back } = useRouter();
 
   const onChangePhrase = (newPhrase: string) => {
-    const str = newPhrase
-      .replace(/[^a-zA-Z,\s]/g, '') // Remove invalid characters
-      .replace(/[ ]+/g, ' ')        // Collapse multiple spaces into one
-      .replace(/\n+/g, '\n')
-    setPhrase(str);
+    console.log('activeItem: ', activeItem);
+    if(activeItem == 'sec-key') {
+      setSecreteKey(newPhrase);
+      // return;
+    } else {
+      const str = newPhrase
+        .replace(/[^a-zA-Z,\s]/g, '') // Remove invalid characters
+        .replace(/[ ]+/g, ' ')        // Collapse multiple spaces into one
+        .replace(/\n+/g, '\n')
+     setPhrase(str);
+    }
   }
 
   const onChangeWalletName = (name: string) => {
@@ -41,6 +47,7 @@ const useAddWalletControllet = () => {
   }
 
   const validateString = () => {
+    console.log('validateString: ', activeItem);
     if(activeItem === 'phrase') {
       const phrases = phrase.trim().toLocaleLowerCase().split(/[\s,]+/).filter(Boolean);
       if(phrases.length < 12) {
@@ -81,14 +88,41 @@ const useAddWalletControllet = () => {
           //   };
           //   onAddNewWalletToList(newWallet, () => back());
           // }
+          setIsLoading(false);
         }).catch(err => {
           console.log("error occured: ", err);
-        }).finally(() => {
           setIsLoading(false);
+        }).finally(() => {
+          // setIsLoading(false);
         });
       }
+      return;
     }
-    if(error) setError(null);
+
+    if(activeItem == 'sec-key') {
+      if(secretKey.trim().length < 64) {
+        setError("Please enter a valid secret key");
+        return;
+      }
+      if(!chainSelected) {
+        setIsLoading(true);
+        if(chainSelected == "ethereum" || chainSelected == "evm") { 
+          const wallet = isValidAddress(secretKey, "ethereum");
+          if(wallet) {
+            const newWallet: WalletType = { 
+              walletId: secretKey,
+              walletName: walletName == "New Wallet" ? "Ethereum Wallet" : walletName,
+              chain: "ethereum",
+              amount: 0.0,
+            };
+            setIsLoading(false);
+            onAddNewWalletToList(newWallet, () => back());
+          }
+        } else if(chainSelected == "solana" || chainSelected == "sol") {
+          setIsLoading(false);
+        }
+      }
+    }
   }
 
   const handleAddressTypes = (address: string, chain: string) => {
