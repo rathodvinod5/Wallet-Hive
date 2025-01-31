@@ -23,8 +23,6 @@ const WalletModalContents = ({
     back();
   }
 
-  console.log('walletsAdded: ', walletsAdded);
-
   return(
     <View style={styles.container}>
       <HeaderComponent

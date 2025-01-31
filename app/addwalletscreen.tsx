@@ -67,10 +67,10 @@ const AddWalletScreen = () => {
         <TouchableOpacity 
           style={[styles.restoreWalletButton, {
             // backgroundColor: phrase ? 'royalblue' : 'lightgray',
-            opacity: phrase ? 1.0 : 0.4,
+            opacity: phrase || secretKey ? 1.0 : 0.4,
           }]}
           activeOpacity={0.9}
-          disabled={!phrase}
+          disabled={!(phrase || secretKey)}
           onPress={validateString}
         >
           {isLoading ? (

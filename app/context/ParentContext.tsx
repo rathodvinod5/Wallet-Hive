@@ -160,8 +160,6 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     }
   }
 
-  console.log('in context: ', wallets)
-
   const value: AppContextState = {
     user,
     isAuthenticated: !!user,

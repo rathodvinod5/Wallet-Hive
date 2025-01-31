@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { SwitchType } from "./types/Types";
 import { identifyBlockchain } from "./CheckChain";
-import { isValidAddress } from "./ValidateAddres";
+import { isSecretKey, isValidAddress } from "./ValidateAddres";
 import { useAppContext } from "@/app/context/ParentContext";
 import { WalletType } from "@/app/data/WalletsData";
 import { useRouter } from "expo-router";
+import { Wallet } from "ethers";
 import { AddressObjectEnum, validateEthAddress, validateSolAddress } from "@/app/utilities/ValidateEthAndSolAddress";
 
 type AddressObjectType = {
@@ -15,7 +16,7 @@ const useAddWalletControllet = () => {
   const [walletName, setWalletName] = useState("New Wallet");
   const [phrase, setPhrase] = useState("");
   const [secretKey, setSecreteKey] = useState("");
-  const [chainSelected, setChainSelected] = useState<string | null>(null);
+  const [chainSelected, setChainSelected] = useState<string | null>("ethereum");
   const [activeItem, setActiveItem] = useState<SwitchType>('phrase');
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -100,27 +101,29 @@ const useAddWalletControllet = () => {
     }
 
     if(activeItem == 'sec-key') {
+      console.log('secret key: ', secretKey);
       if(secretKey.trim().length < 64) {
         setError("Please enter a valid secret key");
         return;
       }
-      if(!chainSelected) {
-        setIsLoading(true);
-        if(chainSelected == "ethereum" || chainSelected == "evm") { 
-          const wallet = isValidAddress(secretKey, "ethereum");
-          if(wallet) {
-            const newWallet: WalletType = { 
-              walletId: secretKey,
-              walletName: walletName == "New Wallet" ? "Ethereum Wallet" : walletName,
-              chain: "ethereum",
-              amount: 0.0,
-            };
-            setIsLoading(false);
-            onAddNewWalletToList(newWallet, () => back());
-          }
-        } else if(chainSelected == "solana" || chainSelected == "sol") {
+
+      setIsLoading(true);
+      if(chainSelected == "ethereum" || chainSelected == "evm") { 
+        const walletObj: Wallet | null | boolean = isSecretKey(secretKey, "ethereum");
+        console.log('wallet: ', walletObj);
+        if(walletObj && walletObj instanceof Wallet && walletObj.address) {
+          const newWallet: WalletType = { 
+            walletId: walletObj.address,
+            walletName: walletName == "New Wallet" ? "Ethereum Wallet" : walletName,
+            chain: "ethereum",
+            amount: 0.0,
+          };
           setIsLoading(false);
+          onAddNewWalletToList(newWallet, () => back());
         }
+        setIsLoading(false);
+      } else if(chainSelected == "solana" || chainSelected == "sol") {
+        setIsLoading(false);
       }
     }
   }
