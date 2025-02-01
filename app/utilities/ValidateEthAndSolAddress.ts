@@ -3,7 +3,8 @@ import { ethers, type Provider } from 'ethers';
 
 export enum AddressObjectEnum {
   WALLET = "address",
-  CONTRACT = "contract"
+  CONTRACT = "contract",
+  PROGRAMME = "programme"
 };
 
 export const validateEthAddress = (address: string) => {
@@ -35,8 +36,8 @@ export const validateSolAddress = (address: string) => {
     return accountInfo.executable === false; // Non-executable accounts are wallets
   }
   
-  isSolanaWallet(address).then(isWallet => {
+  return isSolanaWallet(address).then(isWallet => {
     console.log(isWallet ? "Wallet Address" : "Program Address");
-    return isWallet ? AddressObjectEnum.WALLET : AddressObjectEnum.CONTRACT;
+    return isWallet ? AddressObjectEnum.WALLET : AddressObjectEnum.PROGRAMME;
   });
 }
