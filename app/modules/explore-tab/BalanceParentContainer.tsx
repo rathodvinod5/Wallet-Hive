@@ -40,7 +40,9 @@ const BalanceParentContainer = ({
             <Entypo name="select-arrows" size={16} color="gray" />
           </View>
         </Link>
-        <ThemedText type="textELSemibold">$0.00</ThemedText>
+        <ThemedText type="textELSemibold">
+          {selectedWallet ? (Number(selectedWallet?.amount) / 1e9) : "0.00"}
+        </ThemedText>
       </View>
       <View style={styles.rightContainer}>
         <Link href="/copyaddressscreen">

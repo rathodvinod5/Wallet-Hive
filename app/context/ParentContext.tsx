@@ -71,17 +71,17 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   };
 
   useEffect(() => {
-    // deleteItemAsync('walletsAdded');
-    // deleteItemAsync('walletsRemoved');
+    deleteItemAsync('walletsAdded');
+    deleteItemAsync('walletsRemoved');
 
-    getItem('walletsAdded', (newWallets: WalletType[]) => {
-      console.log('useEffect wallets: ', newWallets);
-      setWallets(newWallets);
-    });
-    getItem('walletsRemoved', (walletsRemoved: WalletType[]) => {
-      console.log('useEffect walletsRemoved: ', walletsRemoved);
-      setWalletsRemoved(walletsRemoved);
-    });
+    // getItem('walletsAdded', (newWallets: WalletType[]) => {
+    //   console.log('useEffect wallets: ', newWallets);
+    //   setWallets(newWallets);
+    // });
+    // getItem('walletsRemoved', (walletsRemoved: WalletType[]) => {
+    //   console.log('useEffect walletsRemoved: ', walletsRemoved);
+    //   setWalletsRemoved(walletsRemoved);
+    // });
   }, []);
 
   const login = (username: string) => {

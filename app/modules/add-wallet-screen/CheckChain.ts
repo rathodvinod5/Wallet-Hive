@@ -35,7 +35,8 @@ export const identifyBlockchain = async (mnemonicString: string) => {
   const ethAddress = ethWallet.address;
 
   // SOLANA (BIP-44 Path: m/44'/501'/0'/0')
-  const seed = bip39.mnemonicToSeedSync(mnemonic)
+  const seed = bip39.mnemonicToSeedSync(mnemonic);
+  console.log('seed: ', seed)
   const solanaSeed = new Uint8Array(seed.slice(0, 32)); // Ensure seed is 32 bytes for Solana
   const solKeypair = Keypair.fromSeed(solanaSeed);
   const solAddress = solKeypair.publicKey.toBase58();

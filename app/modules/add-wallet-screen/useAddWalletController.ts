@@ -7,7 +7,6 @@ import { WalletType } from "@/app/data/WalletsData";
 import { useRouter } from "expo-router";
 import { Wallet } from "ethers";
 import { AddressObjectEnum, validateEthAddress, validateSolAddress } from "@/app/utilities/ValidateEthAndSolAddress";
-import { isUtf8 } from "buffer";
 
 type AddressObjectType = {
   [key: string]: string;
@@ -116,27 +115,14 @@ const useAddWalletControllet = () => {
 
   const handleAddressTypes = (address: string, chain: string, status?: string | null) => {
     if(chain == "ethereum" || chain == "evm") {
-      console.log('in if condition');
-      // const status = validateEthAddress(address);
-      // console.log("eth status: ", status);
-      // if(status && status == AddressObjectEnum.WALLET) {
-      //   const newWallet: WalletType = { 
-      //     walletId: address,
-      //     walletName: walletName == "New Wallet" ? "Ethereum Wallet" : walletName,
-      //     chain: "ethereum",
-      //     amount: 0.0,
-      //   };
-      //   onAddNewWalletToList(newWallet, () => back());
-      // }
-
-      validateEthAddress(address).then((status) => {
-        console.log("eth status: ", status);
-        if(status == AddressObjectEnum.WALLET) {
+      validateEthAddress(address).then((walletObj) => {
+        console.log("eth status: ", walletObj);
+        if(walletObj.status == AddressObjectEnum.WALLET) {
           const newWallet: WalletType = { 
             walletId: address,
             walletName: walletName == "New Wallet" ? "Ethereum Wallet" : walletName,
             chain: "ethereum",
-            amount: 0.0,
+            amount: walletObj.balance as number,
           };
           onAddNewWalletToList(newWallet, () => back());
         }
@@ -144,14 +130,14 @@ const useAddWalletControllet = () => {
         console.log("error: ", err);
       });
     } else if(chain == "solana" || chain == "sol") {
-      validateSolAddress(address).then((status) => {
-        console.log("sol status: ", status);
-        if(status == AddressObjectEnum.WALLET) {
+      validateSolAddress(address).then((walletObj) => {
+        console.log("sol status: ", walletObj);
+        if(walletObj.status == AddressObjectEnum.WALLET) {
           const newWallet: WalletType = { 
             walletId: address,
             walletName: walletName == "New Wallet" ? "Solana Wallet" : walletName,
             chain: "solana",
-            amount: 0.0,
+            amount: walletObj.balance as number,
           };
           onAddNewWalletToList(newWallet, () => back());
         }
