@@ -1,5 +1,8 @@
-import { Connection, LAMPORTS_PER_SOL, PublicKey, SystemProgram, Transaction, type PublicKeyData } from '@solana/web3.js';
+import { Connection, Keypair, LAMPORTS_PER_SOL, PublicKey, 
+  SystemProgram, Transaction, type PublicKeyData } from '@solana/web3.js';
 import { ethers, type Provider } from 'ethers';
+import * as bip39 from "bip39";
+import * as Crypto from "expo-crypto";
 
 export enum AddressObjectEnum {
   WALLET = "address",
@@ -53,10 +56,14 @@ export const validateEthAddress = (address: string) => {
 }
 
 
-export const validateSolAddress = (address: string) => {
+export const validateSolAddress = (address: string, secretKey?: string) => {
 
   async function isSolanaWallet(address: string) {
     const connection = new Connection("https://api.devnet.solana.com");
+    // if(secretKey) {
+    //   const solanaSeed = new Uint8Array(secretKey); // Ensure seed is 32 bytes for Solana
+    //   const solKeypair = Keypair.fromSeed(solanaSeed);
+    // }
     const publicKey = new PublicKey(address);
     await connection.getLatestBlockhash();
 
@@ -65,7 +72,7 @@ export const validateSolAddress = (address: string) => {
     //   .catch(error => console.error("❌ Airdrop Failed:", error));
 
     await connection.getLatestBlockhash();
-    const balance = await connection.getBalance(publicKey);
+    // const balance = await connection.getBalance(publicKey);
     const accountInfo = await connection.getAccountInfo(publicKey);
     console.log('accountInfo: ', JSON.stringify(accountInfo, null, 2))
     // if (!accountInfo) {

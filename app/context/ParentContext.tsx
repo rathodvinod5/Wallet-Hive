@@ -74,6 +74,8 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     deleteItemAsync('walletsAdded');
     deleteItemAsync('walletsRemoved');
 
+    console.log('API key: ', process.env.SEPOLIA_KEY);
+
     // getItem('walletsAdded', (newWallets: WalletType[]) => {
     //   console.log('useEffect wallets: ', newWallets);
     //   setWallets(newWallets);
