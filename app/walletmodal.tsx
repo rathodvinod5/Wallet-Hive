@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import WalletModalContents from "./modules/explore-tab/WalletModalContents";
 import { useRouter } from "expo-router";
 import ModalHandler from "./modules/explore-tab/ModalHandler";

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Switch, View, StyleSheet } from "react-native";
 import { ThemedText } from "@/components/ThemedText";
-import { AllowedChainsType, TransactionObjType } from "@/app/data/DATA";
+import { AllowedChainsType } from "@/app/data/DATA";
 import { Colors } from "@/constants/Colors";
 
 type RenderItemProps<T> = {

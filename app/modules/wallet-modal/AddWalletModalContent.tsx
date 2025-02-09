@@ -1,8 +1,7 @@
 import { ThemedText } from "@/components/ThemedText";
-import { View, Text, StyleSheet, Switch, Image } from "react-native";
+import { View, StyleSheet, Image } from "react-native";
 import Feather from '@expo/vector-icons/Feather';
 import { Colors } from "@/constants/Colors";
-import { useThemeColor } from "@/hooks/useThemeColor";
 import { Link } from "expo-router";
 const Crypto = require('../../../assets/images/CryptoWallet.svg');
 

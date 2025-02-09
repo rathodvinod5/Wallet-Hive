@@ -57,17 +57,6 @@ const CryptoNFTTabContainer = () => {
 
 export default CryptoNFTTabContainer;
 
-// export const RenderFlatlistForCoinAndNFT = () => {
-//   return(
-//     <FlatList
-//       data={transactionListData}
-//       keyExtractor={(item, index) => 'list-item-'+index} 
-//       renderItem={(item) => <RenderItem item={item.item} />}
-//       contentContainerStyle={styles.flatlistContainer}
-//     />
-//   );
-// }
-
 export const RenderCoinItem = ({ item } : { item: CoinType }) => {
   return(
     <View style={{ marginVertical: 8 }}>
@@ -113,14 +102,12 @@ const styles = StyleSheet.create({
   },
   listItemObject: {
     flexDirection: 'row',
-    // justifyContent: 'space-between',
     alignItems: 'center',
     marginVertical: 8,
     gap: 4
   },
   flatlistContainer: { 
     width: '100%', 
-    // borderWidth: 1, 
     marginTop: 20 
   },
   itemLeftContainer: {

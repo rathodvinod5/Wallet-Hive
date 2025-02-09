@@ -99,7 +99,6 @@ const styles = StyleSheet.create({
     marginTop: 40,
   },
   rightContainer: {
-    // flex: 1,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-end',
@@ -111,7 +110,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor: 'lightgrey',
     backgroundColor: "transparent",
     flex: 1,
   },

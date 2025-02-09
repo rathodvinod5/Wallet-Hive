@@ -112,7 +112,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 48,
     borderRadius: 48 / 2,
-    // backgroundColor: 'lightgrey'
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',

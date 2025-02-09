@@ -1,5 +1,5 @@
 import { ThemedText } from "@/components/ThemedText";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { View, StyleSheet } from "react-native";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Entypo from '@expo/vector-icons/Entypo';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
@@ -23,11 +23,7 @@ const BalanceParentContainer = ({
   return(
     <View style={styles.container}>
       <View>
-        <Link
-          href={"/walletmodal"} 
-          // activeOpacity={0.8} 
-          // onPress={onPressOpenWalletModal}
-        >
+        <Link href={"/walletmodal"}>
           <View style={styles.innLeftContainer}>
             {showBalance ? (
               <Ionicons name="eye" size={24} color="gray" />
@@ -55,11 +51,6 @@ const BalanceParentContainer = ({
             <MaterialCommunityIcons name="line-scan" size={20} color="gray" />
           </ThemedView>
         </IconButton>
-        {/* <IconButton onPress={() => {}}>
-          <ThemedView style={styles.buttonStyles}>
-            <MaterialIcons name="notifications" size={20} color="gray" />
-          </ThemedView>
-        </IconButton> */}
       </View>
     </View>
   );
@@ -95,7 +86,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor: 'lightgrey',
     backgroundColor: Colors.light.greyExtraLight1,
     padding: 6,
     borderRadius: 6,

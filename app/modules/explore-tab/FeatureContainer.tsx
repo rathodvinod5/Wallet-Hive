@@ -3,7 +3,6 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import IconButton from "@/components/ui/button/IconButton";
-import Foundation from '@expo/vector-icons/Foundation';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Colors } from "@/constants/Colors";
 import { Link } from "expo-router";

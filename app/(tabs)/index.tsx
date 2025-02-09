@@ -1,5 +1,4 @@
-import { Image, StyleSheet, Platform, Text, Modal, View, 
-  TouchableOpacity, VirtualizedList } from 'react-native';
+import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Link } from "expo-router";
 import Screen from '@/components/Screen';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
@@ -12,9 +11,7 @@ import CryptoNFTTabContainer from '../modules/explore-tab/CryptoNFTTabContainer'
 import useParentController from '../modules/explore-tab/useExploreTabController';
 import ModalHandler from '../modules/explore-tab/ModalHandler';
 import WalletModalContents from '../modules/explore-tab/WalletModalContents';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-// import ManageCrypto from '../managecrypto';
-
+// import ParallaxScrollView from '@/components/ParallaxScrollView';
 
 export default function HomeScreen() {
   const { showWalletModal, toggleWalletModal, showManageCryptoModal, 

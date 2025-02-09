@@ -119,7 +119,6 @@ const styles = StyleSheet.create({
     color: "gray",
     textAlign: 'center',
     paddingTop: 20
-    // width: "80%"
   },
    buttonContainer: {
     flexDirection: 'column',
@@ -132,7 +131,6 @@ const styles = StyleSheet.create({
     width: 52,
     height: 52,
     borderRadius: 52 / 2,
-    // backgroundColor: 'lightgrey',
     backgroundColor: Colors.light.greyExtraLight1,
     justifyContent: 'center',
     alignItems: "center",
@@ -144,7 +142,6 @@ const styles = StyleSheet.create({
   },
   addWalletTextStyles: {
     fontSize: 20,
-    // lineHeight: 22,
     fontWeight: '600',
     color: 'teal',
   }

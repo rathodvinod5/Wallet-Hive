@@ -49,12 +49,9 @@ const styles = StyleSheet.create({
   listItemObject: {
     flexDirection: 'row',
     alignItems: 'center',
-    // marginVertical: 4,
     gap: 4,
-    // backgroundColor: Colors.light.greyExtraLight1,
     paddingHorizontal: 12,
     paddingVertical: 8,
-    // borderRadius: 6
   },
   itemLeftContainer: {
     padding: 4,
@@ -75,7 +72,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor: 'lightgrey',
     backgroundColor: Colors.light.greyExtraLight1,
     padding: 6,
     borderRadius: 6,

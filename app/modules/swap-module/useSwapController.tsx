@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { type FromAndToType } from "./Types";
 import { FromAndToEnum } from "./Constants";
-import { TextInputChangeEventData } from "react-native";
 
 const useSwapContoller = () => {
   const [currentTabIndex, setCurrentTabIndex] = useState(0); 

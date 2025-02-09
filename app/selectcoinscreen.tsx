@@ -3,12 +3,9 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import IconButton from "@/components/ui/button/IconButton";
 import HeaderComponent from "@/components/ui/header/HeaderComponent";
 import SearchInput from "@/components/ui/search-input/SearchInput";
-import { useRouter, SearchParams, useLocalSearchParams } from "expo-router";
-import { RenderFlatlistForCoinAndNFT } from "./modules/explore-tab/CryptoNFTTabContainer";
-import { useAppContext } from "./context/ParentContext";
+import { useRouter } from "expo-router";
 import { ContentContainer } from "./modules/select-coin-screen/ContentContainer";
 import useSelectCoinController from "./modules/select-coin-screen/useSelectCoinController";
-import { AllChainsType } from "./data/DATA";
 
 
 const SelectCoinScreen = () => {

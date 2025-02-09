@@ -1,7 +1,6 @@
 import { View, StyleSheet, SafeAreaView, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import IconButton from '@/components/ui/button/IconButton';
 import HeaderComponent from "@/components/ui/header/HeaderComponent";
@@ -107,7 +106,6 @@ const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row',
     alignItems: 'center',
-    // marginVertical: 4,
     gap: 4,
     backgroundColor: Colors.light.greyExtraLight1,
     paddingHorizontal: 12,
@@ -126,7 +124,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    // alignItems: 'center'
   },
   recordContainer: {
     flexDirection: 'row',
@@ -137,7 +134,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor: 'lightgrey',
     backgroundColor: "transparent",
     padding: 6,
     borderRadius: 6,

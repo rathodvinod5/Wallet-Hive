@@ -1,7 +1,6 @@
-import { useState } from "react";
-import { View, StyleSheet, FlatList, Switch } from "react-native";
+import { View, StyleSheet, FlatList } from "react-native";
 import SearchInput from "@/components/ui/search-input/SearchInput";
-import { AllowedChainsType, TransactionObjType } from "./data/DATA";
+import { AllowedChainsType } from "./data/DATA";
 import useManageCryptoController from "./modules/manage-crypto/useManageCryptoController";
 import ListItemWithSwitch from "./modules/manage-crypto/ListItemWithSwitch";
 

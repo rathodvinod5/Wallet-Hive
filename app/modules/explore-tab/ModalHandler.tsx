@@ -1,4 +1,4 @@
-import { View, StyleSheet, ViewStyle, Text, Dimensions, Platform} from "react-native";
+import { StyleSheet, ViewStyle, Dimensions } from "react-native";
 import Modal from "react-native-modal";
 
 const { width, height } = Dimensions.get("window");

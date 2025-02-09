@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode, useEffect } from 'react';
 import { WalletType } from '../data/WalletsData';
-import { walletsAdded } from '../data/WalletsData';
-import { AllChainsType, TransactionObjType } from '../data/DATA';
+import { AllChainsType } from '../data/DATA';
 import { getItemAsync, setItemAsync, deleteItemAsync } from '../utilities/SecureStorgeAPI';
 
 // Define the shape of the context state

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AllowedChainsType, chainsAllowed, transactionListData } from "@/app/data/DATA";
+import { AllowedChainsType, chainsAllowed } from "@/app/data/DATA";
 import { getItemAsync, setItemAsync } from "@/app/utilities/SecureStorgeAPI";
 
 const useManageCryptoController = () => {

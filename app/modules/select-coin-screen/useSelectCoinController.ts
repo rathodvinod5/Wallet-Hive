@@ -1,5 +1,5 @@
 import { useAppContext } from "@/app/context/ParentContext";
-import { allChains, AllChainsType, AllowedChainsType } from "@/app/data/DATA";
+import { allChains, AllChainsType } from "@/app/data/DATA";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
 

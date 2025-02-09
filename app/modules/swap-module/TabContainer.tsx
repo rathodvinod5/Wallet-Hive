@@ -1,5 +1,4 @@
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import useSwapContoller from "./useSwapController";
 import { ThemedText } from "@/components/ThemedText";
 import { Colors } from "@/constants/Colors";
 

@@ -1,4 +1,4 @@
-import { Text, StyleSheet, View, TextInput, TouchableOpacity, Button, ActivityIndicator } from 'react-native';
+import { Text, StyleSheet, View, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
 import IconButton from '@/components/ui/button/IconButton';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
@@ -66,7 +66,6 @@ const AddWalletScreen = () => {
         </View>
         <TouchableOpacity 
           style={[styles.restoreWalletButton, {
-            // backgroundColor: phrase ? 'royalblue' : 'lightgray',
             opacity: phrase || secretKey ? 1.0 : 0.4,
           }]}
           activeOpacity={0.9}
@@ -121,13 +120,10 @@ export default AddWalletScreen;
 
 const styles = StyleSheet.create({
   container: {
-    // height: '100%',
     paddingTop: 20,
     paddingHorizontal: 20
   },
   innContainer: {
-    // flex: 1,
-    // height: '100%',
     paddingVertical: 40,
     display: 'flex',
     flexDirection: 'column',
@@ -152,7 +148,6 @@ const styles = StyleSheet.create({
   },
   customSwitchButton: {
     flexDirection: 'row',
-    // justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 8,
     overflow: 'hidden',
@@ -163,7 +158,6 @@ const styles = StyleSheet.create({
   switchInnButton: {
     flex: 1,
     height: 32,
-    // backgroundColor: 'lightgray',
     color: 'gray',
     alignItems: 'center',
     justifyContent: 'center',
