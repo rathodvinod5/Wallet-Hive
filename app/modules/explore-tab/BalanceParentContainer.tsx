@@ -46,11 +46,11 @@ const BalanceParentContainer = ({
             <MaterialIcons name="content-copy" size={20} color="gray" />
           </ThemedView>
         </Link>
-        <IconButton onPress={() => {}}>
+        <Link href="/scanqrcodescreen">
           <ThemedView style={styles.buttonStyles}>
             <MaterialCommunityIcons name="line-scan" size={20} color="gray" />
           </ThemedView>
-        </IconButton>
+        </Link>
       </View>
     </View>
   );

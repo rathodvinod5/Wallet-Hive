@@ -137,6 +137,14 @@ export default function RootLayout() {
               animation: "slide_from_bottom",
               headerShown: false,
             }}
+          />r
+          <Stack.Screen
+            name="scanqrcodescreen"
+            options={{
+              presentation: "formSheet",
+              animation: "slide_from_bottom",
+              headerShown: false,
+            }}
           />
         </Stack>
         <StatusBar style="auto" />
