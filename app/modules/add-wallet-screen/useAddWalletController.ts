@@ -1,12 +1,14 @@
 import { useState } from "react";
-import { SwitchType } from "./types/Types";
-import { identifyBlockchain } from "./CheckChain";
-import { isSecretKey, isValidAddress } from "./ValidateAddres";
-import { useAppContext } from "@/app/context/ParentContext";
-import { WalletType } from "@/app/data/WalletsData";
+// import Toast from 'react-native-simple-toast';
 import { useRouter } from "expo-router";
 import { Wallet } from "ethers";
 import { AddressObjectEnum, validateEthAddress, validateSolAddress } from "@/app/utilities/ValidateEthAndSolAddress";
+import { ToastMessage } from "@/app/utilities/ToastMessage";
+import { isSecretKey, isValidAddress } from "./ValidateAddres";
+import { useAppContext } from "@/app/context/ParentContext";
+import { WalletType } from "@/app/data/WalletsData";
+import { identifyBlockchain } from "./CheckChain";
+import { SwitchType } from "./types/Types";
 
 type AddressObjectType = {
   [key: string]: string;
@@ -16,7 +18,7 @@ const useAddWalletControllet = () => {
   const [walletName, setWalletName] = useState("New Wallet");
   const [phrase, setPhrase] = useState("");
   const [secretKey, setSecreteKey] = useState("");
-  const [chainSelected, setChainSelected] = useState<string | null>(null); // "solana" | "ethereum" | eth | evm | sol
+  const [chainSelected, setChainSelected] = useState<string | null>("eth"); // "solana" | "ethereum" | eth | evm | sol
   const [activeItem, setActiveItem] = useState<SwitchType>('phrase');
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -51,10 +53,10 @@ const useAddWalletControllet = () => {
     console.log('validateString: ', activeItem);
     if(activeItem === 'phrase') {
       const phrases = phrase.trim().toLocaleLowerCase().split(/[\s,]+/).filter(Boolean);
-      // if(phrases.length < 12) {
-      //   setError("Please enter atleast 12 phrases");
-      //   return;
-      // }
+      if(phrases.length < 12) {
+        setError("Please enter atleast 12 phrases");
+        return;
+      }
       setPhrase(phrases.join(" "));
       if(!chainSelected) {
         console.log("inside if")
@@ -69,7 +71,6 @@ const useAddWalletControllet = () => {
             handleAddressTypes(res.ethereum, "ethereum");
           }
           if(solStatus) {
-            // const status: null | string = validateSolAddress(res.solana);
             handleAddressTypes(res.solana, "solana");
           }
           setIsLoading(false);
@@ -102,30 +103,17 @@ const useAddWalletControllet = () => {
         return;
       } else if((chainSelected == "solana" || chainSelected == "sol") && walletObj) {
         console.log('sol address: ', walletObj);
-        const newWallet: WalletType = { 
-          walletId: walletObj as string,
-          walletName: walletName == "New Wallet" ? "Solana Wallet" : walletName,
-          chain: "solana",
-          amount: 0.0,
-        };
-        setIsLoading(false);
-        onAddNewWalletToList(newWallet, () => back());
+        handleAddressTypes(walletObj as string, "solana");
       } else if(walletObj && walletObj instanceof Wallet && walletObj.address) {
         console.log('wallet: ', walletObj);
-        const newWallet: WalletType = { 
-          walletId: walletObj.address,
-          walletName: walletName == "New Wallet" ? "Ethereum Wallet" : walletName,
-          chain: "ethereum",
-          amount: 0.0,
-        };
-        setIsLoading(false);
-        onAddNewWalletToList(newWallet, () => back());
+        handleAddressTypes(walletObj.address, "ethereum");
       }
     }
   }
 
   const handleAddressTypes = (address: string, chain: string, status?: string | null) => {
-    if(chain == "ethereum" || chain == "evm") {
+    console.log('in handleAddressTypes: ', chain);
+    if(chain == "ethereum" || chain == "eth" || chain == "evm") {
       validateEthAddress(address).then((walletObj) => {
         console.log("eth status: ", walletObj);
         if(walletObj.status == AddressObjectEnum.WALLET) {
@@ -135,9 +123,11 @@ const useAddWalletControllet = () => {
             chain: "ethereum",
             amount: walletObj.balance as number,
           };
+          setIsLoading(false);
           onAddNewWalletToList(newWallet, () => back());
         }
       }).catch(err => {
+        setIsLoading(false);
         console.log("error: ", err);
       });
     } else if(chain == "solana" || chain == "sol") {
@@ -151,9 +141,11 @@ const useAddWalletControllet = () => {
             chain: "solana",
             amount: walletObj.balance as number,
           };
+          setIsLoading(false);
           onAddNewWalletToList(newWallet, () => back());
         }
       }).catch(err => {
+        setIsLoading(false);
         console.log("error: ", err);
       });
     }

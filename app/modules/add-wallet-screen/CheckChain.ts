@@ -3,6 +3,8 @@ import { Keypair } from "@solana/web3.js";
 // @ts-ignore
 import * as bip39 from "bip39";
 import * as Crypto from "expo-crypto";
+import { derivePath } from "ed25519-hd-key";
+
 
 // Convert a string to a hash (entropy) and then generate mnemonic
 const stringToMnemonic = async (inputString: string) => {
@@ -25,21 +27,28 @@ const stringToMnemonic = async (inputString: string) => {
 export const identifyBlockchain = async (mnemonicString: string) => {
   const mnemonic = await stringToMnemonic(mnemonicString);
 
-  const isValid = bip39.validateMnemonic(mnemonic);
-  if (!isValid) {
-    throw new Error("Invalid Mnemonic");
-  }
+  // const isValid = bip39.validateMnemonic(mnemonic);
+  // if (!isValid) {
+  //   throw new Error("Invalid Mnemonic");
+  // }
 
   // ETHEREUM (BIP-44 Path: m/44'/60'/0'/0/0)
   const ethWallet = ethers.Wallet.fromPhrase(mnemonicString);
   const ethAddress = ethWallet.address;
 
   // SOLANA (BIP-44 Path: m/44'/501'/0'/0')
-  const seed = bip39.mnemonicToSeedSync(mnemonic);
+  const seed = bip39.mnemonicToSeedSync(mnemonicString);
   console.log('seed: ', seed)
-  const solanaSeed = new Uint8Array(seed.slice(0, 32)); // Ensure seed is 32 bytes for Solana
-  const solKeypair = Keypair.fromSeed(solanaSeed);
-  const solAddress = solKeypair.publicKey.toBase58();
+
+  const derivationPath = "m/44'/501'/0'/0'";
+  const derivedSeed = derivePath(derivationPath, seed.toString("hex")).key;
+  const keypairs = Keypair.fromSeed(derivedSeed);
+  console.log('keypairs: ', keypairs);
+  // const solanaSeed = new Uint8Array(seed.slice(0, 32)); // Ensure seed is 32 bytes for Solana
+  // const solKeypair = Keypair.fromSeed(solanaSeed);
+  // const solAddress = solKeypair.publicKey.toBase58();
+
+  const solAddress = keypairs.publicKey.toString();
 
   return {
     ethereum: ethAddress,

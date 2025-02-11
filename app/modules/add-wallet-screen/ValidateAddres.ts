@@ -19,7 +19,7 @@ export function isValidAddress(address: string, chain: string): boolean | string
 export function isSecretKey(privateKey: string, chain: string): Wallet | boolean | null | string {
   try {
     if (chain.toLowerCase() === "ethereum" || chain.toLowerCase() === "evm") {
-      return new ethers.Wallet(privateKey);; // ✅ Ethereum, Polygon, BSC, Avalanche
+      return new ethers.Wallet(privateKey); // ✅ Ethereum, Polygon, BSC, Avalanche
     } else if (chain.toLowerCase() === "solana" || chain.toLowerCase() === "sol") {
       // new PublicKey(address); // Will throw an error if invalid
       // return true; // ✅ Solana
