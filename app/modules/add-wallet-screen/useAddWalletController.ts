@@ -16,7 +16,7 @@ const useAddWalletControllet = () => {
   const [walletName, setWalletName] = useState("New Wallet");
   const [phrase, setPhrase] = useState("");
   const [secretKey, setSecreteKey] = useState("");
-  const [chainSelected, setChainSelected] = useState<string | null>(null); // "solana" | "ethereum"
+  const [chainSelected, setChainSelected] = useState<string | null>(null); // "solana" | "ethereum" | eth | evm | sol
   const [activeItem, setActiveItem] = useState<SwitchType>('phrase');
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -64,7 +64,7 @@ const useAddWalletControllet = () => {
           const ethStatus = isValidAddress(res.ethereum, "ethereum");
           const solStatus = isValidAddress(res.solana, "solana");
 
-          console.log("eth: " + ethStatus);
+          console.log("eth and sol status: ", ethStatus, solStatus);
           if(ethStatus) {
             handleAddressTypes(res.ethereum, "ethereum");
           }
@@ -80,25 +80,36 @@ const useAddWalletControllet = () => {
       }
       return;
     } else if(activeItem == 'sec-key') {
-      console.log('secret key: ', secretKey);
+      console.log('secret key: ', secretKey, secretKey.length);
       if(secretKey.trim().length < 64) {
         setError("Please enter a valid secret key");
         return;
       }
 
       setIsLoading(true);
-      let walletObj: Wallet | null | boolean = null;
-      if(chainSelected == "ethereum" || chainSelected == "evm") { 
+      let walletObj: Wallet | null | boolean | string = null;
+      if(chainSelected == "ethereum" || chainSelected == "evm" || chainSelected == "eth") { 
         walletObj = isSecretKey(secretKey, "ethereum");
+        console.log('walletObj: ', walletObj);
       } else if(chainSelected == "solana" || chainSelected == "sol") {
-        // walletObj = isSecretKey(secretKey, "ethereum");
-        return;
+        walletObj = isSecretKey(secretKey, "solana");
+        // return;
       }
 
       if(!walletObj) {
         setError("Invalid Secret Key");
         setIsLoading(false);
         return;
+      } else if((chainSelected == "solana" || chainSelected == "sol") && walletObj) {
+        console.log('sol address: ', walletObj);
+        const newWallet: WalletType = { 
+          walletId: walletObj as string,
+          walletName: walletName == "New Wallet" ? "Solana Wallet" : walletName,
+          chain: "solana",
+          amount: 0.0,
+        };
+        setIsLoading(false);
+        onAddNewWalletToList(newWallet, () => back());
       } else if(walletObj && walletObj instanceof Wallet && walletObj.address) {
         console.log('wallet: ', walletObj);
         const newWallet: WalletType = { 
@@ -130,6 +141,7 @@ const useAddWalletControllet = () => {
         console.log("error: ", err);
       });
     } else if(chain == "solana" || chain == "sol") {
+      console.log('in sol section')
       validateSolAddress(address).then((walletObj) => {
         console.log("sol status: ", walletObj);
         if(walletObj.status == AddressObjectEnum.WALLET) {

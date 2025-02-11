@@ -57,7 +57,7 @@ export const validateEthAddress = (address: string) => {
 
 
 export const validateSolAddress = (address: string, secretKey?: string) => {
-
+  console.log('validateSolAddress')
   async function isSolanaWallet(address: string) {
     const connection = new Connection("https://api.devnet.solana.com");
     // if(secretKey) {
