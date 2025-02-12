@@ -16,46 +16,46 @@ const CoinDetailsScreen = () => {
   return(
     <View style={styles.container}>
       <SafeAreaView>
-      <HeaderComponent
-        customTitleComponent={(
-          <View style={{ alignItems: 'center' }}>
-            <ThemedText style={styles.titleStyles}>ETH</ThemedText>
-            <View style={styles.headerInnContainer}>
-              <Text style={styles.headingStyles}>COIN</Text>
-              <Text style={styles.headingStyles}>Ethereum</Text>
+        <HeaderComponent
+          customTitleComponent={(
+            <View style={{ alignItems: 'center' }}>
+              <ThemedText style={styles.titleStyles}>ETH</ThemedText>
+              <View style={styles.headerInnContainer}>
+                <Text style={styles.headingStyles}>COIN</Text>
+                <Text style={styles.headingStyles}>Ethereum</Text>
+              </View>
             </View>
-          </View>
-        )}
-        leftItem={(
-          <IconButton onPress={onPressClose}>
-            <Ionicons name="arrow-back-outline" size={28} color="gray" />
-          </IconButton>
-        )}
-      />
-
-      <View style={styles.innContainer}>
-        <View style={styles.imageContainer} />
-        <ThemedText type="textELSemibold" style={styles.amountStyles}>
-          0 ETH
-        </ThemedText>
-        <ThemedText style={styles.convertToDollarText}>0 ETH</ThemedText>
-        <FeatureContainer />
-
-        <View style={{ paddingTop: 20 }}>
-          <View style={styles.listItemObject}>
-            <View style={styles.itemLeftContainer} />
-            <View style={styles.middleContainer}>
-              <ThemedText type="textSMSemibold" style={{ lineHeight: 30 }}>Start earning</ThemedText>
-              <ThemedText style={{ fontSize: 12 }}>Start earning on your ETH</ThemedText>
-            </View>
-            <IconButton onPress={() => {}}>
-              <ThemedView style={styles.buttonStyles}>
-                <FontAwesome name="angle-right" size={20} color="gray" />
-              </ThemedView>
+          )}
+          leftItem={(
+            <IconButton onPress={onPressClose}>
+              <Ionicons name="arrow-back-outline" size={28} color="gray" />
             </IconButton>
+          )}
+        />
+
+        <View style={styles.innContainer}>
+          <View style={styles.imageContainer} />
+          <ThemedText type="textELSemibold" style={styles.amountStyles}>
+            0 ETH
+          </ThemedText>
+          <ThemedText style={styles.convertToDollarText}>0 ETH</ThemedText>
+          <FeatureContainer />
+
+          <View style={{ paddingTop: 20 }}>
+            <View style={styles.listItemObject}>
+              <View style={styles.itemLeftContainer} />
+              <View style={styles.middleContainer}>
+                <ThemedText type="textSMSemibold" style={{ lineHeight: 30 }}>Start earning</ThemedText>
+                <ThemedText style={{ fontSize: 12 }}>Start earning on your ETH</ThemedText>
+              </View>
+              <IconButton onPress={() => {}}>
+                <ThemedView style={styles.buttonStyles}>
+                  <FontAwesome name="angle-right" size={20} color="gray" />
+                </ThemedView>
+              </IconButton>
+            </View>
           </View>
         </View>
-      </View>
       </SafeAreaView>
     </View>
   );
