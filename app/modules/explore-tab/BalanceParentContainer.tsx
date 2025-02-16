@@ -17,27 +17,35 @@ const BalanceParentContainer = ({
 }: {
   onPressOpenWalletModal: () => void
 }) => {
-  const { showBalance } = useExploreTabController();
+  const { showBalance, onPressShowAndBalance } = useExploreTabController();
   const { selectedWallet } = useAppContext();
 
   return(
     <View style={styles.container}>
       <View>
-        <Link href={"/walletmodal"}>
-          <View style={styles.innLeftContainer}>
+        <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+          <View>
             {showBalance ? (
-              <Ionicons name="eye" size={24} color="gray" />
-            ) : (
-              <Ionicons name="eye-off" size={24} color="gray" />
-            )}
-            <ThemedText type="textSMSemibold" style={styles.walletChainName}>
-              {selectedWallet ? selectedWallet.walletName : "Select or add Wallet"}
-            </ThemedText>
-            <Entypo name="select-arrows" size={16} color="gray" />
+              <IconButton onPress={onPressShowAndBalance}>
+                <Ionicons name="eye" size={24} color="gray" />
+              </IconButton>
+              ) : (
+                <IconButton onPress={onPressShowAndBalance}>
+                  <Ionicons name="eye-off" size={24} color="gray" />
+                </IconButton>
+              )}
           </View>
-        </Link>
+          <Link href={"/walletmodal"}>
+            <View style={styles.innLeftContainer}>
+              <ThemedText type="textSMSemibold" style={styles.walletChainName}>
+                {selectedWallet ? selectedWallet.walletName : "Select or add Wallet"}
+              </ThemedText>
+              <Entypo name="select-arrows" size={16} color="gray" />
+            </View>
+          </Link>
+        </View>
         <ThemedText type="textELSemibold">
-          {selectedWallet ? (Number(selectedWallet?.amount) / 1e9) : "0.00"}
+          {selectedWallet && showBalance ? (Number(selectedWallet?.amount) / 1e9) : showBalance ? "0.00" : "*****"}
         </ThemedText>
       </View>
       <View style={styles.rightContainer}>

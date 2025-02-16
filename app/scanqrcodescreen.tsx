@@ -44,7 +44,13 @@ const ScanQRCodeScreen = () => {
         />
       </View>
 
-      <CameraView style={styles.camera} facing={facing}>
+      <CameraView 
+        style={styles.camera} 
+        facing={facing}
+        barcodeScannerSettings={{
+          barcodeTypes: ["qr"],
+        }}
+      >
         <View style={styles.scanBorderContainer}>
           <View style={styles.scanBorder}  />
         </View>
@@ -77,7 +83,8 @@ const styles = StyleSheet.create({
     // width: '100%',
     // height: '100%',
     // borderWidth: 2,
-    // borderColor: 'white',
+    borderColor: 'black',
+    opacity: 0.8
   },
   scanBorderContainer: {
     flex: 1,
