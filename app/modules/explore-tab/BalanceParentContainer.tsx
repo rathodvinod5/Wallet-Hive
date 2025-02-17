@@ -1,13 +1,14 @@
-import { ThemedText } from "@/components/ThemedText";
 import { View, StyleSheet } from "react-native";
+import { Link } from "expo-router";
+import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Entypo from '@expo/vector-icons/Entypo';
+import { ThemedText } from "@/components/ThemedText";
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import useExploreTabController from "@/hooks/useExploreTabController";
 import IconButton from "@/components/ui/button/IconButton";
 import { ThemedView } from "@/components/ThemedView";
-import { Link } from "expo-router";
 import { Colors } from "@/constants/Colors";
 import { useAppContext } from "@/app/context/ParentContext";
 
@@ -44,9 +45,21 @@ const BalanceParentContainer = ({
             </View>
           </Link>
         </View>
-        <ThemedText type="textELSemibold">
-          {selectedWallet && showBalance ? (Number(selectedWallet?.amount) / 1e9) : showBalance ? "0.00" : "*****"}
-        </ThemedText>
+        <View style={styles.amountContainer}>
+          {selectedWallet || showBalance ? (
+            <ThemedText type="textELSemibold">
+              {selectedWallet && showBalance ? (Number(selectedWallet?.amount) / 1e9) : "0.00"}
+            </ThemedText>
+          ) : (
+            <View style={styles.starTextCont}>
+              <FontAwesome6 name="star-of-life" size={18} color="grey" />
+              <FontAwesome6 name="star-of-life" size={18} color="grey" />
+              <FontAwesome6 name="star-of-life" size={18} color="grey" />
+              <FontAwesome6 name="star-of-life" size={18} color="grey" />
+              <FontAwesome6 name="star-of-life" size={18} color="grey" />
+            </View>
+          )}
+        </View>
       </View>
       <View style={styles.rightContainer}>
         <Link href="/copyaddressscreen">
@@ -97,5 +110,13 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.light.greyExtraLight1,
     padding: 6,
     borderRadius: 6,
+  },
+  amountContainer: {
+    marginTop: 10
+  },
+  starTextCont: {
+    display: 'flex',
+    flexDirection: 'row',
+    gap: 2
   }
 });

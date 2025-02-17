@@ -30,7 +30,7 @@ const SendScreen = () => {
       <View style={styles.contentStyles}>
         <CustomTextInputWithLabel 
           label="Wallet Address"
-          placeHolderText="Enter Address"
+          placeHolderText="Enter address"
           onChangeText={onChangeToAddress}
           renderItemDirection="right"
           renderItem={(
@@ -49,8 +49,8 @@ const SendScreen = () => {
           )}
         /> 
         <CustomTextInputWithLabel 
-          label="Wallet Address"
-          placeHolderText="Enter Address"
+          label="Amount"
+          placeHolderText="Enter amount"
           onChangeText={onChangeAmount}
           keyboardType={"numeric"}
           renderItemDirection="right"
