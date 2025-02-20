@@ -77,7 +77,8 @@ export default function RootLayout() {
           <Stack.Screen
             name="walletmodal"
             options={{
-              presentation: "formSheet",
+              // presentation: "formSheet",
+              presentation: "modal",
               animation: "slide_from_bottom",
               headerShown: false,
             }}
@@ -93,7 +94,8 @@ export default function RootLayout() {
           <Stack.Screen
             name="createnewwalletscreen" 
             options={{
-              presentation: "formSheet",
+              // presentation: "formSheet",
+              presentation: "modal",
               animation: "slide_from_right",
               headerShown: false,
             }}
@@ -117,7 +119,8 @@ export default function RootLayout() {
           <Stack.Screen
             name="sendscreen"
             options={{
-              presentation: "formSheet",
+              // presentation: "formSheet",
+              presentation: "modal",
               animation: "slide_from_bottom",
               headerShown: false,
             }}

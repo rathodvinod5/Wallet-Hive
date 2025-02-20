@@ -59,14 +59,13 @@ const useAddWalletControllet = () => {
       }
       setPhrase(phrases.join(" "));
       if(!chainSelected) {
-        console.log("inside if")
         setIsLoading(true);
         identifyBlockchain(phrase).then((res) => {
           console.log('res: ', res);
           const ethStatus = isValidAddress(res.ethereum, "ethereum");
           const solStatus = isValidAddress(res.solana, "solana");
 
-          console.log("eth and sol status: ", ethStatus, solStatus);
+          // console.log("eth and sol status: ", ethStatus, solStatus);
           if(ethStatus) {
             handleAddressTypes(res.ethereum, "ethereum");
           }
@@ -81,7 +80,7 @@ const useAddWalletControllet = () => {
       }
       return;
     } else if(activeItem == 'sec-key') {
-      console.log('secret key: ', secretKey, secretKey.length);
+      // console.log('secret key: ', secretKey, secretKey.length);
       if(secretKey.trim().length < 64) {
         setError("Please enter a valid secret key");
         return;
@@ -91,7 +90,7 @@ const useAddWalletControllet = () => {
       let walletObj: Wallet | null | boolean | string = null;
       if(chainSelected == "ethereum" || chainSelected == "evm" || chainSelected == "eth") { 
         walletObj = isSecretKey(secretKey, "ethereum");
-        console.log('walletObj: ', walletObj);
+        // console.log('walletObj: ', walletObj);
       } else if(chainSelected == "solana" || chainSelected == "sol") {
         walletObj = isSecretKey(secretKey, "solana");
         // return;
@@ -102,20 +101,19 @@ const useAddWalletControllet = () => {
         setIsLoading(false);
         return;
       } else if((chainSelected == "solana" || chainSelected == "sol") && walletObj) {
-        console.log('sol address: ', walletObj);
+        // console.log('sol address: ', walletObj);
         handleAddressTypes(walletObj as string, "solana");
       } else if(walletObj && walletObj instanceof Wallet && walletObj.address) {
-        console.log('wallet: ', walletObj);
+        // console.log('wallet: ', walletObj);
         handleAddressTypes(walletObj.address, "ethereum");
       }
     }
   }
 
   const handleAddressTypes = (address: string, chain: string, status?: string | null) => {
-    console.log('in handleAddressTypes: ', chain);
     if(chain == "ethereum" || chain == "eth" || chain == "evm") {
       validateEthAddress(address).then((walletObj) => {
-        console.log("eth status: ", walletObj);
+        // console.log("eth status: ", walletObj);
         if(walletObj.status == AddressObjectEnum.WALLET) {
           const newWallet: WalletType = { 
             walletId: address,
@@ -131,9 +129,8 @@ const useAddWalletControllet = () => {
         console.log("error: ", err);
       });
     } else if(chain == "solana" || chain == "sol") {
-      console.log('in sol section')
       validateSolAddress(address).then((walletObj) => {
-        console.log("sol status: ", walletObj);
+        // console.log("sol status: ", walletObj);
         if(walletObj.status == AddressObjectEnum.WALLET) {
           const newWallet: WalletType = { 
             walletId: address,

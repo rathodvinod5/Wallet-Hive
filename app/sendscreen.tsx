@@ -66,8 +66,8 @@ const SendScreen = () => {
             </View>
           )}
         />
-
-       <View style={styles.buttonContainer}>
+      </View>
+      <View style={styles.buttonContainer}>
         <TouchableOpacity 
             activeOpacity={0.9} 
             // disabled={!isReceivable}
@@ -78,7 +78,6 @@ const SendScreen = () => {
           >
             <Text style={styles.buttonLabel}>Send</Text>
           </TouchableOpacity>
-       </View>
       </View>
     </View>
   );
@@ -91,6 +90,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
     paddingTop: 20,
+    paddingBottom: 60
   },
   contentStyles: {
     flex: 1,
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     flex: 1,
   },
-  buttonContainer: { flex: 1, marginTop: 100 },
+  buttonContainer: { marginTop: 0 },
   buttonStyle: {
     paddingVertical: 10,
     flexDirection: 'row',

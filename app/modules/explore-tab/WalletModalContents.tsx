@@ -61,7 +61,7 @@ const WalletModalContents = ({
           </View>
         ) : (
           <View style={{ width: '100%', alignItems: 'center', justifyContent: 'center' }}>
-            <ThemedText style={[styles.titleSmall, { flex: 1, fontSize: 18 }]}>
+            <ThemedText style={[styles.titleSmall, { fontSize: 18 }]}>
               No Active wallets found
             </ThemedText>
             <ThemedText style={[styles.titleSmall, { paddingBottom: 50 }]}>
@@ -98,8 +98,9 @@ const WalletModalContents = ({
 export default WalletModalContents;
 
 const styles = StyleSheet.create({
-  container: {   
-    height: '100%',
+  container: {  
+    flex: 1, 
+    // height: '100%',
     paddingHorizontal: 20,
     backgroundColor: 'white',
   },
@@ -116,7 +117,7 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
-    height: '100%',
+    // height: '100%',
     marginTop: 20,
     flexDirection: 'column',
     alignItems: 'flex-start',

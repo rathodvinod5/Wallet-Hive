@@ -25,7 +25,7 @@ const AddWalletScreen = () => {
       />
 
       <View style={styles.innContainer}>
-        <View style={{ flexGrow: 1, alignItems: 'center' }}>
+        <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center' }}>
           <View style={styles.phraseStyles}>
             <View style={{ flex: 1, flexDirection: 'column', gap: 8 }}>
               {Array.from({ length: 12 }).map((item, index) => {
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   phraseStyles: {
-    flex: 1,
+    // flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     gap: 12,
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     marginTop: 20
   },
   restoreWalletButton: { 
-    flex: 1, 
+    // flex: 1, 
     height: 48,
     justifyContent: 'center', 
     alignItems: 'center',
