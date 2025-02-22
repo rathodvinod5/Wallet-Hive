@@ -117,6 +117,7 @@ const styles = StyleSheet.create({
   starTextCont: {
     display: 'flex',
     flexDirection: 'row',
-    gap: 2
+    gap: 2,
+    height: 28
   }
 });

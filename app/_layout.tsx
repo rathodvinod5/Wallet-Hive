@@ -62,14 +62,21 @@ export default function RootLayout() {
                 </Link>
               ),
               headerTitle(props) {
-              return (
-                  <Text style={{ fontSize: 18, color: 'black', fontWeight: 'bold' }}>
+                return (
+                  <Text 
+                    style={{ 
+                      fontSize: 18, 
+                      color: 'black', 
+                      fontWeight: 'bold',
+                      paddingBottom: 6,
+                    }}
+                  >
                     Manage Crypto
                   </Text>
                 );
               },
               headerStyle: {
-                backgroundColor: 'lightgrey',
+                // backgroundColor: 'lightgrey',
               },
             }} 
           />
