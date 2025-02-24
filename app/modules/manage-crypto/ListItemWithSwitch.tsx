@@ -27,8 +27,11 @@ export default function ListItemWithSwitch<T>({
       <View style={styles.itemLeftContainer}>
         <Image 
           source={getImages(item.title.toLocaleLowerCase())}
-          style={{ width: 36, height: 36 }} 
-          contentFit="cover"
+          style={{ 
+            width: item.symbol === "SOL" ? 30 : 36, 
+            aspectRatio: item.symbol === "SOL" ? 1/0.7 : 1/1,
+          }} 
+          contentFit="contain"
         />
       </View>
       <View style={styles.itemRightContainer}>

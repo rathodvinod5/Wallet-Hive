@@ -34,7 +34,7 @@ export type TransactionObjType = {
 export const transactionListData: TransactionObjType[] = [
   {
     chain: {
-      title: "Etherum",
+      title: "Ethereum",
       symbol: "ETH",
     },
     cryptoNativeValue: "3431.10",
@@ -47,7 +47,7 @@ export const transactionListData: TransactionObjType[] = [
   },
   {
     chain: {
-      title: "Etherum",
+      title: "Ethereum",
       symbol: "ETH",
     },
     cryptoNativeValue: "3431.10",
@@ -86,7 +86,7 @@ export const transactionListData: TransactionObjType[] = [
   },
   {
     chain: {
-      title: "Etherum",
+      title: "Ethereum",
       symbol: "ETH",
     },
     cryptoNativeValue: "3431.10",
@@ -99,7 +99,7 @@ export const transactionListData: TransactionObjType[] = [
   },
   {
     chain: {
-      title: "Etherum",
+      title: "Ethereum",
       symbol: "ETH",
     },
     cryptoNativeValue: "3431.10",
@@ -128,7 +128,7 @@ export const transactionListData: TransactionObjType[] = [
 export const allChains: AllChainsType[] = [
   {
     chain: {
-      title: "Etherum",
+      title: "Ethereum",
       symbol: "ETH",
     },
     cryptoNativeValue: "3431.10",
@@ -175,7 +175,7 @@ export const allChains: AllChainsType[] = [
 
 export const chainsAllowed: AllowedChainsType[] = [
   {
-    title: "Etherum",
+    title: "Ethereum",
     symbol: "ETH",
     isEnabled: false,
   },

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { AllowedChainsType, chainsAllowed } from "@/app/data/DATA";
-import { getItemAsync, setItemAsync } from "@/app/utilities/SecureStorgeAPI";
+import { getItemAsync, setItemAsync, deleteItemAsync } from "@/app/utilities/SecureStorgeAPI";
 
 const useManageCryptoController = () => {
   const [itemsList, setItemsList] = useState<AllowedChainsType[] | null>(null);
@@ -18,6 +18,9 @@ const useManageCryptoController = () => {
         }).catch((error) => {
         console.log('error: ', error);
       });
+      // deleteItemAsync('chainsAllowed').then(() => {
+      //   console.log('sucessfully deleted');
+      // }).catch((error) => {});
     };
     getItem();
   }, []);
