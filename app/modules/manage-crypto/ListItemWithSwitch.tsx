@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Switch, View, StyleSheet } from "react-native";
+import { Image } from "expo-image"
 import { ThemedText } from "@/components/ThemedText";
 import { AllowedChainsType } from "@/app/data/DATA";
 import { Colors } from "@/constants/Colors";
+import getImages from "@/app/utilities/GetImages";
 
 type RenderItemProps<T> = {
   item: T;
@@ -22,7 +24,13 @@ export default function ListItemWithSwitch<T>({
 
   return(
     <View style={styles.listItemObject}>
-      <View style={styles.itemLeftContainer} />
+      <View style={styles.itemLeftContainer}>
+        <Image 
+          source={getImages(item.title.toLocaleLowerCase())}
+          style={{ width: 36, height: 36 }} 
+          contentFit="cover"
+        />
+      </View>
       <View style={styles.itemRightContainer}>
         <View style={styles.recordContainer}>
           <ThemedText type="textSMSemibold">{item.title}</ThemedText>
@@ -56,10 +64,14 @@ const styles = StyleSheet.create({
     width: 48,
     height: 48,
     borderRadius: 48 / 2,
-    backgroundColor: 'lightgray'
+    backgroundColor: 'lightgray',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   itemRightContainer: {
     flex: 1,
+    paddingLeft: 8
   },
   recordContainer: {
     flexDirection: 'row',
