@@ -4,6 +4,8 @@ import Entypo from '@expo/vector-icons/Entypo';
 import { Colors } from "@/constants/Colors";
 import { Link } from "expo-router";
 import { AllChainsType, TransactionObjType } from "@/app/data/DATA";
+import { Image } from "expo-image";
+import getImages from "@/app/utilities/GetImages";
 
 const SingleSwapContainer = ({
   coinOrToken,
@@ -35,7 +37,20 @@ const SingleSwapContainer = ({
       <View style={styles.topContainer}>
       <Link href={`/selectcoinscreen?source=${source}`}>
         <View style={styles.topLeftContainer}>
-          <View style={styles.imageContainer} />
+          <View style={[styles.imageContainer, {
+            backgroundColor: coinOrToken ? 'transparent' : 'lightgrey',
+          }]}>
+            {coinOrToken && (
+              <Image
+                source={getImages(coinOrToken.chain.title.toLocaleLowerCase())}
+                style={{ 
+                  width: coinOrToken.chain.symbol === "SOL" ? 34 : 40, 
+                  aspectRatio: coinOrToken.chain.symbol === "SOL" ? 1/0.7 : 1/1,
+                }} 
+                contentFit="contain"
+              />
+            )}
+          </View>
           <Text style={styles.currStyles}>{coinOrToken?.chain.symbol}</Text>
           <Entypo name="chevron-right" size={22} color="gray" />
         </View>
@@ -94,8 +109,11 @@ const styles = StyleSheet.create({
   imageContainer: {
     width: 48,
     height: 48,
-    backgroundColor: 'lightgrey',
+    // backgroundColor: 'lightgrey',
     borderRadius: 48 / 2,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   currStyles: {
     fontSize: 26,

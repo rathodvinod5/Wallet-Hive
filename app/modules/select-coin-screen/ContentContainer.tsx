@@ -2,6 +2,8 @@ import { FlatList, StyleSheet, TouchableOpacity, View } from "react-native";
 import { AllChainsType } from "@/app/data/DATA";
 import { ThemedText } from "@/components/ThemedText";
 import { Colors } from "@/constants/Colors";
+import { Image } from "expo-image";
+import getImages from "@/app/utilities/GetImages";
 
 
 export const ContentContainer = ({
@@ -38,6 +40,14 @@ export const RenderItem = ({
     <View style={{ marginVertical: 3 }}>
       <View style={styles.listItemObject}>
         <View style={styles.itemLeftContainer}>
+          <Image 
+            source={getImages(item.chain.title.toLocaleLowerCase())}
+            style={{ 
+              width: item.chain.symbol === "SOL" ? 30 : 36, 
+              aspectRatio: item.chain.symbol === "SOL" ? 1/0.7 : 1/1,
+            }} 
+            contentFit="contain"
+          />
         </View>
         <View style={styles.itemRightContainer}>
           <View style={styles.recordContainer}>
@@ -76,14 +86,12 @@ const styles = StyleSheet.create({
   },
   listItemObject: {
     flexDirection: 'row',
-    // justifyContent: 'space-between',
     alignItems: 'center',
     marginVertical: 8,
     gap: 4
   },
   flatlistContainer: { 
     width: '100%', 
-    // borderWidth: 1, 
     marginTop: 20 
   },
   itemLeftContainer: {
@@ -91,7 +99,10 @@ const styles = StyleSheet.create({
     width: 48,
     height: 48,
     borderRadius: 48 / 2,
-    backgroundColor: 'lightgrey'
+    // backgroundColor: 'lightgrey',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   itemRightContainer: {
     flex: 1,

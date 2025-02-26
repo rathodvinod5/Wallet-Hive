@@ -17,14 +17,14 @@ const SwapScreen = () => {
 
   return(
     <View style={styles.container}>
-      <SafeAreaView>
+      <SafeAreaView style={styles.container}>
         <TabContainer
           currentTabIndex={currentTabIndex}
           onChangeTabIndex={onChangeTabIndex}
          />
         <View style={styles.contentContainer}>
           {currentTabIndex === 0 ? (
-            <View style={{ width: '100%', height: '100%' }}>
+            <View style={{ flex: 1, flexDirection: 'column' }}>
               <View style={styles.swapTopContainer}>
                 <SingleSwapContainer
                   coinOrToken={fromCoin}
@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   contentContainer: {
+    flex: 1,
     paddingTop: 30,
     paddingHorizontal: 20,
   },
